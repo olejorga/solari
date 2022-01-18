@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Solari (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Solari (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
