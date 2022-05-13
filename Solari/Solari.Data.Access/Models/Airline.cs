@@ -8,6 +8,26 @@ using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Models
 {
+    /// <summary>
+    /// A schema for an airline.
+    /// 
+    /// <list type="bullet">
+    /// <item>
+    /// <term>Icao</term>
+    /// <description>A unique three letter identifier (PK)</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Iata</term>
+    /// <description>A two letter identifier (not unique)</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Name</term>
+    /// <description>The name of the airline</description>
+    /// </item>
+    /// </list>
+    /// </summary>
     [Table("Airlines")]
     public class Airline
     {

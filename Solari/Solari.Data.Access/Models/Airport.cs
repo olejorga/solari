@@ -8,6 +8,41 @@ using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Models
 {
+    /// <summary>
+    /// A schema for an airport.
+    /// 
+    /// <list type="bullet">
+    /// <item>
+    /// <term>Icao</term>
+    /// <description>A unique four letter identifier (PK)</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Iata</term>
+    /// <description>A three letter identifier (not unique)</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Name</term>
+    /// <description>The name of the airport</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>City</term>
+    /// <description>The city of which the airport adheres to</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Departing flights</term>
+    /// <description>A list of flights scheduled to depart the airport</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Arriving flights</term>
+    /// <description>A list of flights scheduled to arrive at the airport</description>
+    /// </item>
+    /// </list>
+    /// </summary>
     [Table("Airports")]
     public class Airport
     {

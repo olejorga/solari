@@ -8,6 +8,51 @@ using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Models
 {
+    /// <summary>
+    /// A schema for an airport.
+    /// 
+    /// <list type="bullet">
+    /// <item>
+    /// <term>Flight number</term>
+    /// <description>A unique identifier between 3 and 6 letters (PK)</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Status</term>
+    /// <description>A optional status message for the flight</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Departure time</term>
+    /// <description>The estimated time of departure (datetime string)</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Arrival time</term>
+    /// <description>The estimated time of arrival (datetime string)</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Departure gate</term>
+    /// <description>The identifier of the departure gate</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Arrival gate</term>
+    /// <description>The identifier of the arrival gate</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Departure airport</term>
+    /// <description>The object representation of the departure airport</description>
+    /// </item>
+    /// 
+    /// <item>
+    /// <term>Arrival airport</term>
+    /// <description>The object representation of the arrival airport</description>
+    /// </item>
+    /// </list>
+    /// </summary>
     [Table("Flights")]
     public class Flight
     {
