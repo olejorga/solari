@@ -1,32 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Models
 {
+    [Table("Flights")]
     public class Flight
     {
-        public int FlightId { get; set; }
-
+        [Key]
         [Required]
         [StringLength(6, MinimumLength = 3, ErrorMessage = "Must be 3 to 6 characters long.")]
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only letters and numbers allowed.")]
         public string FlightNumber { get; set; }
 
         [Required]
-        public string Airline { get; set; }
-
-        [Required]
         public string Status { get; set; }
-
-        [Required]
-        public Airport DepartureAirport { get; set; }
-
-        [Required]
-        public Airport ArrivalAirport { get; set; }
 
         [Required]
         public string DepartureTime { get; set; }
@@ -39,5 +31,17 @@ namespace Solari.Data.Access.Models
 
         [Required]
         public string ArrivalGate { get; set; }
+
+        [ForeignKey("DepartureAirportIcao")]
+        [InverseProperty("DepartingFlights")]
+        public virtual Airport DepartureAirport { get; set; }
+
+        [ForeignKey("ArrivalAirportIcao")]
+        [InverseProperty("ArrivingFlights")]
+        public virtual Airport ArrivalAirport { get; set; }
+
+        [ForeignKey("AirlineIcao")]
+        [InverseProperty("Flights")]
+        public Airline Airline { get; set; }
     }
 }
