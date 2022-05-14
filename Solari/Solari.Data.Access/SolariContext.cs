@@ -31,6 +31,7 @@ namespace Solari.Data.Access
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Seed some sample data for demonstration purposes
             new AirlineEntityTypeConfiguration().Configure(modelBuilder.Entity<Airline>());
             new AirportEntityTypeConfiguration().Configure(modelBuilder.Entity<Airport>());
             new FlightEntityTypeConfiguration().Configure(modelBuilder.Entity<Flight>());
@@ -67,7 +68,14 @@ namespace Solari.Data.Access
             public void Configure(EntityTypeBuilder<Flight> builder)
             {
                 #region Seeding flights
-                builder.HasData(new Flight { FlightNumber = "ENGM", Status = "OSL", DepartureTime = "Gardermoen", ArrivalTime = "Oslo", DepartureGate = "", ArrivalGate = "" });
+                builder.HasData(new Flight { FlightNumber = "DY250", AirlineIcao = "NAX", Status = "New time 10:15", DepartureTime = "", ArrivalTime = "", DepartureGate = "A16", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "ENBR" });
+                builder.HasData(new Flight { FlightNumber = "DY345", AirlineIcao = "NAX", Status = "Gate closed", DepartureTime = "", ArrivalTime = "", DepartureGate = "B45", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "EKCH" });
+                builder.HasData(new Flight { FlightNumber = "SK324", AirlineIcao = "SAS", Status = "Last call", DepartureTime = "", ArrivalTime = "", DepartureGate = "C72", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "EKCH" });
+                builder.HasData(new Flight { FlightNumber = "FS172", AirlineIcao = "FOX", Status = "Boarding", DepartureTime = "", ArrivalTime = "", DepartureGate = "A14", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "ENBR" });
+                builder.HasData(new Flight { FlightNumber = "FS173", AirlineIcao = "FOX", Status = "Go to gate", DepartureTime = "", ArrivalTime = "", DepartureGate = "C69", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "EKCH" });
+                builder.HasData(new Flight { FlightNumber = "FR28", AirlineIcao = "RYR", Status = "Last bag on belt", DepartureTime = "", ArrivalTime = "", DepartureGate = "185", BaggageBelt = "7", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "EGSS" });
+                builder.HasData(new Flight { FlightNumber = "SK346", AirlineIcao = "SAS", Status = "Cancelled", DepartureTime = "", ArrivalTime = "", DepartureGate = "", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "ENBR" });
+                builder.HasData(new Flight { FlightNumber = "FR616", AirlineIcao = "RYR", Status = "Landed 09:46", DepartureTime = "", ArrivalTime = "", DepartureGate = "C64", BaggageBelt = "9", DepartureAirportIcao = "EKCH", ArrivalAirportIcao = "EGSS" });
                 #endregion
             }
         }

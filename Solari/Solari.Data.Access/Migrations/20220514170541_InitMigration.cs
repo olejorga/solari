@@ -41,8 +41,8 @@ namespace Solari.Data.Access.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DepartureTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ArrivalTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartureGate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ArrivalGate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepartureGate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BaggageBelt = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DepartureAirportIcao = table.Column<string>(type: "nvarchar(4)", nullable: true),
                     ArrivalAirportIcao = table.Column<string>(type: "nvarchar(4)", nullable: true),
                     AirlineIcao = table.Column<string>(type: "nvarchar(3)", nullable: true)
@@ -68,6 +68,43 @@ namespace Solari.Data.Access.Migrations
                         principalTable: "Airports",
                         principalColumn: "Icao",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Airlines",
+                columns: new[] { "Icao", "Iata", "Name" },
+                values: new object[,]
+                {
+                    { "FOX", "FS", "Flyr" },
+                    { "SAS", "SK", "Scandinavian Airlines" },
+                    { "NAX", "DY", "Norwegian Air Shuttle" },
+                    { "RYR", "FR", "Ryanair" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Airports",
+                columns: new[] { "Icao", "City", "Iata", "Name" },
+                values: new object[,]
+                {
+                    { "ENGM", "Oslo", "OSL", "Gardermoen" },
+                    { "ENBR", "Bergen", "BGO", "Flesland" },
+                    { "EKCH", "Copenhagen", "CPH", "Kastrup" },
+                    { "EGSS", "London", "STN", "Standsted" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Flights",
+                columns: new[] { "FlightNumber", "AirlineIcao", "ArrivalAirportIcao", "ArrivalTime", "BaggageBelt", "DepartureAirportIcao", "DepartureGate", "DepartureTime", "Status" },
+                values: new object[,]
+                {
+                    { "DY250", "NAX", "ENBR", "", "", "ENGM", "A16", "", "New time 10:15" },
+                    { "FS172", "FOX", "ENBR", "", "", "ENGM", "A14", "", "Boarding" },
+                    { "SK346", "SAS", "ENBR", "", "", "ENGM", "", "", "Cancelled" },
+                    { "DY345", "NAX", "EKCH", "", "", "ENGM", "B45", "", "Gate closed" },
+                    { "SK324", "SAS", "EKCH", "", "", "ENGM", "C72", "", "Last call" },
+                    { "FS173", "FOX", "EKCH", "", "", "ENGM", "C69", "", "Go to gate" },
+                    { "FR28", "RYR", "EGSS", "", "7", "ENGM", "185", "", "Last bag on belt" },
+                    { "FR616", "RYR", "EGSS", "", "9", "EKCH", "C64", "", "Landed 09:46" }
                 });
 
             migrationBuilder.CreateIndex(

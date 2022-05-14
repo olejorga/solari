@@ -38,8 +38,8 @@ namespace Solari.Data.Access.Models
     /// </item>
     /// 
     /// <item>
-    /// <term>Arrival gate</term>
-    /// <description>The identifier of the arrival gate</description>
+    /// <term>Baggage belt</term>
+    /// <description>The identifier of the baggage belt</description>
     /// </item>
     /// 
     /// <item>
@@ -71,22 +71,29 @@ namespace Solari.Data.Access.Models
         [Required]
         public string ArrivalTime { get; set; }
 
-        [Required]
         public string DepartureGate { get; set; }
 
-        [Required]
-        public string ArrivalGate { get; set; }
+        public string BaggageBelt { get; set; }
 
+        #region Departure airport
         [ForeignKey("DepartureAirportIcao")]
         [InverseProperty("DepartingFlights")]
         public virtual Airport DepartureAirport { get; set; }
+        public string DepartureAirportIcao { get; set; }
+        #endregion
 
+        #region Arrival airport
         [ForeignKey("ArrivalAirportIcao")]
         [InverseProperty("ArrivingFlights")]
         public virtual Airport ArrivalAirport { get; set; }
+        public string ArrivalAirportIcao { get; set; }
+        #endregion
 
+        #region Airline
         [ForeignKey("AirlineIcao")]
         [InverseProperty("Flights")]
-        public Airline Airline { get; set; }
+        public virtual Airline Airline { get; set; }
+        public string AirlineIcao { get; set; }
+        #endregion
     }
 }
