@@ -109,6 +109,11 @@
             The ICAO code of the departure airport (FK).
             </summary>
         </member>
+        <member name="P:Solari.Data.Access.Models.Flight.ArrivalAirportIcao">
+            <summary>
+            The ICAO code of the arrival airport (FK).
+            </summary>
+        </member>
         <member name="P:Solari.Data.Access.Models.Flight.Airline">
             <summary>
             The aggregated object representation of the arrival airport.
@@ -116,7 +121,7 @@
         </member>
         <member name="P:Solari.Data.Access.Models.Flight.AirlineIcao">
             <summary>
-            The ICAO code of the arrival airport (FK).
+            The ICAO code of the flights airline (FK).
             </summary>
         </member>
         <member name="T:Solari.Data.Access.Repositories.SqlAirlineRepository">

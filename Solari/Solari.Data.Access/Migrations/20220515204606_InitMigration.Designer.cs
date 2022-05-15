@@ -10,7 +10,7 @@ using Solari.Data.Access;
 namespace Solari.Data.Access.Migrations
 {
     [DbContext(typeof(SolariContext))]
-    [Migration("20220515133856_InitMigration")]
+    [Migration("20220515204606_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,13 +24,11 @@ namespace Solari.Data.Access.Migrations
             modelBuilder.Entity("Solari.Data.Access.Models.Airline", b =>
                 {
                     b.Property<string>("Icao")
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Iata")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -70,8 +68,7 @@ namespace Solari.Data.Access.Migrations
             modelBuilder.Entity("Solari.Data.Access.Models.Airport", b =>
                 {
                     b.Property<string>("Icao")
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -79,8 +76,7 @@ namespace Solari.Data.Access.Migrations
 
                     b.Property<string>("Iata")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -124,14 +120,13 @@ namespace Solari.Data.Access.Migrations
             modelBuilder.Entity("Solari.Data.Access.Models.Flight", b =>
                 {
                     b.Property<string>("FlightNumber")
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AirlineIcao")
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ArrivalAirportIcao")
-                        .HasColumnType("nvarchar(4)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
@@ -140,7 +135,7 @@ namespace Solari.Data.Access.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartureAirportIcao")
-                        .HasColumnType("nvarchar(4)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DepartureGate")
                         .HasColumnType("nvarchar(max)");

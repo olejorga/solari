@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Solari.Data.Access.Models;
+using System;
 
 namespace Solari.Data.Access
 {
@@ -68,7 +64,7 @@ namespace Solari.Data.Access
             public void Configure(EntityTypeBuilder<Flight> builder)
             {
                 #region Seeding flights
-                builder.HasData(new Flight { FlightNumber = "DY250", AirlineIcao = "NAX", Status = "New time 10:15", DepartureTime = new DateTime(1970, 1, 1, 9, 45, 0), ArrivalTime = new DateTime(1970, 1, 1, 10, 45, 0), DepartureGate = "A16", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "ENBR" });  ;
+                builder.HasData(new Flight { FlightNumber = "DY250", AirlineIcao = "NAX", Status = "New time 10:15", DepartureTime = new DateTime(1970, 1, 1, 9, 45, 0), ArrivalTime = new DateTime(1970, 1, 1, 10, 45, 0), DepartureGate = "A16", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "ENBR" }); ;
                 builder.HasData(new Flight { FlightNumber = "DY345", AirlineIcao = "NAX", Status = "Gate closed", DepartureTime = new DateTime(1970, 1, 1, 10, 0, 0), ArrivalTime = new DateTime(1970, 1, 1, 11, 0, 0), DepartureGate = "B45", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "EKCH" });
                 builder.HasData(new Flight { FlightNumber = "SK324", AirlineIcao = "SAS", Status = "Last call", DepartureTime = new DateTime(1970, 1, 1, 9, 45, 0), ArrivalTime = new DateTime(1970, 1, 1, 10, 45, 0), DepartureGate = "C72", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "EKCH" });
                 builder.HasData(new Flight { FlightNumber = "FS172", AirlineIcao = "FOX", Status = "Boarding", DepartureTime = new DateTime(1970, 1, 1, 10, 30, 0), ArrivalTime = new DateTime(1970, 1, 1, 11, 30, 0), DepartureGate = "A14", BaggageBelt = "", DepartureAirportIcao = "ENGM", ArrivalAirportIcao = "ENBR" });

@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Solari.Data.Access.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Solari.Data.Access.Exceptions;
+using Solari.Data.Access.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Repositories
 {
@@ -59,7 +56,7 @@ namespace Solari.Data.Access.Repositories
                 .FirstOrDefaultAsync(e => e.Icao == icao.ToUpper());
 
             // If airline is not found, throw exception.
-            if (airline == null) 
+            if (airline == null)
                 throw new EntityNotFoundException($"Airline with ICAO = {icao} not found!");
 
             // If airline is found, return airline.
@@ -93,7 +90,7 @@ namespace Solari.Data.Access.Repositories
 
                 // Get and return the created airline.
                 return await GetAirlineAsync(airline.Icao);
-            } 
+            }
         }
 
         /// <summary>

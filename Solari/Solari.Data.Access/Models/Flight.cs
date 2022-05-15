@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Solari.Data.Access.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Models
 {
@@ -19,8 +16,7 @@ namespace Solari.Data.Access.Models
         /// </summary>
         [Key]
         [Required]
-        [StringLength(6, MinimumLength = 3, ErrorMessage = "Must be 3 to 6 characters long.")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only letters and numbers allowed.")]
+        [FlightNumber]
         public string FlightNumber { get; set; }
 
         /// <summary>
@@ -61,6 +57,7 @@ namespace Solari.Data.Access.Models
         /// <summary>
         /// The ICAO code of the departure airport (FK).
         /// </summary>
+        [AirportIcao]
         public string DepartureAirportIcao { get; set; }
         #endregion
 
@@ -68,6 +65,11 @@ namespace Solari.Data.Access.Models
         [ForeignKey("ArrivalAirportIcao")]
         [InverseProperty("ArrivingFlights")]
         public virtual Airport ArrivalAirport { get; set; }
+
+        /// <summary>
+        /// The ICAO code of the arrival airport (FK).
+        /// </summary>
+        [AirportIcao]
         public string ArrivalAirportIcao { get; set; }
         #endregion
 
@@ -80,8 +82,9 @@ namespace Solari.Data.Access.Models
         public virtual Airline Airline { get; set; }
 
         /// <summary>
-        /// The ICAO code of the arrival airport (FK).
+        /// The ICAO code of the flights airline (FK).
         /// </summary>
+        [AirlineIcao]
         public string AirlineIcao { get; set; }
         #endregion
     }

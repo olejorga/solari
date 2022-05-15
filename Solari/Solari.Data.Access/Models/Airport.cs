@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Solari.Data.Access.Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Models
 {
@@ -19,16 +16,14 @@ namespace Solari.Data.Access.Models
         /// </summary>
         [Key]
         [Required]
-        [StringLength(4, MinimumLength = 4, ErrorMessage = "Must be exactly 4 characters.")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only letters and numbers allowed.")]
+        [AirportIcao]
         public string Icao { get; set; }
 
         /// <summary>
         /// A three letter identifier (not unique).
         /// </summary>
         [Required]
-        [StringLength(3, MinimumLength = 3, ErrorMessage = "Must be exactly 3 characters.")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only letters and numbers allowed.")]
+        [AirportIata]
         public string Iata { get; set; }
 
         /// <summary>

@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Solari.Data.Access.Exceptions;
+using Solari.Data.Access.Models;
+using Solari.Data.Access.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Solari.Data.Access.Repositories;
-using Solari.Data.Access.Models;
-using Microsoft.AspNetCore.Http;
-using Solari.Data.Access.Exceptions;
 
 namespace Solari.Data.Api.Controllers
 {

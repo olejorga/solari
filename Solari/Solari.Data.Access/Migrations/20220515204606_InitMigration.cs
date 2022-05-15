@@ -11,8 +11,8 @@ namespace Solari.Data.Access.Migrations
                 name: "Airlines",
                 columns: table => new
                 {
-                    Icao = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    Iata = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    Icao = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Iata = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -24,8 +24,8 @@ namespace Solari.Data.Access.Migrations
                 name: "Airports",
                 columns: table => new
                 {
-                    Icao = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
-                    Iata = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    Icao = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Iata = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -38,15 +38,15 @@ namespace Solari.Data.Access.Migrations
                 name: "Flights",
                 columns: table => new
                 {
-                    FlightNumber = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    FlightNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DepartureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ArrivalTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DepartureGate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BaggageBelt = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DepartureAirportIcao = table.Column<string>(type: "nvarchar(4)", nullable: true),
-                    ArrivalAirportIcao = table.Column<string>(type: "nvarchar(4)", nullable: true),
-                    AirlineIcao = table.Column<string>(type: "nvarchar(3)", nullable: true)
+                    DepartureAirportIcao = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ArrivalAirportIcao = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AirlineIcao = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
