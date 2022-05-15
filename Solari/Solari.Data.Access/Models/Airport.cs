@@ -63,8 +63,8 @@ namespace Solari.Data.Access.Models
         [Required]
         public string City { get; set; }
 
-        public List<Flight> DepartingFlights { get; set; } = new();
+        public virtual List<Flight> DepartingFlights { get; set; } = new();
 
-        public List<Flight> ArrivingFlights { get; set; } = new();
+        public virtual List<Flight> ArrivingFlights { get; set; } = new();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Solari.Data.Access.Migrations
 {
@@ -39,8 +40,8 @@ namespace Solari.Data.Access.Migrations
                 {
                     FlightNumber = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartureTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ArrivalTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepartureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ArrivalTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DepartureGate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BaggageBelt = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DepartureAirportIcao = table.Column<string>(type: "nvarchar(4)", nullable: true),
@@ -97,14 +98,14 @@ namespace Solari.Data.Access.Migrations
                 columns: new[] { "FlightNumber", "AirlineIcao", "ArrivalAirportIcao", "ArrivalTime", "BaggageBelt", "DepartureAirportIcao", "DepartureGate", "DepartureTime", "Status" },
                 values: new object[,]
                 {
-                    { "DY250", "NAX", "ENBR", "", "", "ENGM", "A16", "", "New time 10:15" },
-                    { "FS172", "FOX", "ENBR", "", "", "ENGM", "A14", "", "Boarding" },
-                    { "SK346", "SAS", "ENBR", "", "", "ENGM", "", "", "Cancelled" },
-                    { "DY345", "NAX", "EKCH", "", "", "ENGM", "B45", "", "Gate closed" },
-                    { "SK324", "SAS", "EKCH", "", "", "ENGM", "C72", "", "Last call" },
-                    { "FS173", "FOX", "EKCH", "", "", "ENGM", "C69", "", "Go to gate" },
-                    { "FR28", "RYR", "EGSS", "", "7", "ENGM", "185", "", "Last bag on belt" },
-                    { "FR616", "RYR", "EGSS", "", "9", "EKCH", "C64", "", "Landed 09:46" }
+                    { "DY250", "NAX", "ENBR", new DateTime(1970, 1, 1, 10, 45, 0, 0, DateTimeKind.Unspecified), "", "ENGM", "A16", new DateTime(1970, 1, 1, 9, 45, 0, 0, DateTimeKind.Unspecified), "New time 10:15" },
+                    { "FS172", "FOX", "ENBR", new DateTime(1970, 1, 1, 11, 30, 0, 0, DateTimeKind.Unspecified), "", "ENGM", "A14", new DateTime(1970, 1, 1, 10, 30, 0, 0, DateTimeKind.Unspecified), "Boarding" },
+                    { "SK346", "SAS", "ENBR", new DateTime(1970, 1, 1, 12, 50, 0, 0, DateTimeKind.Unspecified), "", "ENGM", "", new DateTime(1970, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled" },
+                    { "DY345", "NAX", "EKCH", new DateTime(1970, 1, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), "", "ENGM", "B45", new DateTime(1970, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), "Gate closed" },
+                    { "SK324", "SAS", "EKCH", new DateTime(1970, 1, 1, 10, 45, 0, 0, DateTimeKind.Unspecified), "", "ENGM", "C72", new DateTime(1970, 1, 1, 9, 45, 0, 0, DateTimeKind.Unspecified), "Last call" },
+                    { "FS173", "FOX", "EKCH", new DateTime(1970, 1, 1, 11, 25, 0, 0, DateTimeKind.Unspecified), "", "ENGM", "C69", new DateTime(1970, 1, 1, 10, 35, 0, 0, DateTimeKind.Unspecified), "Go to gate" },
+                    { "FR28", "RYR", "EGSS", new DateTime(1970, 1, 1, 9, 15, 0, 0, DateTimeKind.Unspecified), "7", "ENGM", "185", new DateTime(1970, 1, 1, 7, 20, 0, 0, DateTimeKind.Unspecified), "Last bag on belt" },
+                    { "FR616", "RYR", "EGSS", new DateTime(1970, 1, 1, 9, 45, 0, 0, DateTimeKind.Unspecified), "9", "EKCH", "C64", new DateTime(1970, 1, 1, 8, 0, 0, 0, DateTimeKind.Unspecified), "Landed 09:46" }
                 });
 
             migrationBuilder.CreateIndex(

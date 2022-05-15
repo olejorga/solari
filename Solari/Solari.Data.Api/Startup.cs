@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Solari.Data.Access;
+using Solari.Data.Access.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +30,16 @@ namespace Solari.Data.Api
         {
 
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Solari.Data.Api", Version = "v1" });
             });
+
+            services.AddScoped<SolariContext, SolariContext>();
+            services.AddScoped<IAirlineRepository, SqlAirlineRepository>();
+            //services.AddScoped<IAirportRepository, SqlAirportRepository>();
+            //services.AddScoped<IFlightRepository, SqlFlightRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

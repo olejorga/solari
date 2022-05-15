@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Repositories
 {
-    public class AirlineRepository
+    public class SqlFlightRepository
     {
     }
 }

@@ -1,28 +1,34 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Solari.Data.Access.Models;
+using Solari.Data.Access.Repositories;
 
 namespace Solari.Data.Access
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
+        {
+            MainAsync().GetAwaiter().GetResult();
+        }
+
+        private static async Task MainAsync()
         {
             Console.WriteLine("Hello World!");
 
-            using var db = new SolariContext();
+            SolariContext ctx = new();
+            var repo = new SqlAirlineRepository(ctx);
 
-            var airlines = db.Airlines.Include(a => a.Flights).ToList();
+            await repo.AddAirlineAsync(new Airline { Icao = "TST", Iata = "TS", Name = "Test Airways" });
+            //await repo.DeleteAirlineAsync("TST");
 
-            foreach(Airline a in airlines)
+            var airlines = await repo.GetAirlinesAsync();
+
+            foreach (Airline a in airlines)
             {
                 Console.WriteLine(a.Name);
-
-                foreach(Flight f in a.Flights)
-                {
-                    Console.WriteLine(f.FlightNumber);
-                }
             }
         }
     }

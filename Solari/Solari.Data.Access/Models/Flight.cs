@@ -24,12 +24,12 @@ namespace Solari.Data.Access.Models
     /// 
     /// <item>
     /// <term>Departure time</term>
-    /// <description>The estimated time of departure (datetime string)</description>
+    /// <description>The estimated time of departure</description>
     /// </item>
     /// 
     /// <item>
     /// <term>Arrival time</term>
-    /// <description>The estimated time of arrival (datetime string)</description>
+    /// <description>The estimated time of arrival</description>
     /// </item>
     /// 
     /// <item>
@@ -66,10 +66,10 @@ namespace Solari.Data.Access.Models
         public string Status { get; set; }
 
         [Required]
-        public string DepartureTime { get; set; }
+        public DateTime DepartureTime { get; set; }
 
         [Required]
-        public string ArrivalTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
 
         public string DepartureGate { get; set; }
 

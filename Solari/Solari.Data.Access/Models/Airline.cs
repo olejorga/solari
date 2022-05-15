@@ -45,6 +45,6 @@ namespace Solari.Data.Access.Models
         [Required]
         public string Name { get; set; }
 
-        public List<Flight> Flights { get; set; } = new();
+        public virtual List<Flight> Flights { get; set; } = new();
     }
 }
