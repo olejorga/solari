@@ -13,6 +13,6 @@ namespace Solari.Data.Access.Repositories
         Task<Flight> GetFlightAsync(string flightNumber);
         Task<Flight> AddFlightAsync(Flight flight);
         Task<Flight> UpdateFlightAsync(Flight flight);
-        Task<Boolean> DeleteFlightAsync(string flightNumber);
+        Task<Flight> DeleteFlightAsync(string flightNumber);
     }
 }

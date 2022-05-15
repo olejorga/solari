@@ -10,7 +10,7 @@ using Solari.Data.Access;
 namespace Solari.Data.Access.Migrations
 {
     [DbContext(typeof(SolariContext))]
-    [Migration("20220514214147_InitMigration")]
+    [Migration("20220515133856_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,7 +149,6 @@ namespace Solari.Data.Access.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FlightNumber");

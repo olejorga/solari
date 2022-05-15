@@ -104,10 +104,10 @@ namespace Solari.Data.Api.Controllers
                 return StatusCode(StatusCodes.Status409Conflict,
                     exception.Message);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    exception.Message);
+                    "Error updating database!");
             }
         }
 
@@ -138,10 +138,10 @@ namespace Solari.Data.Api.Controllers
             {
                 return NotFound(exception.Message);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    exception.Message);
+                    "Error updating database!");
             }
         }
 
@@ -166,7 +166,7 @@ namespace Solari.Data.Api.Controllers
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error deleting airline!");
+                    "Error updating database!");
             }
         }
     }

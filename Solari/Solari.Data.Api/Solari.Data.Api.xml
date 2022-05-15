@@ -27,7 +27,7 @@
             <response code="404">No matching airline in database.</response>
             <response code="500">Error reading from database.</response>
         </member>
-        <member name="M:Solari.Data.Api.Controllers.AirlineController.CreateAirline(Solari.Data.Api.RequestModels.AirlineRequestModel)">
+        <member name="M:Solari.Data.Api.Controllers.AirlineController.CreateAirline(Solari.Data.Access.Models.Airline)">
             <summary>
             Add an airline.
             </summary>
@@ -54,6 +54,110 @@
             <remarks>Returns referenced JSON.</remarks>
             <response code="200">Returns the deleted airline entry from the database.</response>
             <response code="404">Airline were not found.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="T:Solari.Data.Api.Controllers.AirportController">
+            <summary>
+            Restful airports web service, built with CRUD in mind.
+            </summary>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirportController.GetAirports">
+            <summary>
+            Retrieve all airports.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns a list of airport objects.</response>
+            <response code="404">No airports in database.</response>
+            <response code="500">Error reading from database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirportController.GetAirport(System.String)">
+            <summary>
+            Retrieve airport by ICAO code.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns an airport matching the ICAO code.</response>
+            <response code="404">No matching airport in database.</response>
+            <response code="500">Error reading from database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirportController.CreateAirport(Solari.Data.Access.Models.Airport)">
+            <summary>
+            Add an airport.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns airport entry in database.</response>
+            <response code="400">No airport object provided by the user.</response>
+            <response code="409">Airport already exists.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirportController.UpdateAirport(System.String,Solari.Data.Access.Models.Airport)">
+            <summary>
+            Update an airport.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns the updated airport entry in the database.</response>
+            <response code="400">No airport object provided or ICAO codes mismatch.</response>
+            <response code="404">Airport were not found.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirportController.DeleteAirport(System.String)">
+            <summary>
+            Update an airport.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns the deleted airport entry from the database.</response>
+            <response code="404">Airport were not found.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="T:Solari.Data.Api.Controllers.FlightController">
+            <summary>
+            Restful flights web service, built with CRUD in mind.
+            </summary>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.FlightController.GetFlights">
+            <summary>
+            Retrieve all flights.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns a list of flight objects.</response>
+            <response code="404">No flights in database.</response>
+            <response code="500">Error reading from database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.FlightController.GetFlight(System.String)">
+            <summary>
+            Retrieve flight by flight number.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns a flight matching the flight number.</response>
+            <response code="404">No matching flight in database.</response>
+            <response code="500">Error reading from database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.FlightController.CreateFlight(Solari.Data.Access.Models.Flight)">
+            <summary>
+            Add a flight.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns flight entry in database.</response>
+            <response code="400">No flight object provided by the user.</response>
+            <response code="409">Flight already exists.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.FlightController.UpdateFlight(System.String,Solari.Data.Access.Models.Flight)">
+            <summary>
+            Update a flight.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns the updated flight entry in the database.</response>
+            <response code="400">No flight object provided or flight numbers mismatch.</response>
+            <response code="404">Flight were not found.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.FlightController.DeleteFlight(System.String)">
+            <summary>
+            Update a flight.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns the deleted flight entry from the database.</response>
+            <response code="404">Flight were not found.</response>
             <response code="500">Error updating database.</response>
         </member>
     </members>

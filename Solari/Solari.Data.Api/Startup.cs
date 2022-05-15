@@ -43,6 +43,7 @@ namespace Solari.Data.Api
                 var dataApiDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Api.xml");
                 var dataAccessDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Access.xml");
 
+                // Adding XML documentation to the Swagger UI
                 c.IncludeXmlComments(dataApiDocFilePath);
                 c.IncludeXmlComments(dataAccessDocFilePath);
             });
@@ -50,8 +51,8 @@ namespace Solari.Data.Api
             // Automatic repository and context dependency injection.
             services.AddScoped<SolariContext, SolariContext>();
             services.AddScoped<IAirlineRepository, SqlAirlineRepository>();
-            // services.AddScoped<IAirportRepository, SqlAirportRepository>();
-            // services.AddScoped<IFlightRepository, SqlFlightRepository>();
+            services.AddScoped<IAirportRepository, SqlAirportRepository>();
+            services.AddScoped<IFlightRepository, SqlFlightRepository>();
         }
 
         // This method gets called by the runtime.

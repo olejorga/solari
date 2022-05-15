@@ -147,7 +147,6 @@ namespace Solari.Data.Access.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FlightNumber");

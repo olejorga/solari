@@ -13,6 +13,6 @@ namespace Solari.Data.Access.Repositories
         Task<Airport> GetAirportAsync(string icao);
         Task<Airport> AddAirportAsync(Airport airport);
         Task<Airport> UpdateAirportAsync(Airport airport);
-        Task<Boolean> DeleteAirportAsync(string icao);
+        Task<Airport> DeleteAirportAsync(string icao);
     }
 }

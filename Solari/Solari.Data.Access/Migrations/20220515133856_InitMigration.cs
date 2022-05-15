@@ -39,7 +39,7 @@ namespace Solari.Data.Access.Migrations
                 columns: table => new
                 {
                     FlightNumber = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DepartureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ArrivalTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DepartureGate = table.Column<string>(type: "nvarchar(max)", nullable: true),

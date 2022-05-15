@@ -164,5 +164,95 @@
             <returns>The deleted airline entry in the repository.</returns>
             <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No airline were found.</exception>
         </member>
+        <member name="T:Solari.Data.Access.Repositories.SqlAirportRepository">
+            <summary>
+            An abstraction of the airports SQL table, 
+            built with EF Core 5 and designed with CRUD in mind.
+            </summary>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirportRepository.GetAirportsAsync">
+            <summary>
+            Gets all airports in repository.
+            </summary>
+            <returns>All airports in repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntitiesNotFoundException">No airports were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirportRepository.GetAirportAsync(System.String)">
+            <summary>
+            Gets airport by ICAO code.
+            </summary>
+            <param name="icao">The airports four letter ICAO identifier.</param>
+            <returns>Airport matching the ICAO code.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No airport were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirportRepository.AddAirportAsync(Solari.Data.Access.Models.Airport)">
+            <summary>
+            Adds an airport to the repository.
+            </summary>
+            <param name="airport">A airport object.</param>
+            <returns>The added airport entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityAlreadyExistsException">Airport already exists.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirportRepository.UpdateAirportAsync(Solari.Data.Access.Models.Airport)">
+            <summary>
+            Updates an airport in the repository.
+            </summary>
+            <param name="airport">A updated airport object.</param>
+            <returns>The updated airport entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No airport were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirportRepository.DeleteAirportAsync(System.String)">
+            <summary>
+            Delete an airport from the repository.
+            </summary>
+            <param name="icao">The airports four letter ICAO identifier.</param>
+            <returns>The deleted airport entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No airport were found.</exception>
+        </member>
+        <member name="T:Solari.Data.Access.Repositories.SqlFlightRepository">
+            <summary>
+            An abstraction of the flights SQL table, 
+            built with EF Core 5 and designed with CRUD in mind.
+            </summary>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlFlightRepository.GetFlightsAsync">
+            <summary>
+            Gets all flights in repository.
+            </summary>
+            <returns>All flights in repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntitiesNotFoundException">No flights were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlFlightRepository.GetFlightAsync(System.String)">
+            <summary>
+            Gets flight by flight number.
+            </summary>
+            <param name="flightNumber">The flights flight number.</param>
+            <returns>Flight matching the flight number.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No flight were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlFlightRepository.AddFlightAsync(Solari.Data.Access.Models.Flight)">
+            <summary>
+            Adds a flight to the repository.
+            </summary>
+            <param name="flight">A flight object.</param>
+            <returns>The added flight entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityAlreadyExistsException">Flight already exists.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlFlightRepository.UpdateFlightAsync(Solari.Data.Access.Models.Flight)">
+            <summary>
+            Updates a flight in the repository.
+            </summary>
+            <param name="flight">A updated flight object.</param>
+            <returns>The updated flight entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No flight were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlFlightRepository.DeleteFlightAsync(System.String)">
+            <summary>
+            Delete a flight from the repository.
+            </summary>
+            <param name="flightNumber">The flights flight number.</param>
+            <returns>The deleted flight entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No flight were found.</exception>
+        </member>
     </members>
 </doc>
