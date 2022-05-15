@@ -31,7 +31,7 @@ namespace Solari.Data.Access
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Seed some sample data for demonstration purposes
+            // Seed some sample data for demonstration purposes.
             new AirlineEntityTypeConfiguration().Configure(modelBuilder.Entity<Airline>());
             new AirportEntityTypeConfiguration().Configure(modelBuilder.Entity<Airport>());
             new FlightEntityTypeConfiguration().Configure(modelBuilder.Entity<Flight>());

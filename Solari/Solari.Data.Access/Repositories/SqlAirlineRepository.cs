@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Solari.Data.Access.Exceptions;
 
 namespace Solari.Data.Access.Repositories
 {
@@ -17,63 +18,117 @@ namespace Solari.Data.Access.Repositories
             this.DbContext = dbContext;
         }
 
+        /// <summary>
+        /// Gets all airlines in repository.
+        /// </summary>
+        /// <returns>All airlines in repository.</returns>
+        /// <exception cref="EntitiesNotFoundException">No airlines were found.</exception>
         public async Task<IEnumerable<Airline>> GetAirlinesAsync()
         {
-            return await DbContext.Airlines
+            // Get all airlines.
+            var airlines = await DbContext.Airlines
                 .Include(e => e.Flights)
                 .ToListAsync();
+
+            // If no airlines were found, throw exception.
+            if (airlines.Count == 0)
+                throw new EntitiesNotFoundException("No airlines were found!");
+
+            // If airlines were found.
+            return airlines;
         }
 
+        /// <summary>
+        /// Gets airline by ICAO code.
+        /// </summary>
+        /// <param name="icao">The airlines three letter ICAO identifier.</param>
+        /// <returns>Airline matching ICAO code.</returns>
+        /// <exception cref="EntityNotFoundException">No airline were found.</exception>
         public async Task<Airline> GetAirlineAsync(string icao)
         {
-            return await DbContext.Airlines
+            // Enforcing that the ICAO code is uppercase.
+            icao = icao.ToUpper();
+
+            // Get airline by ICAO code.
+            var airline = await DbContext.Airlines
                 .Include(e => e.Flights)
-                .FirstOrDefaultAsync(e => e.Icao == icao);
+                .FirstOrDefaultAsync(e => e.Icao == icao.ToUpper());
+
+            // If airline is not found, throw exception.
+            if (airline == null) 
+                throw new EntityNotFoundException($"Airline with ICAO = {icao} not found!");
+
+            // If airline is found, return airline.
+            return airline;
         }
 
+        /// <summary>
+        /// Adds an airline to the repository.
+        /// </summary>
+        /// <param name="airline">A airline object.</param>
+        /// <returns>The added airline entry in the repository.</returns>
+        /// <exception cref="EntityAlreadyExistsException">Airline already exists.</exception>
         public async Task<Airline> AddAirlineAsync(Airline airline)
         {
-            var result = await DbContext.Airlines.AddAsync(airline);
+            // Try to get duplicate airline with the same ICAO code.
+            var existingAirline = await GetAirlineAsync(airline.Icao);
 
+            // If the airline does already exist, return a 303 with the airline object. 
+            if (existingAirline != null)
+                throw new EntityAlreadyExistsException("Airline already exists!");
+
+            // If the airline does not exist, create airline.
+            await DbContext.Airlines.AddAsync(airline);
+
+            // Update database.
             await DbContext.SaveChangesAsync();
 
-            return result.Entity;
+            // Get and return the created airline.
+            return await GetAirlineAsync(airline.Icao);
         }
 
+        /// <summary>
+        /// Updates an airline in the repository.
+        /// </summary>
+        /// <param name="airline">A updated airline object.</param>
+        /// <returns>The updated airline entry in the repository.</returns>
+        /// <exception cref="EntityNotFoundException">No airline were found.</exception>
         public async Task<Airline> UpdateAirlineAsync(Airline airline)
         {
-            var result = await DbContext.Airlines
-                .Include(e => e.Flights)
-                .FirstOrDefaultAsync(e => e.Icao == airline.Icao);
+            // Check if the airline the user is trying to update exists.
+            // Throws "EntityNotFoundException" if airline does not already exist.
+            _ = await GetAirlineAsync(airline.Icao);
 
-            if (result != null)
-            {
-                result = airline;
+            // If the airline exists, update airline.
+            DbContext.Airlines.Update(airline);
 
-                await DbContext.SaveChangesAsync();
+            // Update database.
+            await DbContext.SaveChangesAsync();
 
-                return result;
-            }
-
-            return null;
+            // Get and return the updated airline.
+            return await GetAirlineAsync(airline.Icao);
         }
 
+        /// <summary>
+        /// Delete an airline from the repository.
+        /// </summary>
+        /// <param name="icao">The airlines three letter ICAO identifier.</param>
+        /// <returns>The deleted airline entry in the repository.</returns>
+        /// <exception cref="EntityNotFoundException">No airline were found.</exception>
         public async Task<Airline> DeleteAirlineAsync(string icao)
         {
-            var result = await DbContext.Airlines
-                .Include(e => e.Flights)
-                .FirstOrDefaultAsync(e => e.Icao == icao);
+            // Get the airline the user is trying to delete.
+            // Throws "EntityNotFoundException" if airline does not already exist.
+            var airlineToDelete = await GetAirlineAsync(icao);
 
-            if (result != null)
-            {
-                DbContext.Airlines.Remove(result);
+            // If the airline exists, remove airline.
+            DbContext.Airlines.Remove(airlineToDelete);
 
-                await DbContext.SaveChangesAsync();
+            // Update database.
+            await DbContext.SaveChangesAsync();
 
-                return result;
-            }
-
-            return null;
+            // Return deleted airline.
+            return airlineToDelete;
         }
     }
 }

@@ -13,12 +13,12 @@ namespace Solari.Data.Access.Models
     /// 
     /// <list type="bullet">
     /// <item>
-    /// <term>Icao</term>
+    /// <term>ICAO</term>
     /// <description>A unique four letter identifier (PK)</description>
     /// </item>
     /// 
     /// <item>
-    /// <term>Iata</term>
+    /// <term>IATA</term>
     /// <description>A three letter identifier (not unique)</description>
     /// </item>
     /// 

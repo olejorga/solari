@@ -11,7 +11,9 @@ using Solari.Data.Access;
 using Solari.Data.Access.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Solari.Data.Api
@@ -25,24 +27,31 @@ namespace Solari.Data.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime.
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            // Use JSON References to prevent cycles in data.
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
+            // API name and version.
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Solari.Data.Api", Version = "v1" });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Solari.Data.Api.xml");
+                c.IncludeXmlComments(filePath);
             });
 
+            // Automatic repository and context dependency injection.
             services.AddScoped<SolariContext, SolariContext>();
             services.AddScoped<IAirlineRepository, SqlAirlineRepository>();
-            //services.AddScoped<IAirportRepository, SqlAirportRepository>();
-            //services.AddScoped<IFlightRepository, SqlFlightRepository>();
+            // services.AddScoped<IAirportRepository, SqlAirportRepository>();
+            // services.AddScoped<IFlightRepository, SqlFlightRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This method gets called by the runtime.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

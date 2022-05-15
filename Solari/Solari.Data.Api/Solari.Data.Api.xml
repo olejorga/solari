@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Solari.Data.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Solari.Data.Api.Controllers.AirlineController.GetAirlines">
+            <summary>
+            Tests
+            </summary>
+            <returns></returns>
+            <remarks>Awesomeness!</remarks>
+        </member>
+    </members>
+</doc>
