@@ -4,6 +4,11 @@
         <name>Solari.Data.Api</name>
     </assembly>
     <members>
+        <member name="T:Solari.Data.Api.Controllers.AirlineController">
+            <summary>
+            Restful airlines web service, built with CRUD in mind.
+            </summary>
+        </member>
         <member name="M:Solari.Data.Api.Controllers.AirlineController.GetAirlines">
             <summary>
             Retrieve all airlines.

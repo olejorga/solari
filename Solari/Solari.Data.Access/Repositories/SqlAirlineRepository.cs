@@ -9,6 +9,10 @@ using Solari.Data.Access.Exceptions;
 
 namespace Solari.Data.Access.Repositories
 {
+    /// <summary>
+    /// An abstraction of the airlines SQL table, 
+    /// built with EF Core 5 and designed with CRUD in mind.
+    /// </summary>
     public class SqlAirlineRepository : IAirlineRepository
     {
         private readonly SolariContext DbContext;

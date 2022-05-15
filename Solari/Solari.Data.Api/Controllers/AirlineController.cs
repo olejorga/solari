@@ -11,6 +11,9 @@ using Solari.Data.Access.Exceptions;
 
 namespace Solari.Data.Api.Controllers
 {
+    /// <summary>
+    /// Restful airlines web service, built with CRUD in mind.
+    /// </summary>
     [ApiController]
     [Route("api")]
     public class AirlineController : ControllerBase

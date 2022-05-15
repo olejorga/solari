@@ -64,7 +64,11 @@
             A aggregated list of flights scheduled to arrive the airport.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Solari.Data.Access.Models.Flight" -->
+        <member name="T:Solari.Data.Access.Models.Flight">
+            <summary>
+            A schema for an airport.
+            </summary>
+        </member>
         <member name="P:Solari.Data.Access.Models.Flight.FlightNumber">
             <summary>
             A unique identifier between 3 and 6 letters (PK).
@@ -113,6 +117,12 @@
         <member name="P:Solari.Data.Access.Models.Flight.AirlineIcao">
             <summary>
             The ICAO code of the arrival airport (FK).
+            </summary>
+        </member>
+        <member name="T:Solari.Data.Access.Repositories.SqlAirlineRepository">
+            <summary>
+            An abstraction of the airlines SQL table, 
+            built with EF Core 5 and designed with CRUD in mind.
             </summary>
         </member>
         <member name="M:Solari.Data.Access.Repositories.SqlAirlineRepository.GetAirlinesAsync">
