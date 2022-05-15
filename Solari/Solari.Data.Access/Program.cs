@@ -17,19 +17,6 @@ namespace Solari.Data.Access
         private static async Task MainAsync()
         {
             Console.WriteLine("Hello World!");
-
-            SolariContext ctx = new();
-            var repo = new SqlAirlineRepository(ctx);
-
-            await repo.AddAirlineAsync(new Airline { Icao = "TST", Iata = "TS", Name = "Test Airways" });
-            //await repo.DeleteAirlineAsync("TST");
-
-            var airlines = await repo.GetAirlinesAsync();
-
-            foreach (Airline a in airlines)
-            {
-                Console.WriteLine(a.Name);
-            }
         }
     }
 }

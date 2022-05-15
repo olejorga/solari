@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Solari.Data.Access</name>
+    </assembly>
+    <members>
+        <member name="T:Solari.Data.Access.Models.Airline">
+            <summary>
+            A schema for an airline.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airline.Icao">
+            <summary>
+            A unique three letter identifier (PK).
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airline.Iata">
+            <summary>
+            A two letter identifier (not unique).
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airline.Name">
+            <summary>
+            The name of the airline
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airline.Flights">
+            <summary>
+            A aggregated list of flights flying for the airline.
+            </summary>
+        </member>
+        <member name="T:Solari.Data.Access.Models.Airport">
+            <summary>
+            A schema for an airport.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airport.Icao">
+            <summary>
+            A unique four letter identifier (PK).
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airport.Iata">
+            <summary>
+            A three letter identifier (not unique).
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airport.Name">
+            <summary>
+            The name of the airport.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airport.City">
+            <summary>
+            The city of which the airport adheres to.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airport.DepartingFlights">
+            <summary>
+            A aggregated list of flights scheduled to depart the airport.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Airport.ArrivingFlights">
+            <summary>
+            A aggregated list of flights scheduled to arrive the airport.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Solari.Data.Access.Models.Flight" -->
+        <member name="P:Solari.Data.Access.Models.Flight.FlightNumber">
+            <summary>
+            A unique identifier between 3 and 6 letters (PK).
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.Status">
+            <summary>
+            A optional status message for the flight.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.DepartureTime">
+            <summary>
+            The estimated time of departure.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.ArrivalTime">
+            <summary>
+            The estimated time of arrival.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.DepartureGate">
+            <summary>
+            The identifier of the departure gate at the departure airport.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.BaggageBelt">
+            <summary>
+            The identifier of the baggage belt at the arrival airport.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.DepartureAirport">
+            <summary>
+            The aggregated object representation of the departure airport.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.DepartureAirportIcao">
+            <summary>
+            The ICAO code of the departure airport (FK).
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.Airline">
+            <summary>
+            The aggregated object representation of the arrival airport.
+            </summary>
+        </member>
+        <member name="P:Solari.Data.Access.Models.Flight.AirlineIcao">
+            <summary>
+            The ICAO code of the arrival airport (FK).
+            </summary>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirlineRepository.GetAirlinesAsync">
+            <summary>
+            Gets all airlines in repository.
+            </summary>
+            <returns>All airlines in repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntitiesNotFoundException">No airlines were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirlineRepository.GetAirlineAsync(System.String)">
+            <summary>
+            Gets airline by ICAO code.
+            </summary>
+            <param name="icao">The airlines three letter ICAO identifier.</param>
+            <returns>Airline matching the ICAO code.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No airline were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirlineRepository.AddAirlineAsync(Solari.Data.Access.Models.Airline)">
+            <summary>
+            Adds an airline to the repository.
+            </summary>
+            <param name="airline">A airline object.</param>
+            <returns>The added airline entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityAlreadyExistsException">Airline already exists.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirlineRepository.UpdateAirlineAsync(Solari.Data.Access.Models.Airline)">
+            <summary>
+            Updates an airline in the repository.
+            </summary>
+            <param name="airline">A updated airline object.</param>
+            <returns>The updated airline entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No airline were found.</exception>
+        </member>
+        <member name="M:Solari.Data.Access.Repositories.SqlAirlineRepository.DeleteAirlineAsync(System.String)">
+            <summary>
+            Delete an airline from the repository.
+            </summary>
+            <param name="icao">The airlines three letter ICAO identifier.</param>
+            <returns>The deleted airline entry in the repository.</returns>
+            <exception cref="T:Solari.Data.Access.Exceptions.EntityNotFoundException">No airline were found.</exception>
+        </member>
+    </members>
+</doc>

@@ -25,10 +25,10 @@ namespace Solari.Data.Api.Controllers
         /// <summary>
         /// Retrieve all airlines.
         /// </summary>
-        /// <remarks>Awesomeness!</remarks>
+        /// <remarks>Returns referenced JSON.</remarks>
         /// <response code="200">Returns a list of airline objects.</response>
         /// <response code="404">No airlines in database.</response>
-        /// <response code="500"></response>
+        /// <response code="500">Error reading from database.</response>
         [HttpGet("airlines")]
         public async Task<ActionResult<IEnumerable<Airline>>> GetAirlines()
         {
@@ -47,6 +47,13 @@ namespace Solari.Data.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve airline by ICAO code.
+        /// </summary>
+        /// <remarks>Returns referenced JSON.</remarks>
+        /// <response code="200">Returns an airline matching the ICAO code.</response>
+        /// <response code="404">No matching airline in database.</response>
+        /// <response code="500">Error reading from database.</response>
         [HttpGet("airlines/{icao}")]
         public async Task<ActionResult<Airline>> GetAirline(string icao)
         {
@@ -65,6 +72,14 @@ namespace Solari.Data.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Add an airline.
+        /// </summary>
+        /// <remarks>Returns referenced JSON.</remarks>
+        /// <response code="200">Returns airline entry in database.</response>
+        /// <response code="400">No airline object provided by the user.</response>
+        /// <response code="409">Airline already exists.</response>
+        /// <response code="500">Error updating database.</response>
         [HttpPost("airlines")]
         public async Task<ActionResult<Airline>> CreateAirline(Airline airline)
         {
@@ -93,6 +108,14 @@ namespace Solari.Data.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Update an airline.
+        /// </summary>
+        /// <remarks>Returns referenced JSON.</remarks>
+        /// <response code="200">Returns the updated airline entry in the database.</response>
+        /// <response code="400">No airline object provided or ICAO codes mismatch.</response>
+        /// <response code="404">Airline were not found.</response>
+        /// <response code="500">Error updating database.</response>
         [HttpPut("airlines/{icao}")]
         public async Task<ActionResult<Airline>> UpdateAirline(string icao, Airline airline)
         {
@@ -119,6 +142,13 @@ namespace Solari.Data.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Update an airline.
+        /// </summary>
+        /// <remarks>Returns referenced JSON.</remarks>
+        /// <response code="200">Returns the deleted airline entry from the database.</response>
+        /// <response code="404">Airline were not found.</response>
+        /// <response code="500">Error updating database.</response>
         [HttpDelete("airlines/{icao}")]
         public async Task<ActionResult<Airline>> DeleteAirline(string icao)
         {

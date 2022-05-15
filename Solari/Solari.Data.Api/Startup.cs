@@ -40,8 +40,11 @@ namespace Solari.Data.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Solari.Data.Api", Version = "v1" });
 
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Solari.Data.Api.xml");
-                c.IncludeXmlComments(filePath);
+                var dataApiDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Api.xml");
+                var dataAccessDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Access.xml");
+
+                c.IncludeXmlComments(dataApiDocFilePath);
+                c.IncludeXmlComments(dataAccessDocFilePath);
             });
 
             // Automatic repository and context dependency injection.

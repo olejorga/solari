@@ -6,10 +6,50 @@
     <members>
         <member name="M:Solari.Data.Api.Controllers.AirlineController.GetAirlines">
             <summary>
-            Tests
+            Retrieve all airlines.
             </summary>
-            <returns></returns>
-            <remarks>Awesomeness!</remarks>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns a list of airline objects.</response>
+            <response code="404">No airlines in database.</response>
+            <response code="500">Error reading from database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirlineController.GetAirline(System.String)">
+            <summary>
+            Retrieve airline by ICAO code.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns an airline matching the ICAO code.</response>
+            <response code="404">No matching airline in database.</response>
+            <response code="500">Error reading from database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirlineController.CreateAirline(Solari.Data.Access.Models.Airline)">
+            <summary>
+            Add an airline.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns airline entry in database.</response>
+            <response code="400">No airline object provided by the user.</response>
+            <response code="409">Airline already exists.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirlineController.UpdateAirline(System.String,Solari.Data.Access.Models.Airline)">
+            <summary>
+            Update an airline.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns the updated airline entry in the database.</response>
+            <response code="400">No airline object provided or ICAO codes mismatch.</response>
+            <response code="404">Airline were not found.</response>
+            <response code="500">Error updating database.</response>
+        </member>
+        <member name="M:Solari.Data.Api.Controllers.AirlineController.DeleteAirline(System.String)">
+            <summary>
+            Update an airline.
+            </summary>
+            <remarks>Returns referenced JSON.</remarks>
+            <response code="200">Returns the deleted airline entry from the database.</response>
+            <response code="404">Airline were not found.</response>
+            <response code="500">Error updating database.</response>
         </member>
     </members>
 </doc>

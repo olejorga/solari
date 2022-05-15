@@ -42,7 +42,7 @@ namespace Solari.Data.Access.Repositories
         /// Gets airline by ICAO code.
         /// </summary>
         /// <param name="icao">The airlines three letter ICAO identifier.</param>
-        /// <returns>Airline matching ICAO code.</returns>
+        /// <returns>Airline matching the ICAO code.</returns>
         /// <exception cref="EntityNotFoundException">No airline were found.</exception>
         public async Task<Airline> GetAirlineAsync(string icao)
         {
