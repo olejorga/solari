@@ -74,21 +74,26 @@ namespace Solari.Data.Access.Repositories
         /// <exception cref="EntityAlreadyExistsException">Airline already exists.</exception>
         public async Task<Airline> AddAirlineAsync(Airline airline)
         {
-            // Try to get duplicate airline with the same ICAO code.
-            var existingAirline = await GetAirlineAsync(airline.Icao);
+            try
+            {
+                // Check if an airline with the same ICAO code exists.
+                // Throws "EntityNotFoundException" if airline does not already exist.
+                await GetAirlineAsync(airline.Icao);
 
-            // If the airline does already exist, return a 303 with the airline object. 
-            if (existingAirline != null)
+                // If the airline does already exist, throw exception.
                 throw new EntityAlreadyExistsException("Airline already exists!");
+            }
+            catch (EntityNotFoundException)
+            {
+                // If the airline does not exist, create airline.
+                await DbContext.Airlines.AddAsync(airline);
 
-            // If the airline does not exist, create airline.
-            await DbContext.Airlines.AddAsync(airline);
+                // Update database.
+                await DbContext.SaveChangesAsync();
 
-            // Update database.
-            await DbContext.SaveChangesAsync();
-
-            // Get and return the created airline.
-            return await GetAirlineAsync(airline.Icao);
+                // Get and return the created airline.
+                return await GetAirlineAsync(airline.Icao);
+            } 
         }
 
         /// <summary>
@@ -99,18 +104,20 @@ namespace Solari.Data.Access.Repositories
         /// <exception cref="EntityNotFoundException">No airline were found.</exception>
         public async Task<Airline> UpdateAirlineAsync(Airline airline)
         {
-            // Check if the airline the user is trying to update exists.
+            // Get the airline the user is trying to update exists.
             // Throws "EntityNotFoundException" if airline does not already exist.
-            _ = await GetAirlineAsync(airline.Icao);
+            var airlineToUpdate = await GetAirlineAsync(airline.Icao);
 
             // If the airline exists, update airline.
-            DbContext.Airlines.Update(airline);
+            airlineToUpdate.Icao = airline.Icao;
+            airlineToUpdate.Iata = airline.Iata;
+            airlineToUpdate.Name = airline.Name;
 
             // Update database.
             await DbContext.SaveChangesAsync();
 
-            // Get and return the updated airline.
-            return await GetAirlineAsync(airline.Icao);
+            // Return the updated airline.
+            return airlineToUpdate;
         }
 
         /// <summary>

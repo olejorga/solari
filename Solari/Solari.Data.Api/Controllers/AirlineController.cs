@@ -95,7 +95,7 @@ namespace Solari.Data.Api.Controllers
                 var createdAirline = await airlineRepository.AddAirlineAsync(airline);
 
                 // Return a 201 response with the airline object.
-                return CreatedAtAction(nameof(GetAirline),
+                return CreatedAtAction(nameof(CreateAirline),
                     new { createdAirline.Icao }, createdAirline);
             }
             catch (EntityAlreadyExistsException exception)
@@ -104,10 +104,10 @@ namespace Solari.Data.Api.Controllers
                 return StatusCode(StatusCodes.Status409Conflict,
                     exception.Message);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error creating new airline!");
+                    exception.Message);
             }
         }
 
@@ -138,10 +138,10 @@ namespace Solari.Data.Api.Controllers
             {
                 return NotFound(exception.Message);
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error updating airline!");
+                    exception.Message);
             }
         }
 

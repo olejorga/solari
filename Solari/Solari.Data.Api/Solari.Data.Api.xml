@@ -27,7 +27,7 @@
             <response code="404">No matching airline in database.</response>
             <response code="500">Error reading from database.</response>
         </member>
-        <member name="M:Solari.Data.Api.Controllers.AirlineController.CreateAirline(Solari.Data.Access.Models.Airline)">
+        <member name="M:Solari.Data.Api.Controllers.AirlineController.CreateAirline(Solari.Data.Api.RequestModels.AirlineRequestModel)">
             <summary>
             Add an airline.
             </summary>
