@@ -3,23 +3,34 @@ using System.Text.RegularExpressions;
 
 namespace Solari.Data.Access.Attributes
 {
+    /// <summary>
+    /// A common data annotation validation attribute for IATA, 
+    /// ICAO and flight numbers.
+    /// 
+    /// The only difference is the string min and max length.
+    /// </summary>
     public class Identifier : ValidationAttribute
     {
-        public int Length { get; set; }
+        public int MinLength { get; set; }
+        public int MaxLength { get; set; }
 
-        public Identifier(int Length)
+        public Identifier(int MinLength, int MaxLength)
         {
-            this.Length = Length;
-            ErrorMessage = $"Must be exactly {Length} long and only contain uppercase letters (A-Z) and numbers (0-9).";
+            this.MinLength = MinLength;
+            this.MaxLength = MaxLength;
+
+            ErrorMessage = $"" +
+                $"Must be between {MinLength} and {MaxLength} characters " +
+                $"and only contain uppercase letters (A-Z) and numbers (0-9).";
         }
 
         public override bool IsValid(object value)
         {
-            string icaoCode = value as string;
-            Regex icaoPattern = new($"^[A-Z0-9]{{{Length}}}$");
+            string icao = value as string;
+            Regex pattern = new($"^[A-Z0-9]{{{MinLength},{MaxLength}}}$");
 
-            if (!string.IsNullOrEmpty(icaoCode))
-                return icaoPattern.IsMatch(icaoCode);
+            if (!string.IsNullOrEmpty(icao))
+                return pattern.IsMatch(icao);
 
             return true;
         }

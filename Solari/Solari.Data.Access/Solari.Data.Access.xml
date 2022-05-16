@@ -4,6 +4,39 @@
         <name>Solari.Data.Access</name>
     </assembly>
     <members>
+        <member name="T:Solari.Data.Access.Attributes.AirlineIata">
+            <summary>
+            A validation attribute for airline IATA.
+            </summary>
+        </member>
+        <member name="T:Solari.Data.Access.Attributes.AirlineIcao">
+            <summary>
+            A validation attribute for airline ICAO.
+            </summary>
+        </member>
+        <member name="T:Solari.Data.Access.Attributes.AirportIata">
+            <summary>
+            A validation attribute for airport IATA.
+            </summary>
+        </member>
+        <member name="T:Solari.Data.Access.Attributes.AirportIcao">
+            <summary>
+            A validation attribute for airport ICAO.
+            </summary>
+        </member>
+        <member name="T:Solari.Data.Access.Attributes.FlightNumber">
+            <summary>
+            A validation attribute for flight numbers.
+            </summary>
+        </member>
+        <member name="T:Solari.Data.Access.Attributes.Identifier">
+            <summary>
+            A common data annotation validation attribute for IATA, 
+            ICAO and flight numbers.
+            
+            The only difference is the string min and max length.
+            </summary>
+        </member>
         <member name="T:Solari.Data.Access.Models.Airline">
             <summary>
             A schema for an airline.

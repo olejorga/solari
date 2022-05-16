@@ -10,7 +10,7 @@ using Solari.Data.Access;
 namespace Solari.Data.Access.Migrations
 {
     [DbContext(typeof(SolariContext))]
-    [Migration("20220515204606_InitMigration")]
+    [Migration("20220516074708_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
