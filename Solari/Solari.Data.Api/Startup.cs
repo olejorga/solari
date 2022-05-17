@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Solari.Data.Access;
+using Solari.Data.Access.Contracts.Repositories;
 using Solari.Data.Access.Repositories;
 using System;
 using System.IO;

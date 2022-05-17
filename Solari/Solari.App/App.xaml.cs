@@ -59,6 +59,7 @@ namespace Solari.App
 
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
+            services.AddSingleton<IAirlineService, AirlineService>();
 
             // Views and ViewModels
             services.AddTransient<ShellPage>();

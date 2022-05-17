@@ -33,5 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solari.App.Core\Solari.App.Core.csproj" />
+    <ProjectReference Include="..\Solari.Data.Access\Solari.Data.Access.csproj" />
   </ItemGroup>
 </Project>

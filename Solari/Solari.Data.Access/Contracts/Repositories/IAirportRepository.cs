@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Solari.Data.Access.Repositories
+namespace Solari.Data.Access.Contracts.Repositories
 {
     public interface IAirportRepository
     {

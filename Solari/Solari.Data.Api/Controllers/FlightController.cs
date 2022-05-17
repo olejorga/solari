@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Solari.Data.Access.Contracts.Repositories;
 using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
-using Solari.Data.Access.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +17,11 @@ namespace Solari.Data.Api.Controllers
     [Route("api")]
     public class FlightController : ControllerBase
     {
-        private readonly IFlightRepository flightRepository;
+        private readonly IFlightRepository _FlightRepository;
 
         public FlightController(IFlightRepository flightRepository)
         {
-            this.flightRepository = flightRepository;
+            _FlightRepository = flightRepository;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Solari.Data.Api.Controllers
         {
             try
             {
-                return Ok((await flightRepository.GetFlightsAsync()).ToList());
+                return Ok((await _FlightRepository.GetFlightsAsync()).ToList());
             }
             catch (EntitiesNotFoundException exception)
             {
@@ -61,7 +61,7 @@ namespace Solari.Data.Api.Controllers
         {
             try
             {
-                return Ok(await flightRepository.GetFlightAsync(flightNumber));
+                return Ok(await _FlightRepository.GetFlightAsync(flightNumber));
             }
             catch (EntityNotFoundException exception)
             {
@@ -91,7 +91,7 @@ namespace Solari.Data.Api.Controllers
                 if (flight == null)
                     return BadRequest("No flight object provided!");
 
-                var createdFlight = await flightRepository.AddFlightAsync(flight);
+                var createdFlight = await _FlightRepository.AddFlightAsync(flight);
 
                 // Return a 201 response with the flight object.
                 return CreatedAtAction(nameof(CreateFlight),
@@ -131,7 +131,7 @@ namespace Solari.Data.Api.Controllers
                 if (flightNumber.ToUpper() != flight.FlightNumber)
                     return BadRequest("Flight number mismatch!");
 
-                return Ok(await flightRepository.UpdateFlightAsync(flight));
+                return Ok(await _FlightRepository.UpdateFlightAsync(flight));
             }
             catch (EntityNotFoundException exception)
             {
@@ -156,7 +156,7 @@ namespace Solari.Data.Api.Controllers
         {
             try
             {
-                return Ok(await flightRepository.DeleteFlightAsync(flightNumber));
+                return Ok(await _FlightRepository.DeleteFlightAsync(flightNumber));
             }
             catch (EntityNotFoundException exception)
             {
