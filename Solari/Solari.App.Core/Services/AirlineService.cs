@@ -1,16 +1,20 @@
-﻿using Solari.App.Core.Contracts.Services;
+﻿using Solari.App.Core.Constants;
+using Solari.App.Core.Contracts.Services;
+using Solari.App.Core.Helpers;
+using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
-using System.Text;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Solari.App.Core.Helpers;
-using Solari.App.Core.Constants;
 
 namespace Solari.App.Core.Services
 {
+    /// <summary>
+    /// An abstraction of the HTTP operations made towards the
+    /// airline endpoints of the REST-API.
+    /// </summary>
     public class AirlineService : IAirlineService
     {
         private readonly HttpClient _HttpClient;
@@ -20,33 +24,68 @@ namespace Solari.App.Core.Services
             _HttpClient = new HttpClient() { BaseAddress = new Uri(BaseAddress.DataApi) };
         }
 
-        public Task<bool> AddAirlineAsync(Airline airline)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAirlineAsync(string icao)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Airline> GetAirlineAsync(string icao)
         {
-            Airline airline = null;
-            HttpResponseMessage response = await _HttpClient.GetAsync($"airlines/{icao}");
+            // Request the airline.
+            HttpResponseMessage response = await _HttpClient
+                .GetAsync($"airlines/{icao}");
 
+            // Read the contents of the body of the response.
+            string content = await response.Content.ReadAsStringAsync();
+
+            // If the request was successful (200), return the airline.
             if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                airline = await Json.ToObjectAsync<Airline>(content);
-            }
+                return await Json.ToObjectAsync<Airline>(content);
 
-            return airline;
+            // For any other status code, throw a exception with
+            // the error message from the REST-API.
+            else
+                throw new Exception(content);
         }
 
-        public Task<bool> UpdateAirlineAsync(Airline airline)
+        public async void AddAirlineAsync(Airline airline)
         {
-            throw new NotImplementedException();
+            // Create the airline.
+            HttpResponseMessage response = await _HttpClient
+                .PostAsJsonAsync("airlines", airline);
+
+            // Read the contents of the body of the response.
+            string content = await response.Content.ReadAsStringAsync();
+
+            // If the request was unsuccessful (Not 200), throw a
+            // exception with the error message from the REST-API.
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(content);
+        }
+
+        public async void UpdateAirlineAsync(Airline airline)
+        {
+            // Update the airline.
+            HttpResponseMessage response = await _HttpClient
+                .PutAsJsonAsync($"airlines/{airline.Icao}", airline);
+
+            // Read the contents of the body of the response.
+            string content = await response.Content.ReadAsStringAsync();
+
+            // If the request was unsuccessful (Not 200), throw a
+            // exception with the error message from the REST-API.
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(content);
+        }
+
+        public async void DeleteAirlineAsync(string icao)
+        {
+            // Delete the airline.
+            HttpResponseMessage response = await _HttpClient
+                .DeleteAsync($"airlines/{icao}");
+
+            // Read the contents of the body of the response.
+            string content = await response.Content.ReadAsStringAsync();
+
+            // If the request was unsuccessful (Not 200), throw a
+            // exception with the error message from the REST-API.
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new Exception(content);
         }
     }
 }

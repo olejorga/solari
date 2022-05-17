@@ -10,8 +10,8 @@ namespace Solari.App.Core.Contracts.Services
     public interface IAirlineService
     {
         Task<Airline> GetAirlineAsync(string icao);
-        Task<bool> AddAirlineAsync(Airline airline);
-        Task<bool> UpdateAirlineAsync(Airline airline);
-        Task<bool> DeleteAirlineAsync(string icao);
+        void AddAirlineAsync(Airline airline);
+        void UpdateAirlineAsync(Airline airline);
+        void DeleteAirlineAsync(string icao);
     }
 }
