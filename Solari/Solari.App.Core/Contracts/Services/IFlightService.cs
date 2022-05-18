@@ -1,8 +1,5 @@
 ﻿using Solari.Data.Access.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Solari.App.Core.Contracts.Services
@@ -12,8 +9,8 @@ namespace Solari.App.Core.Contracts.Services
         Task<IEnumerable<Flight>> GetFlightsAsync();
         Task<IEnumerable<Flight>> SearchFlightsAsync(string query);
         Task<Flight> GetFlightAsync(string flightNumber);
-        Task<Flight> AddFlightAsync(Flight flight);
-        Task<Flight> UpdateFlightAsync(Flight flight);
-        Task<Flight> DeleteFlightAsync(string flightNumber);
+        void AddFlightAsync(Flight flight);
+        void UpdateFlightAsync(Flight flight);
+        void DeleteFlightAsync(string flightNumber);
     }
 }

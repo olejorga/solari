@@ -1,8 +1,10 @@
 ﻿using Solari.App.Core.Constants;
 using Solari.App.Core.Contracts.Services;
 using Solari.App.Core.Helpers;
+using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -12,35 +14,64 @@ namespace Solari.App.Core.Services
 {
     /// <summary>
     /// An abstraction of the HTTP operations made towards the
-    /// airline endpoints of the REST-API.
+    /// flight endpoints of the REST-API, with extra methods.
     /// </summary>
-    public class AirlineService : IAirlineService
+    public class FlightService : IFlightService
     {
         private readonly HttpClient _HttpClient;
 
-        public AirlineService()
+        public FlightService()
         {
             _HttpClient = new HttpClient() { BaseAddress = new Uri(BaseAddress.DataApi) };
         }
 
         /// <summary>
-        /// Gets airline by ICAO code from the REST-API.
+        /// Gets all flights via the REST-API.
         /// </summary>
-        /// <param name="icao">The airlines three letter ICAO identifier.</param>
-        /// <returns>Airline matching the ICAO code.</returns>
+        /// <returns>All flights from the REST-API.</returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async Task<Airline> GetAirlineAsync(string icao)
+        public async Task<IEnumerable<Flight>> GetFlightsAsync()
         {
-            // Request the airline.
+            // Request all flights.
             HttpResponseMessage response = await _HttpClient
-                .GetAsync($"airlines/{icao}");
+                .GetAsync("flights");
 
             // Read the contents of the body of the response.
             string content = await response.Content.ReadAsStringAsync();
 
-            // If the request was successful (200), return the airline.
+            // If the request was successful (200), return the flights.
             if (response.IsSuccessStatusCode)
-                return await Json.ToObjectAsync<Airline>(content);
+                return await Json.ToObjectAsync<List<Flight>>(content);
+
+            // For any other status code, throw a exception with
+            // the error message from the REST-API.
+            else
+                throw new Exception(content);
+        }
+
+        public async Task<IEnumerable<Flight>> SearchFlightsAsync(string query)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets flight by flight number from the REST-API.
+        /// </summary>
+        /// <param name="flightNumber">The flights three letter ICAO identifier.</param>
+        /// <returns>Flight matching the flight number.</returns>
+        /// <exception cref="Exception">API error with message.</exception>
+        public async Task<Flight> GetFlightAsync(string flightNumber)
+        {
+            // Request the flight.
+            HttpResponseMessage response = await _HttpClient
+                .GetAsync($"flights/{flightNumber}");
+
+            // Read the contents of the body of the response.
+            string content = await response.Content.ReadAsStringAsync();
+
+            // If the request was successful (200), return the flight.
+            if (response.IsSuccessStatusCode)
+                return await Json.ToObjectAsync<Flight>(content);
 
             // For any other status code, throw a exception with
             // the error message from the REST-API.
@@ -49,19 +80,19 @@ namespace Solari.App.Core.Services
         }
 
         /// <summary>
-        /// Adds an airline via the REST-API.
+        /// Adds an flight via the REST-API.
         /// </summary>
         /// <returns>
         /// Nothing, but throws exception with a helping,
         /// error message if something went wrong.
         /// </returns>
-        /// <param name="airline">A airline object.</param>
+        /// <param name="flight">A flight object.</param>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void AddAirlineAsync(Airline airline)
+        public async void AddFlightAsync(Flight flight)
         {
-            // Create the airline.
+            // Create the flight.
             HttpResponseMessage response = await _HttpClient
-                .PostAsJsonAsync("airlines", airline);
+                .PostAsJsonAsync("flights", flight);
 
             // Read the contents of the body of the response.
             string content = await response.Content.ReadAsStringAsync();
@@ -73,19 +104,19 @@ namespace Solari.App.Core.Services
         }
 
         /// <summary>
-        /// Updates an airline via the REST-API.
+        /// Updates an flight via the REST-API.
         /// </summary>
-        /// <param name="airline">A updated airline object.</param>
+        /// <param name="flight">A updated flight object.</param>
         /// <returns>
         /// Nothing, but throws exception with a helping,
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void UpdateAirlineAsync(Airline airline)
+        public async void UpdateFlightAsync(Flight flight)
         {
-            // Update the airline.
+            // Update the flight.
             HttpResponseMessage response = await _HttpClient
-                .PutAsJsonAsync($"airlines/{airline.Icao}", airline);
+                .PutAsJsonAsync($"flights/{flight.FlightNumber}", flight);
 
             // Read the contents of the body of the response.
             string content = await response.Content.ReadAsStringAsync();
@@ -97,19 +128,19 @@ namespace Solari.App.Core.Services
         }
 
         /// <summary>
-        /// Delete an airline via the REST-API.
+        /// Delete an flight via the REST-API.
         /// </summary>
-        /// <param name="icao">The airlines three letter ICAO identifier.</param>
+        /// <param name="flightNumber">The flights three letter ICAO identifier.</param>
         /// <returns>
         /// Nothing, but throws exception with a helping,
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void DeleteAirlineAsync(string icao)
+        public async void DeleteFlightAsync(string flightNumber)
         {
-            // Delete the airline.
+            // Delete the flight.
             HttpResponseMessage response = await _HttpClient
-                .DeleteAsync($"airlines/{icao}");
+                .DeleteAsync($"flights/{flightNumber}");
 
             // Read the contents of the body of the response.
             string content = await response.Content.ReadAsStringAsync();

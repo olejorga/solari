@@ -41,7 +41,7 @@ namespace Solari.App
 
         private System.IServiceProvider ConfigureServices()
         {
-            // TODO WTS: Register your services, viewmodels and pages here
+            // TODO WTS: Register your services, view models and pages here
             var services = new ServiceCollection();
 
             // Default Activation Handler
@@ -60,6 +60,8 @@ namespace Solari.App
             // Core Services
             services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IAirlineService, AirlineService>();
+            services.AddSingleton<IAirportService, AirportService>();
+            services.AddSingleton<IFlightService, FlightService>();
 
             // Views and ViewModels
             services.AddTransient<ShellPage>();
@@ -80,6 +82,7 @@ namespace Solari.App
             services.AddTransient<EditPage>();
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
+
             return services.BuildServiceProvider();
         }
     }
