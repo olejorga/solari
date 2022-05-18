@@ -13,7 +13,6 @@ namespace Solari.App.ViewModels
 {
     public class AddViewModel : ObservableRecipient, INavigationAware
     {
-        private readonly IAirlineService _AirlineService;
         private readonly ISampleDataService _sampleDataService;
         private SampleOrder _selected;
 
@@ -25,9 +24,8 @@ namespace Solari.App.ViewModels
 
         public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
 
-        public AddViewModel(IAirlineService airlineService, ISampleDataService sampleDataService)
+        public AddViewModel(ISampleDataService sampleDataService)
         {
-            _AirlineService = airlineService;
             _sampleDataService = sampleDataService;
         }
 
@@ -42,10 +40,6 @@ namespace Solari.App.ViewModels
             {
                 SampleItems.Add(item);
             }
-
-            var airline = await _AirlineService.GetAirlineAsync("FOX");
-
-            Debug.WriteLine(airline.Name);
         }
 
         public void OnNavigatedFrom()
