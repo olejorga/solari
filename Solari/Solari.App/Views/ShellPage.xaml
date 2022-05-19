@@ -26,12 +26,35 @@
             Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/release/docs/UWP/projectTypes/navigationpane.md
             Edit String/en-US/Resources.resw: Add a menu item title for each page
             -->
-            <NavigationViewItem x:Uid="Shell_Landing" Icon="Document" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.LandingViewModel" />
-            <NavigationViewItem x:Uid="Shell_Departures" Icon="Document" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.DeparturesViewModel" />
-            <NavigationViewItem x:Uid="Shell_Arrivals" Icon="Document" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.ArrivalsViewModel" />
-            <NavigationViewItem x:Uid="Shell_Flight" Icon="Document" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.FlightViewModel" />
-            <NavigationViewItem x:Uid="Shell_Add" Icon="Document" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddViewModel" />
-            <NavigationViewItem x:Uid="Shell_Edit" Icon="Document" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditViewModel" />
+            <NavigationViewItem x:Uid="Shell_Add" Content="Flights" ToolTipService.ToolTip="Flights" SelectsOnInvoked="False">
+                <NavigationViewItem.MenuItems>
+                    <NavigationViewItem x:Uid="Shell_Departures" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.DeparturesViewModel" />
+                    <NavigationViewItem x:Uid="Shell_Arrivals" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.ArrivalsViewModel" />
+                </NavigationViewItem.MenuItems>
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE709;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem x:Uid="Shell_Add" Content="Add" ToolTipService.ToolTip="Add" SelectsOnInvoked="False">
+                <NavigationViewItem.MenuItems>
+                    <NavigationViewItem x:Uid="Shell_Add_Airline" Content="Add an Airline" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddAirlineViewModel" />
+                    <NavigationViewItem x:Uid="Shell_Add_Airport" Content="Add an Airport" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddAirportViewModel" />
+                    <NavigationViewItem x:Uid="Shell_Add_Flight" Content="Add a Flight" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddFlightViewModel" />
+                </NavigationViewItem.MenuItems>
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xECC8;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem x:Uid="Shell_Edit" Content="Edit" ToolTipService.ToolTip="Edit" SelectsOnInvoked="False">
+                <NavigationViewItem.MenuItems>
+                    <NavigationViewItem x:Uid="Shell_Edit_Airline" Content="Edit an Airline" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditAirlineViewModel" />
+                    <NavigationViewItem x:Uid="Shell_Edit_Airport" Content="Edit an Airport" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditAirportViewModel" />
+                    <NavigationViewItem x:Uid="Shell_Edit_Flight" Content="Edit a Flight" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditFlightViewModel" />
+                </NavigationViewItem.MenuItems>
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
         </NavigationView.MenuItems>
         <NavigationView.HeaderTemplate>
             <DataTemplate>

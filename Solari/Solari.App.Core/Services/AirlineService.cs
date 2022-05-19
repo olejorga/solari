@@ -57,7 +57,7 @@ namespace Solari.App.Core.Services
         /// </returns>
         /// <param name="airline">A airline object.</param>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void AddAirlineAsync(Airline airline)
+        public async Task AddAirlineAsync(Airline airline)
         {
             // Create the airline.
             HttpResponseMessage response = await _HttpClient
@@ -81,7 +81,7 @@ namespace Solari.App.Core.Services
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void UpdateAirlineAsync(Airline airline)
+        public async Task UpdateAirlineAsync(Airline airline)
         {
             // Update the airline.
             HttpResponseMessage response = await _HttpClient
@@ -105,7 +105,7 @@ namespace Solari.App.Core.Services
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void DeleteAirlineAsync(string icao)
+        public async Task DeleteAirlineAsync(string icao)
         {
             // Delete the airline.
             HttpResponseMessage response = await _HttpClient

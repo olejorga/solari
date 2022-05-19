@@ -64,22 +64,43 @@ namespace Solari.App
             services.AddSingleton<IFlightService, FlightService>();
 
             // Views and ViewModels
+            // Navigation
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
+
+            // Start page
             services.AddTransient<LandingViewModel>();
             services.AddTransient<LandingPage>();
+
+            // Airport departures page
             services.AddTransient<DeparturesViewModel>();
             services.AddTransient<DeparturesPage>();
+
+            // Airport arrivals page
             services.AddTransient<ArrivalsViewModel>();
             services.AddTransient<ArrivalsPage>();
+
+            // Flight details page
             services.AddTransient<FlightViewModel>();
             services.AddTransient<FlightPage>();
-            services.AddTransient<FlightDetailViewModel>();
-            services.AddTransient<FlightDetailPage>();
-            services.AddTransient<AddViewModel>();
-            services.AddTransient<AddPage>();
-            services.AddTransient<EditViewModel>();
-            services.AddTransient<EditPage>();
+
+            // Add data pages
+            services.AddTransient<AddAirlineViewModel>();
+            services.AddTransient<AddAirlinePage>();
+            services.AddTransient<AddAirportViewModel>();
+            services.AddTransient<AddAirportPage>();
+            services.AddTransient<AddFlightViewModel>();
+            services.AddTransient<AddFlightPage>();
+
+            // Edit (and remove) data pages
+            services.AddTransient<EditAirlineViewModel>();
+            services.AddTransient<EditAirlinePage>();
+            services.AddTransient<EditAirportViewModel>();
+            services.AddTransient<EditAirportPage>();
+            services.AddTransient<EditFlightViewModel>();
+            services.AddTransient<EditFlightPage>();
+
+            // Application settings page
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
 

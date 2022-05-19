@@ -14,6 +14,15 @@
   <PropertyGroup>
     <NoWarn>CA1416, $(NoWarn)</NoWarn>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\AddAirlinePage.xaml" />
+    <None Remove="Views\AddAirportPage.xaml" />
+    <None Remove="Views\AddFlightPage.xaml" />
+    <None Remove="Views\EditAirlinePage.xaml" />
+    <None Remove="Views\EditAirportPage.xaml" />
+    <None Remove="Views\EditFlightPage.xaml" />
+    <None Remove="Views\FlightPage.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -34,5 +43,33 @@
   <ItemGroup>
     <ProjectReference Include="..\Solari.App.Core\Solari.App.Core.csproj" />
     <ProjectReference Include="..\Solari.Data.Access\Solari.Data.Access.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\EditAirlinePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EditAirportPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddAirportPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddAirlinePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EditFlightPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FlightPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\AddFlightPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 </Project>

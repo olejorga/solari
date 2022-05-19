@@ -22,9 +22,12 @@ namespace Solari.App.Services
             Configure<DeparturesViewModel, DeparturesPage>();
             Configure<ArrivalsViewModel, ArrivalsPage>();
             Configure<FlightViewModel, FlightPage>();
-            Configure<FlightDetailViewModel, FlightDetailPage>();
-            Configure<AddViewModel, AddPage>();
-            Configure<EditViewModel, EditPage>();
+            Configure<AddAirlineViewModel, AddAirlinePage>();
+            Configure<AddAirportViewModel, AddAirportPage>();
+            Configure<AddFlightViewModel, AddFlightPage>();
+            Configure<EditAirlineViewModel, EditAirlinePage>();
+            Configure<EditAirportViewModel, EditAirportPage>();
+            Configure<EditFlightViewModel, EditFlightPage>();
             Configure<SettingsViewModel, SettingsPage>();
         }
 

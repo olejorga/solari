@@ -4,9 +4,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Solari.App.ViewModels
 {
-    public class FlightViewModel : ObservableRecipient
+    public class AddAirportViewModel : ObservableRecipient
     {
-        public FlightViewModel()
+        public AddAirportViewModel()
         {
         }
     }
