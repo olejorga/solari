@@ -9,8 +9,8 @@ namespace Solari.App.Core.Contracts.Services
         Task<IEnumerable<Flight>> GetFlightsAsync();
         Task<IEnumerable<Flight>> SearchFlightsAsync(string query);
         Task<Flight> GetFlightAsync(string flightNumber);
-        void AddFlightAsync(Flight flight);
-        void UpdateFlightAsync(Flight flight);
-        void DeleteFlightAsync(string flightNumber);
+        Task AddFlightAsync(Flight flight);
+        Task UpdateFlightAsync(Flight flight);
+        Task DeleteFlightAsync(string flightNumber);
     }
 }

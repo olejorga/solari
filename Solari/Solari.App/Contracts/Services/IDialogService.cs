@@ -15,6 +15,7 @@ namespace Solari.App.Contracts.Services
         Close
     }
 
+    // See DialogService.cs for abstract implementation.
     public interface IDialogService
     {
         Task<DialogResult> ShowAsync(string message);

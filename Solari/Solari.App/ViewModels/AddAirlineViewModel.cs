@@ -1,14 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Solari.App.Contracts.Services;
 using Solari.App.Core.Contracts.Services;
-using Solari.App.Services;
 using Solari.Data.Access.Models;
+using System;
+using System.Windows.Input;
 
 namespace Solari.App.ViewModels
 {
@@ -38,11 +34,15 @@ namespace Solari.App.ViewModels
                     {
                         try
                         {
+                            // Try to add airline.
                             await _AirlineSerivce.AddAirlineAsync(NewAirline);
+
+                            // If successful, create success dialog.
                             _ = await InfoDialogService.ShowAsync("Airline successfully added.");
                         }
                         catch (Exception exception)
                         {
+                            // If unsuccessful, create error dialog, with error message from service.
                             _ = await ErrorDialogService.ShowAsync(exception.Message);
                         }
                     });

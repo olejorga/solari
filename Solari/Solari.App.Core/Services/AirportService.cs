@@ -1,7 +1,6 @@
 ﻿using Solari.App.Core.Constants;
 using Solari.App.Core.Contracts.Services;
 using Solari.App.Core.Helpers;
-using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
 using System;
 using System.Collections.Generic;
@@ -88,7 +87,7 @@ namespace Solari.App.Core.Services
         /// </returns>
         /// <param name="airport">A airport object.</param>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void AddAirportAsync(Airport airport)
+        public async Task AddAirportAsync(Airport airport)
         {
             // Create the airport.
             HttpResponseMessage response = await _HttpClient
@@ -112,7 +111,7 @@ namespace Solari.App.Core.Services
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void UpdateAirportAsync(Airport airport)
+        public async Task UpdateAirportAsync(Airport airport)
         {
             // Update the airport.
             HttpResponseMessage response = await _HttpClient
@@ -136,7 +135,7 @@ namespace Solari.App.Core.Services
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void DeleteAirportAsync(string icao)
+        public async Task DeleteAirportAsync(string icao)
         {
             // Delete the airport.
             HttpResponseMessage response = await _HttpClient

@@ -1,7 +1,6 @@
 ﻿using Solari.App.Core.Constants;
 using Solari.App.Core.Contracts.Services;
 using Solari.App.Core.Helpers;
-using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
 using System;
 using System.Collections.Generic;
@@ -88,7 +87,7 @@ namespace Solari.App.Core.Services
         /// </returns>
         /// <param name="flight">A flight object.</param>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void AddFlightAsync(Flight flight)
+        public async Task AddFlightAsync(Flight flight)
         {
             // Create the flight.
             HttpResponseMessage response = await _HttpClient
@@ -112,7 +111,7 @@ namespace Solari.App.Core.Services
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void UpdateFlightAsync(Flight flight)
+        public async Task UpdateFlightAsync(Flight flight)
         {
             // Update the flight.
             HttpResponseMessage response = await _HttpClient
@@ -136,7 +135,7 @@ namespace Solari.App.Core.Services
         /// error message if something went wrong.
         /// </returns>
         /// <exception cref="Exception">API error with message.</exception>
-        public async void DeleteFlightAsync(string flightNumber)
+        public async Task DeleteFlightAsync(string flightNumber)
         {
             // Delete the flight.
             HttpResponseMessage response = await _HttpClient
