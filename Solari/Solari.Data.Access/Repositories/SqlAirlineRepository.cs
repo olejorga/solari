@@ -13,11 +13,11 @@ namespace Solari.Data.Access.Repositories
     /// </summary>
     public class SqlAirlineRepository : IAirlineRepository
     {
-        private readonly SolariContext _DbContext;
+        private readonly SolariContext _dbContext;
 
         public SqlAirlineRepository(SolariContext dbContext)
         {
-            _DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Solari.Data.Access.Repositories
         public async Task<IEnumerable<Airline>> GetAirlinesAsync()
         {
             // Get all airlines.
-            var airlines = await _DbContext.Airlines
+            var airlines = await _dbContext.Airlines
                 .Include(e => e.Flights)
                 .ToListAsync();
 
@@ -52,7 +52,7 @@ namespace Solari.Data.Access.Repositories
             icao = icao.ToUpper();
 
             // Get airline by ICAO code.
-            var airline = await _DbContext.Airlines
+            var airline = await _dbContext.Airlines
                 .Include(e => e.Flights)
                 .FirstOrDefaultAsync(e => e.Icao == icao.ToUpper());
 
@@ -84,10 +84,10 @@ namespace Solari.Data.Access.Repositories
             catch (EntityNotFoundException)
             {
                 // If the airline does not exist, create airline.
-                await _DbContext.Airlines.AddAsync(airline);
+                await _dbContext.Airlines.AddAsync(airline);
 
                 // Update database.
-                await _DbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
 
                 // Get and return the created airline.
                 return await GetAirlineAsync(airline.Icao);
@@ -112,7 +112,7 @@ namespace Solari.Data.Access.Repositories
             airlineToUpdate.Name = airline.Name;
 
             // Update database.
-            await _DbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             // Return the updated airline.
             return airlineToUpdate;
@@ -131,10 +131,10 @@ namespace Solari.Data.Access.Repositories
             var airlineToDelete = await GetAirlineAsync(icao);
 
             // If the airline exists, remove airline.
-            _DbContext.Airlines.Remove(airlineToDelete);
+            _dbContext.Airlines.Remove(airlineToDelete);
 
             // Update database.
-            await _DbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             // Return deleted airline.
             return airlineToDelete;

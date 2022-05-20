@@ -11,14 +11,19 @@
     <Grid x:Name="ContentArea" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <ScrollViewer>
             <StackPanel Orientation="Vertical" Margin="{StaticResource DetailPageMargin}" Width="250" HorizontalAlignment="Left">
+                <!-- General section -->
                 <TextBlock Text="General" FontSize="{StaticResource LargeFontSize}" />
                 <TextBox Text="{Binding Path=NewAirport.Name, Mode=TwoWay}" Header="Name of the airport:" PlaceholderText="E.g. Oslo Airport Fornebu" Margin="{StaticResource SmallTopMargin}" />
                 <TextBox Text="{Binding Path=NewAirport.City, Mode=TwoWay}" Header="City:" PlaceholderText="E.g. Oslo" Margin="{StaticResource SmallTopMargin}" />
+                
+                <!-- Identification section -->
                 <TextBlock Text="Identification" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
                 <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
                     <TextBox Text="{Binding Path=NewAirport.Icao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENFB" />
                     <TextBox Text="{Binding Path=NewAirport.Iata, Mode=TwoWay}" Header="Airport IATA code:" PlaceholderText="E.g. FBU" Margin="{StaticResource MediumLeftRightMargin}" />
                 </StackPanel>
+                
+                <!-- Submit button -->
                 <Button Content="Add airport" Command="{Binding Path=AddAirportCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" />
             </StackPanel>
         </ScrollViewer>

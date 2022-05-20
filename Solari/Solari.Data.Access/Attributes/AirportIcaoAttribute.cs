@@ -3,9 +3,9 @@
     /// <summary>
     /// A validation attribute for airport ICAO.
     /// </summary>
-    public class AirportIcao : Identifier
+    public class AirportIcaoAttribute : IdentifierAttribute
     {
-        public AirportIcao() : base(4, 4)
+        public AirportIcaoAttribute() : base(4, 4)
         { }
     }
 }

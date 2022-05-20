@@ -16,7 +16,7 @@ namespace Solari.Data.Access.Models
         /// </summary>
         [Key]
         [Required]
-        [FlightNumber]
+        [FlightNumberAttribute]
         public string FlightNumber { get; set; }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Solari.Data.Access.Models
         /// <summary>
         /// The ICAO code of the departure airport (FK).
         /// </summary>
-        [AirportIcao]
+        [AirportIcaoAttribute]
         public string DepartureAirportIcao { get; set; }
         #endregion
 
@@ -69,7 +69,7 @@ namespace Solari.Data.Access.Models
         /// <summary>
         /// The ICAO code of the arrival airport (FK).
         /// </summary>
-        [AirportIcao]
+        [AirportIcaoAttribute]
         public string ArrivalAirportIcao { get; set; }
         #endregion
 
@@ -84,7 +84,7 @@ namespace Solari.Data.Access.Models
         /// <summary>
         /// The ICAO code of the flights airline (FK).
         /// </summary>
-        [AirlineIcao]
+        [AirlineIcaoAttribute]
         public string AirlineIcao { get; set; }
         #endregion
     }

@@ -3,9 +3,9 @@
     /// <summary>
     /// A validation attribute for airport IATA.
     /// </summary>
-    public class AirportIata : Identifier
+    public class AirportIataAttribute : IdentifierAttribute
     {
-        public AirportIata() : base(3, 3)
+        public AirportIataAttribute() : base(3, 3)
         { }
     }
 }

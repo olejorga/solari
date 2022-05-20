@@ -13,11 +13,11 @@ namespace Solari.Data.Access.Repositories
     /// </summary>
     public class SqlFlightRepository : IFlightRepository
     {
-        private readonly SolariContext _DbContext;
+        private readonly SolariContext _dbContext;
 
         public SqlFlightRepository(SolariContext dbContext)
         {
-            _DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Solari.Data.Access.Repositories
         public async Task<IEnumerable<Flight>> GetFlightsAsync()
         {
             // Get all flights.
-            var flights = await _DbContext.Flights
+            var flights = await _dbContext.Flights
                 .Include(e => e.Airline)
                 .Include(e => e.DepartureAirport)
                 .Include(e => e.ArrivalAirport)
@@ -54,7 +54,7 @@ namespace Solari.Data.Access.Repositories
             flightNumber = flightNumber.ToUpper();
 
             // Get flight by flight number.
-            var flight = await _DbContext.Flights
+            var flight = await _dbContext.Flights
                 .Include(e => e.Airline)
                 .Include(e => e.DepartureAirport)
                 .Include(e => e.ArrivalAirport)
@@ -88,10 +88,10 @@ namespace Solari.Data.Access.Repositories
             catch (EntityNotFoundException)
             {
                 // If the flight does not exist, create flight.
-                await _DbContext.Flights.AddAsync(flight);
+                await _dbContext.Flights.AddAsync(flight);
 
                 // Update database.
-                await _DbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
 
                 // Get and return the created flight.
                 return await GetFlightAsync(flight.FlightNumber);
@@ -121,7 +121,7 @@ namespace Solari.Data.Access.Repositories
             flightToUpdate.ArrivalAirportIcao = flight.ArrivalAirportIcao;
 
             // Update database.
-            await _DbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             // Return the updated flight.
             return flightToUpdate;
@@ -140,10 +140,10 @@ namespace Solari.Data.Access.Repositories
             var flightToDelete = await GetFlightAsync(flightNumber);
 
             // If the flight exists, remove flight.
-            _DbContext.Flights.Remove(flightToDelete);
+            _dbContext.Flights.Remove(flightToDelete);
 
             // Update database.
-            await _DbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             // Return deleted flight.
             return flightToDelete;

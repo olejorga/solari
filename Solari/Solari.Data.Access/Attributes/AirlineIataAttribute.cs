@@ -3,9 +3,9 @@
     /// <summary>
     /// A validation attribute for airline IATA.
     /// </summary>
-    public class AirlineIata : Identifier
+    public class AirlineIataAttribute : IdentifierAttribute
     {
-        public AirlineIata() : base(2, 2)
+        public AirlineIataAttribute() : base(2, 2)
         { }
     }
 }

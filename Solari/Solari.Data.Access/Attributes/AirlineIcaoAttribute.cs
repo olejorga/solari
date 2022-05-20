@@ -3,9 +3,9 @@
     /// <summary>
     /// A validation attribute for airline ICAO.
     /// </summary>
-    public class AirlineIcao : Identifier
+    public class AirlineIcaoAttribute : IdentifierAttribute
     {
-        public AirlineIcao() : base(3, 3)
+        public AirlineIcaoAttribute() : base(3, 3)
         { }
     }
 }

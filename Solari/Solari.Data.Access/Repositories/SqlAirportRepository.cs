@@ -13,11 +13,11 @@ namespace Solari.Data.Access.Repositories
     /// </summary>
     public class SqlAirportRepository : IAirportRepository
     {
-        private readonly SolariContext _DbContext;
+        private readonly SolariContext _dbContext;
 
         public SqlAirportRepository(SolariContext dbContext)
         {
-            _DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Solari.Data.Access.Repositories
         public async Task<IEnumerable<Airport>> GetAirportsAsync()
         {
             // Get all airports.
-            var airports = await _DbContext.Airports
+            var airports = await _dbContext.Airports
                 .Include(e => e.DepartingFlights)
                 .Include(e => e.ArrivingFlights)
                 .ToListAsync();
@@ -53,7 +53,7 @@ namespace Solari.Data.Access.Repositories
             icao = icao.ToUpper();
 
             // Get airport by ICAO code.
-            var airport = await _DbContext.Airports
+            var airport = await _dbContext.Airports
                 .Include(e => e.DepartingFlights)
                 .Include(e => e.ArrivingFlights)
                 .FirstOrDefaultAsync(e => e.Icao == icao.ToUpper());
@@ -86,10 +86,10 @@ namespace Solari.Data.Access.Repositories
             catch (EntityNotFoundException)
             {
                 // If the airport does not exist, create airport.
-                await _DbContext.Airports.AddAsync(airport);
+                await _dbContext.Airports.AddAsync(airport);
 
                 // Update database.
-                await _DbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
 
                 // Get and return the created airport.
                 return await GetAirportAsync(airport.Icao);
@@ -115,7 +115,7 @@ namespace Solari.Data.Access.Repositories
             airportToUpdate.City = airport.City;
 
             // Update database.
-            await _DbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             // Return the updated airport.
             return airportToUpdate;
@@ -134,10 +134,10 @@ namespace Solari.Data.Access.Repositories
             var airportToDelete = await GetAirportAsync(icao);
 
             // If the airport exists, remove airport.
-            _DbContext.Airports.Remove(airportToDelete);
+            _dbContext.Airports.Remove(airportToDelete);
 
             // Update database.
-            await _DbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
 
             // Return deleted airport.
             return airportToDelete;

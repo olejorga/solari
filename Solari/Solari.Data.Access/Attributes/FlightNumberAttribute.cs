@@ -3,9 +3,9 @@
     /// <summary>
     /// A validation attribute for flight numbers.
     /// </summary>
-    public class FlightNumber : Identifier
+    public class FlightNumberAttribute : IdentifierAttribute
     {
-        public FlightNumber() : base(3, 6)
+        public FlightNumberAttribute() : base(3, 6)
         { }
     }
 }

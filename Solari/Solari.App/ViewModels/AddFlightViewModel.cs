@@ -81,7 +81,7 @@ namespace Solari.App.ViewModels
 
         private void SetFlightDepartureTime()
         {
-            DateTime newDepartureTime = new DateTime(
+            DateTime newDepartureTime = new(
                 DepartureDate.Year, DepartureDate.Month, DepartureDate.Day, 
                 DepartureTime.Hours, DepartureTime.Minutes, DepartureTime.Seconds);
 
@@ -115,7 +115,7 @@ namespace Solari.App.ViewModels
 
         private void SetFlightArrivalTime()
         {
-            DateTime newArrivalTime = new DateTime(
+            DateTime newArrivalTime = new(
                 ArrivalDate.Year, ArrivalDate.Month, ArrivalDate.Day,
                 ArrivalTime.Hours, ArrivalTime.Minutes, ArrivalTime.Seconds);
 

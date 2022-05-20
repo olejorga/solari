@@ -9,12 +9,12 @@ namespace Solari.Data.Access.Attributes
     /// 
     /// The only difference is the string min and max length.
     /// </summary>
-    public class Identifier : ValidationAttribute
+    public class IdentifierAttribute : ValidationAttribute
     {
         public int MinLength { get; set; }
         public int MaxLength { get; set; }
 
-        public Identifier(int MinLength, int MaxLength)
+        public IdentifierAttribute(int MinLength, int MaxLength)
         {
             this.MinLength = MinLength;
             this.MaxLength = MaxLength;
