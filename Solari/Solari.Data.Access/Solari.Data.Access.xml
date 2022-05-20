@@ -4,32 +4,32 @@
         <name>Solari.Data.Access</name>
     </assembly>
     <members>
-        <member name="T:Solari.Data.Access.Attributes.AirlineIata">
+        <member name="T:Solari.Data.Access.Attributes.AirlineIataAttribute">
             <summary>
             A validation attribute for airline IATA.
             </summary>
         </member>
-        <member name="T:Solari.Data.Access.Attributes.AirlineIcao">
+        <member name="T:Solari.Data.Access.Attributes.AirlineIcaoAttribute">
             <summary>
             A validation attribute for airline ICAO.
             </summary>
         </member>
-        <member name="T:Solari.Data.Access.Attributes.AirportIata">
+        <member name="T:Solari.Data.Access.Attributes.AirportIataAttribute">
             <summary>
             A validation attribute for airport IATA.
             </summary>
         </member>
-        <member name="T:Solari.Data.Access.Attributes.AirportIcao">
+        <member name="T:Solari.Data.Access.Attributes.AirportIcaoAttribute">
             <summary>
             A validation attribute for airport ICAO.
             </summary>
         </member>
-        <member name="T:Solari.Data.Access.Attributes.FlightNumber">
+        <member name="T:Solari.Data.Access.Attributes.FlightNumberAttribute">
             <summary>
             A validation attribute for flight numbers.
             </summary>
         </member>
-        <member name="T:Solari.Data.Access.Attributes.Identifier">
+        <member name="T:Solari.Data.Access.Attributes.IdentifierAttribute">
             <summary>
             A common data annotation validation attribute for IATA, 
             ICAO and flight numbers.
