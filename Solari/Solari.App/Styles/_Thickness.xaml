@@ -29,6 +29,6 @@
     <Thickness x:Key="XXSmallLeftTopRightBottomMargin">4,4,4,4</Thickness>
 
     <!--ListDetails size margins-->
-    <Thickness x:Key="DetailPageMargin">70,40,70,0</Thickness>
+    <Thickness x:Key="DetailPageMargin">70,40,70,70</Thickness>
 
 </ResourceDictionary>

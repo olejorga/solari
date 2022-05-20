@@ -7,27 +7,28 @@
     xmlns:viewmodels="using:Solari.App.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddFlightViewModel}"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
-    
-    <ScrollViewer>
-        <Grid x:Name="ContentArea" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <StackPanel Orientation="Vertical" Margin="{StaticResource DetailPageMargin}" Width="650" HorizontalAlignment="Left">
+
+    <Grid x:Name="ContentArea" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="{StaticResource DetailPageMargin}" Width="560" HorizontalAlignment="Left">
                 <TextBlock Text="General" FontSize="{StaticResource LargeFontSize}" />
-                <TextBox Text="{Binding Path=NewFlight.AirlineIcao, Mode=TwoWay}" Header="Airline:" PlaceholderText="E.g. ENGM" Margin="{StaticResource SmallTopMargin}" />
-                <TextBlock Text="Departure" FontSize="{StaticResource MediumFontSize}" Margin="{StaticResource MediumTopMargin}" />
+                <TextBox Text="{Binding Path=NewFlight.AirlineIcao, Mode=TwoWay}" Header="Airline ICAO code:" PlaceholderText="E.g. NAX" Margin="{StaticResource SmallTopMargin}" />
+                <TextBox Text="{Binding Path=NewFlight.FlightNumber, Mode=TwoWay}" Header="Flight number:" PlaceholderText="E.g. DY320" Margin="{StaticResource SmallTopMargin}" />
+                <TextBlock Text="Flight plan" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
+                <TextBlock Text="Departure" FontSize="{StaticResource MediumFontSize}" Margin="{StaticResource SmallTopMargin}" />
                 <TextBox Text="{Binding Path=NewFlight.DepartureAirportIcao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENGM" Margin="{StaticResource SmallTopMargin}" />
                 <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <DatePicker SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" Header="Date of departure" />
-                    <TimePicker SelectedTime="{Binding Path=DepartureTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of departure" Margin="{StaticResource MediumLeftRightMargin}" />
+                    <DatePicker SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" Header="Date of departure:" />
+                    <TimePicker SelectedTime="{Binding Path=DepartureTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of departure:" Margin="{StaticResource MediumLeftRightMargin}" />
                 </StackPanel>
                 <TextBlock Text="Arrival" FontSize="{StaticResource MediumFontSize}" Margin="{StaticResource MediumTopMargin}" />
+                <TextBox Text="{Binding Path=NewFlight.ArrivalAirportIcao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENBR" Margin="{StaticResource SmallTopMargin}" />
                 <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <DatePicker SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}" Header="Date of departure" />
-                    <TimePicker SelectedTime="{Binding Path=ArrivalTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of departure" Margin="{StaticResource MediumLeftRightMargin}" />
+                    <DatePicker SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}" Header="Date of arrival:" />
+                    <TimePicker SelectedTime="{Binding Path=ArrivalTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of arrival:" Margin="{StaticResource MediumLeftRightMargin}" />
                 </StackPanel>
-                <TextBlock Text="Identification" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
-                <TextBox Text="{Binding Path=NewFlight.FlightNumber, Mode=TwoWay}" Header="Flight number:" PlaceholderText="E.g. DY320" Margin="{StaticResource SmallTopMargin}" />
                 <Button Content="Add flight" Command="{Binding Path=AddFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" />
             </StackPanel>
-        </Grid>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Grid>
 </Page>

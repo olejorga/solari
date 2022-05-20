@@ -18,7 +18,7 @@ namespace Solari.App.ViewModels
 
         public IDialogService InfoDialogService { get; set; }
 
-        public Flight NewFlight { get; set; } = new() { DepartureTime = new DateTime(1970, 1, 1, 0, 0, 0), ArrivalTime = new DateTime(1970, 1, 1, 0, 0, 1) };
+        public Flight NewFlight { get; set; } = new() { DepartureTime = DateTime.Now, ArrivalTime = DateTime.Now };
 
         public AddFlightViewModel(IFlightService flightService)
         {
