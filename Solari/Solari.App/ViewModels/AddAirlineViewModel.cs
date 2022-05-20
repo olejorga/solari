@@ -4,7 +4,10 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Solari.App.Contracts.Services;
 using Solari.App.Core.Contracts.Services;
+using Solari.App.Services;
 using Solari.Data.Access.Models;
 
 namespace Solari.App.ViewModels
@@ -13,12 +16,15 @@ namespace Solari.App.ViewModels
     {
         private readonly IAirlineService _AirlineSerivce;
 
+        public IDialogService ErrorDialogService { get; set; }
+
+        public IDialogService InfoDialogService { get; set; }
+
         public Airline NewAirline { get; set; } = new();
 
         public AddAirlineViewModel(IAirlineService airlineService)
         {
             _AirlineSerivce = airlineService;
-            NewAirline.Name = "Norwegian";
         }
 
         private ICommand _AddAirlineCommand;
@@ -33,10 +39,11 @@ namespace Solari.App.ViewModels
                         try
                         {
                             await _AirlineSerivce.AddAirlineAsync(NewAirline);
+                            _ = await InfoDialogService.ShowAsync("Airline successfully added.");
                         }
                         catch (Exception exception)
                         {
-                            Debug.WriteLine(exception.Message);
+                            _ = await ErrorDialogService.ShowAsync(exception.Message);
                         }
                     });
                 }

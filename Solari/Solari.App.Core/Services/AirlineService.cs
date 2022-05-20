@@ -66,9 +66,9 @@ namespace Solari.App.Core.Services
             // Read the contents of the body of the response.
             string content = await response.Content.ReadAsStringAsync();
 
-            // If the request was unsuccessful (Not 200), throw a
+            // If the request was unsuccessful (Not 201), throw a
             // exception with the error message from the REST-API.
-            if (response.StatusCode != HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.Created)
                 throw new Exception(content);
         }
 
