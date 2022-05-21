@@ -8,10 +8,12 @@
     xmlns:xaml="using:Microsoft.UI.Xaml"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
+    
     <Page.Resources>
         <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     </Page.Resources>
-    <Grid Margin="{StaticResource MediumLeftRightMargin}">
+    
+    <Grid Margin="{StaticResource DetailPageMargin}">
         <StackPanel
             x:Name="ContentArea">
             <TextBlock x:Uid="Settings_Personalization" Style="{ThemeResource SubtitleTextBlockStyle}" />

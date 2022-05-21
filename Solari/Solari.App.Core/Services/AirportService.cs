@@ -113,6 +113,9 @@ namespace Solari.App.Core.Services
         /// <exception cref="Exception">API error with message.</exception>
         public async Task UpdateAirportAsync(Airport airport)
         {
+            airport.DepartingFlights = null;
+            airport.ArrivingFlights = null;
+
             // Update the airport.
             HttpResponseMessage response = await _HttpClient
                 .PutAsJsonAsync($"airports/{airport.Icao}", airport);
