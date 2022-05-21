@@ -45,11 +45,11 @@
     <ProjectReference Include="..\Solari.Data.Access\Solari.Data.Access.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\EditAirlinePage.xaml">
+    <Page Update="Views\EditAirportPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\EditAirportPage.xaml">
+    <Page Update="Views\EditAirlinePage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

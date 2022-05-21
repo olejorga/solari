@@ -47,9 +47,6 @@ namespace Solari.App.ViewModels
                             // If unsuccessful, create error dialog, with error message from service.
                             _ = await ErrorDialogService.ShowAsync(exception.Message);
                         }
-
-                        Debug.WriteLine(NewFlight.DepartureTime.ToString());
-                        Debug.WriteLine(NewFlight.ArrivalTime.ToString());
                     });
                 }
 

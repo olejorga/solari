@@ -24,6 +24,7 @@
                     <DatePicker SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" Header="Date of departure:" />
                     <TimePicker SelectedTime="{Binding Path=DepartureTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of departure:" Margin="{StaticResource MediumLeftRightMargin}" />
                 </StackPanel>
+                <TextBox Text="{Binding Path=NewFlight.DepartureGate, Mode=TwoWay}" Header="Departure gate:" PlaceholderText="E.g. A14" Margin="{StaticResource SmallTopMargin}" />
                 
                 <TextBlock Text="Arrival" FontSize="{StaticResource MediumFontSize}" Margin="{StaticResource MediumTopMargin}" />
                 <TextBox Text="{Binding Path=NewFlight.ArrivalAirportIcao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENBR" Margin="{StaticResource SmallTopMargin}" />
@@ -31,6 +32,7 @@
                     <DatePicker SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}" Header="Date of arrival:" />
                     <TimePicker SelectedTime="{Binding Path=ArrivalTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of arrival:" Margin="{StaticResource MediumLeftRightMargin}" />
                 </StackPanel>
+                <TextBox Text="{Binding Path=NewFlight.BaggageBelt, Mode=TwoWay}" Header="Baggage belt:" PlaceholderText="E.g. 5" Margin="{StaticResource SmallTopMargin}" />
 
                 <!-- Submit button -->
                 <Button Content="Add flight" Command="{Binding Path=AddFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" />
