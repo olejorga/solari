@@ -69,10 +69,7 @@ namespace Solari.App.Core.Services
             // If the request was unsuccessful (Not 201), throw a
             // exception with the error message from the REST-API.
             if (response.StatusCode != HttpStatusCode.Created)
-            {
-                content = TransformValidationErrors.Transform(content);
                 throw new Exception(content);
-            }
         }
 
         /// <summary>

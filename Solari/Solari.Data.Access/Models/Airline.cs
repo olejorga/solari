@@ -16,14 +16,14 @@ namespace Solari.Data.Access.Models
         /// </summary>
         [Key]
         [Required]
-        [AirlineIcaoAttribute]
+        [AirlineIcao]
         public string Icao { get; set; }
 
         /// <summary>
         /// A two letter identifier (not unique).
         /// </summary>
         [Required]
-        [AirlineIataAttribute]
+        [AirlineIata]
         public string Iata { get; set; }
 
         /// <summary>

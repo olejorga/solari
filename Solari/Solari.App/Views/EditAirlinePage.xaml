@@ -3,13 +3,40 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:viewmodels="using:Solari.App.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EditAirlineViewModel}"
+    xmlns:helpers="using:Solari.App.Helpers"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
 
-    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-        </Grid>
+    <!--- Helps to disable input fields before airline is found -->
+    <Page.Resources>
+        <helpers:NullToBooleanConverter x:Key="NullToBooleanConverter" />
+    </Page.Resources>
+
+    <Grid x:Name="ContentArea" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="{StaticResource DetailPageMargin}" Width="250" HorizontalAlignment="Left">
+                <!-- Search section -->
+                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
+                    <TextBox Text="{Binding Path=UserInputtedIcao, Mode=TwoWay}" Header="Find airline by ICAO:" PlaceholderText="E.g. BRA" Width="175" />
+                    <Button Content="Find" Command="{Binding Path=SearchAirlineCommand}" Margin="{StaticResource MediumLeftRightMargin}" VerticalAlignment="Bottom" />
+                </StackPanel>
+
+                <!-- General section -->
+                <TextBlock Text="General" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
+                <TextBox Text="{Binding Path=UpdatedAirline.Name, Mode=TwoWay}" Header="Name of the airline:" PlaceholderText="E.g. Braathens" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedAirline, Converter={StaticResource NullToBooleanConverter}}" />
+                
+                <!-- Identification section -->
+                <TextBlock Text="Identification" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
+                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
+                    <TextBox Text="{Binding Path=UpdatedAirline.Icao, Mode=TwoWay}" Header="Airline ICAO code:" PlaceholderText="E.g. BRA" IsEnabled="{Binding UpdatedAirline, Converter={StaticResource NullToBooleanConverter}}" />
+                    <TextBox Text="{Binding Path=UpdatedAirline.Iata, Mode=TwoWay}" Header="Airline IATA code:" PlaceholderText="E.g. BU" Margin="{StaticResource MediumLeftRightMargin}" IsEnabled="{Binding UpdatedAirline, Converter={StaticResource NullToBooleanConverter}}" />
+                </StackPanel>
+                
+                <!-- Submit button -->
+                <Button Content="Edit airline" Command="{Binding Path=EditAirlineCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" IsEnabled="{Binding UpdatedAirline, Converter={StaticResource NullToBooleanConverter}}" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
