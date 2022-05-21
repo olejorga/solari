@@ -36,7 +36,7 @@
                     <DatePicker SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" Header="Date of departure:" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
                     <TimePicker SelectedTime="{Binding Path=DepartureTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of departure:" Margin="{StaticResource MediumLeftRightMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
-                <TextBox Text="{Binding Path=UpdatedFlight.DepartureGate, Mode=TwoWay}" Header="Departure gate:" PlaceholderText="E.g. A14" Margin="{StaticResource SmallTopMargin}" />
+                <TextBox Text="{Binding Path=UpdatedFlight.DepartureGate, Mode=TwoWay}" Header="Departure gate:" PlaceholderText="E.g. A14" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
 
                 <TextBlock Text="Arrival" FontSize="{StaticResource MediumFontSize}" Margin="{StaticResource MediumTopMargin}" />
                 <TextBox Text="{Binding Path=UpdatedFlight.ArrivalAirportIcao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENBR" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
@@ -44,7 +44,11 @@
                     <DatePicker SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}" Header="Date of arrival:" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
                     <TimePicker SelectedTime="{Binding Path=ArrivalTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of arrival:" Margin="{StaticResource MediumLeftRightMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
-                <TextBox Text="{Binding Path=UpdatedFlight.BaggageBelt, Mode=TwoWay}" Header="Baggage belt:" PlaceholderText="E.g. 5" Margin="{StaticResource SmallTopMargin}" />
+                <TextBox Text="{Binding Path=UpdatedFlight.BaggageBelt, Mode=TwoWay}" Header="Baggage belt:" PlaceholderText="E.g. 5" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+
+                <!-- Other section -->
+                <TextBlock Text="Other" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
+                <TextBox Text="{Binding Path=UpdatedFlight.Status, Mode=TwoWay}" Header="Status of the flight:" PlaceholderText="E.g. Boarding" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
 
                 <!-- Submit button -->
                 <Button Content="Edit flight" Command="{Binding Path=EditFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />

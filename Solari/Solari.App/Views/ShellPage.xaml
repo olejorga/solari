@@ -32,7 +32,7 @@
                     <NavigationViewItem x:Uid="Shell_Arrivals" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.ArrivalsViewModel" />
                 </NavigationViewItem.MenuItems>
                 <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE709;" />
+                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE709;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem x:Uid="Shell_Add" Content="Add" ToolTipService.ToolTip="Add" SelectsOnInvoked="False">
@@ -42,7 +42,7 @@
                     <NavigationViewItem x:Uid="Shell_Add_Flight" Content="Add a Flight" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddFlightViewModel" />
                 </NavigationViewItem.MenuItems>
                 <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xECC8;" />
+                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xECC8;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem x:Uid="Shell_Edit" Content="Edit" ToolTipService.ToolTip="Edit" SelectsOnInvoked="False">
@@ -52,7 +52,7 @@
                     <NavigationViewItem x:Uid="Shell_Edit_Flight" Content="Edit a Flight" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditFlightViewModel" />
                 </NavigationViewItem.MenuItems>
                 <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;" />
+                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE70F;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.MenuItems>

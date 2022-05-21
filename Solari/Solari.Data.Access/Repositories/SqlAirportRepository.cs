@@ -3,6 +3,7 @@ using Solari.Data.Access.Contracts.Repositories;
 using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Repositories
@@ -54,8 +55,12 @@ namespace Solari.Data.Access.Repositories
 
             // Get airport by ICAO code.
             var airport = await _dbContext.Airports
-                .Include(e => e.DepartingFlights)
-                .Include(e => e.ArrivingFlights)
+                .Include(e => e.DepartingFlights).ThenInclude(s => s.Airline)
+                .Include(e => e.DepartingFlights).ThenInclude(s => s.DepartureAirport)
+                .Include(e => e.DepartingFlights).ThenInclude(s => s.ArrivalAirport)
+                .Include(e => e.ArrivingFlights).ThenInclude(s => s.Airline)
+                .Include(e => e.ArrivingFlights).ThenInclude(s => s.DepartureAirport)
+                .Include(e => e.ArrivingFlights).ThenInclude(s => s.ArrivalAirport)
                 .FirstOrDefaultAsync(e => e.Icao == icao.ToUpper());
 
             // If airport is not found, throw exception.

@@ -33,7 +33,11 @@
                     <TimePicker SelectedTime="{Binding Path=ArrivalTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of arrival:" Margin="{StaticResource MediumLeftRightMargin}" />
                 </StackPanel>
                 <TextBox Text="{Binding Path=NewFlight.BaggageBelt, Mode=TwoWay}" Header="Baggage belt:" PlaceholderText="E.g. 5" Margin="{StaticResource SmallTopMargin}" />
-
+                
+                <!-- Other section -->
+                <TextBlock Text="Other" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
+                <TextBox Text="{Binding Path=NewFlight.Status, Mode=TwoWay}" Header="Status of the flight:" PlaceholderText="E.g. Boarding" Margin="{StaticResource SmallTopMargin}" />
+                
                 <!-- Submit button -->
                 <Button Content="Add flight" Command="{Binding Path=AddFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" />
             </StackPanel>

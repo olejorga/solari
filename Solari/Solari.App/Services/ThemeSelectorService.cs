@@ -14,7 +14,7 @@ namespace Solari.App.Services
     {
         private const string SettingsKey = "AppBackgroundRequestedTheme";
 
-        public ElementTheme Theme { get; set; } = ElementTheme.Default;
+        public ElementTheme Theme { get; set; } = ElementTheme.Dark;
 
         public async Task InitializeAsync()
         {
