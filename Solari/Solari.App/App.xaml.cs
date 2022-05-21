@@ -58,7 +58,6 @@ namespace Solari.App
             services.AddSingleton<INavigationService, NavigationService>();
 
             // Core Services
-            services.AddSingleton<ISampleDataService, SampleDataService>();
             services.AddSingleton<IAirlineService, AirlineService>();
             services.AddSingleton<IAirportService, AirportService>();
             services.AddSingleton<IFlightService, FlightService>();

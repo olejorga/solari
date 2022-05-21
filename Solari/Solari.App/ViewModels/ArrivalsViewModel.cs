@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.ObjectModel;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Solari.App.Contracts.ViewModels;
 using Solari.App.Core.Contracts.Services;
-using Solari.App.Core.Models;
+using Solari.Data.Access.Models;
+using System.Collections.ObjectModel;
 
 namespace Solari.App.ViewModels
 {
     public class ArrivalsViewModel : ObservableRecipient, INavigationAware
     {
-        private readonly ISampleDataService _sampleDataService;
+        private readonly IAirportService _airportService;
 
-        public ObservableCollection<SampleOrder> Source { get; } = new ObservableCollection<SampleOrder>();
+        public ObservableCollection<Flight> Source { get; } = new ObservableCollection<Flight>();
 
-        public ArrivalsViewModel(ISampleDataService sampleDataService)
+        public ArrivalsViewModel(IAirportService airportService)
         {
-            _sampleDataService = sampleDataService;
+            _airportService = airportService;
         }
 
         public async void OnNavigatedTo(object parameter)
@@ -25,11 +22,11 @@ namespace Solari.App.ViewModels
             Source.Clear();
 
             // Replace this with your actual data
-            var data = await _sampleDataService.GetGridDataAsync();
+            Airport airport = await _airportService.GetAirportAsync("ENGM");
 
-            foreach (var item in data)
+            foreach (Flight flight in airport.ArrivingFlights)
             {
-                Source.Add(item);
+                Source.Add(flight);
             }
         }
 

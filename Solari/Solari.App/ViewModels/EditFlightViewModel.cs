@@ -4,7 +4,6 @@ using Solari.App.Contracts.Services;
 using Solari.App.Core.Contracts.Services;
 using Solari.Data.Access.Models;
 using System;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace Solari.App.ViewModels
@@ -115,7 +114,7 @@ namespace Solari.App.ViewModels
             set
             {
                 _ = SetProperty(ref _DepartureDate, value);
-                if(!IsInitializing) SetFlightDepartureTime();
+                if (!IsInitializing) SetFlightDepartureTime();
             }
         }
 

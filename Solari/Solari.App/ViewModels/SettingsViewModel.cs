@@ -1,14 +1,9 @@
-﻿using System;
-using System.Windows.Input;
-
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
 using Microsoft.UI.Xaml;
-
 using Solari.App.Contracts.Services;
 using Solari.App.Helpers;
-
+using System.Windows.Input;
 using Windows.ApplicationModel;
 
 namespace Solari.App.ViewModels

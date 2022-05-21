@@ -5,7 +5,6 @@ using Solari.App.Core.Contracts.Services;
 using Solari.Data.Access.Models;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace Solari.App.ViewModels
@@ -79,7 +78,7 @@ namespace Solari.App.ViewModels
         private void SetFlightDepartureTime()
         {
             DateTime newDepartureTime = new(
-                DepartureDate.Year, DepartureDate.Month, DepartureDate.Day, 
+                DepartureDate.Year, DepartureDate.Month, DepartureDate.Day,
                 DepartureTime.Hours, DepartureTime.Minutes, DepartureTime.Seconds);
 
             if (newDepartureTime < NewFlight.ArrivalTime)

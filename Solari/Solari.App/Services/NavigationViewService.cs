@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Microsoft.UI.Xaml.Controls;
-
+﻿using Microsoft.UI.Xaml.Controls;
 using Solari.App.Contracts.Services;
 using Solari.App.Helpers;
 using Solari.App.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Solari.App.Services
 {

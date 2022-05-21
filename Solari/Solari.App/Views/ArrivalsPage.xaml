@@ -5,39 +5,35 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:helpers="using:Solari.App.Helpers"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
 
-    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
-        <controls:DataGrid
-            AutoGenerateColumns="False"
-            GridLinesVisibility="Horizontal"
-            ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}">
-            <controls:DataGrid.Columns>
-                <!--
-                TODO WTS:
-                Remove this column definitions and define columns for your data.
-                Consider adding header properties to Resources.resw
-                -->
-                <controls:DataGridTextColumn Binding="{Binding OrderID}" Header="OrderID" />
-                <controls:DataGridTextColumn Binding="{Binding OrderDate}" Header="OrderDate" />
-                <controls:DataGridTextColumn Binding="{Binding Company}" Header="Company" />
-                <controls:DataGridTextColumn Binding="{Binding ShipTo}" Header="ShipTo" />
-                <controls:DataGridTextColumn Binding="{Binding OrderTotal}" Header="OrderTotal" />
-                <controls:DataGridTextColumn Binding="{Binding Status}" Header="Status" />
-                <controls:DataGridTemplateColumn Header="Symbol">
-                    <controls:DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <FontIcon
-                                    Margin="{StaticResource SmallLeftRightMargin}"
-                                    HorizontalAlignment="Left"
-                                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                    Glyph="{Binding Symbol}"
-                                    AutomationProperties.Name="{Binding SymbolName}" />
-                        </DataTemplate>
-                    </controls:DataGridTemplateColumn.CellTemplate>
-                </controls:DataGridTemplateColumn>
-            </controls:DataGrid.Columns>
-        </controls:DataGrid>
+    <!--- Helps to convert timespan to a std digital clock format -->
+    <Page.Resources>
+        <helpers:TimeSpanToClockConverter x:Key="TimeSpanToClockConverter" />
+    </Page.Resources>
+
+    <Grid x:Name="ContentArea" Margin="{StaticResource DetailPageMargin}">
+        <StackPanel Orientation="Vertical" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" Padding="24" Spacing="32">
+            <Grid ColumnDefinitions="auto, *, auto" HorizontalAlignment="Stretch">
+                <TextBlock Text="OSL" FontSize="72" Grid.Column="0" FontWeight="Black" />
+                <TextBlock x:Name="Clock" Text="10:00" FontSize="48" Grid.Column="2" VerticalAlignment="Center" />
+            </Grid>
+            <controls:DataGrid
+                AutoGenerateColumns="False"
+                GridLinesVisibility="Horizontal"
+                ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
+                IsReadOnly="True">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn Binding="{Binding ArrivalTime.TimeOfDay, Converter={StaticResource TimeSpanToClockConverter}}" Header="Time" FontSize="{StaticResource LargeFontSize}" />
+                    <controls:DataGridTextColumn Binding="{Binding DepartureAirport.City}" Header="From" FontSize="{StaticResource LargeFontSize}" />
+                    <controls:DataGridTextColumn Binding="{Binding FlightNumber}" Header="Flight" FontSize="{StaticResource LargeFontSize}" />
+                    <controls:DataGridTextColumn Binding="{Binding Airline.Name}" Header="Airline" FontSize="{StaticResource LargeFontSize}" />
+                    <controls:DataGridTextColumn Binding="{Binding BaggageBelt}" Header="Belt" FontSize="{StaticResource LargeFontSize}" />
+                    <controls:DataGridTextColumn Binding="{Binding Status}" Header="Gate" FontSize="{StaticResource LargeFontSize}" />
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
+        </StackPanel>
     </Grid>
 </Page>

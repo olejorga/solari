@@ -1,11 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Solari.App.Contracts.Services;
 using Solari.App.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Solari.App.ViewModels

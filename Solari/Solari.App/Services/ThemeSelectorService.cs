@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Microsoft.UI.Xaml;
-
+﻿using Microsoft.UI.Xaml;
 using Solari.App.Contracts.Services;
 using Solari.App.Helpers;
-
+using System;
+using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Solari.App.Services

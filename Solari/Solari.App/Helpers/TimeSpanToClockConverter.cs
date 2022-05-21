@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Solari.App.Helpers
 {
-    public class DateTimeToClockConverter : IValueConverter
+    public class TimeSpanToClockConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

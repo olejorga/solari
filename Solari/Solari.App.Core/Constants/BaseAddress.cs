@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Solari.App.Core.Constants
+﻿namespace Solari.App.Core.Constants
 {
     public static class BaseAddress
     {

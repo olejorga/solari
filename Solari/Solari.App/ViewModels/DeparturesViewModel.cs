@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Solari.App.Contracts.ViewModels;
 using Solari.App.Core.Contracts.Services;
-using Solari.App.Core.Models;
 using Solari.Data.Access.Models;
+using System.Collections.ObjectModel;
 
 namespace Solari.App.ViewModels
 {

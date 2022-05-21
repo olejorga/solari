@@ -9,9 +9,9 @@
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
 
-    <!--- Helps to disable input fields before airline is found -->
+    <!--- Helps to convert timespan to a std digital clock format -->
     <Page.Resources>
-        <helpers:DateTimeToClockConverter x:Key="DateTimeToClockConverter" />
+        <helpers:TimeSpanToClockConverter x:Key="TimeSpanToClockConverter" />
     </Page.Resources>
 
     <Grid x:Name="ContentArea" Margin="{StaticResource DetailPageMargin}">
@@ -26,7 +26,7 @@
                 ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
                 IsReadOnly="True">
                 <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn Binding="{Binding DepartureTime.TimeOfDay, Converter={StaticResource DateTimeToClockConverter}}" Header="Time" FontSize="{StaticResource LargeFontSize}" />
+                    <controls:DataGridTextColumn Binding="{Binding DepartureTime.TimeOfDay, Converter={StaticResource TimeSpanToClockConverter}}" Header="Time" FontSize="{StaticResource LargeFontSize}" />
                     <controls:DataGridTextColumn Binding="{Binding ArrivalAirport.City}" Header="To" FontSize="{StaticResource LargeFontSize}" />
                     <controls:DataGridTextColumn Binding="{Binding FlightNumber}" Header="Flight" FontSize="{StaticResource LargeFontSize}" />
                     <controls:DataGridTextColumn Binding="{Binding Airline.Name}" Header="Airline" FontSize="{StaticResource LargeFontSize}" />

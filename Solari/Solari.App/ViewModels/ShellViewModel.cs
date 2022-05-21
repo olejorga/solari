@@ -1,6 +1,4 @@
-﻿using System;
-
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 using Microsoft.UI.Xaml.Navigation;
 
