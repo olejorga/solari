@@ -26,7 +26,10 @@
                 GridLinesVisibility="Horizontal"
                 ItemsSource="{x:Bind ViewModel.Source, Mode=OneWay}"
                 IsReadOnly="True"
-                Margin="0, 150, 0, 0">
+                Margin="0, 150, 0, 0"
+                SelectionMode="Extended"
+                x:Name="DataGrid"
+                SelectionChanged="DataGrid_SelectionChanged">
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn Binding="{Binding DepartureTime.TimeOfDay, Converter={StaticResource TimeSpanToClockConverter}}" Header="Time" FontSize="{StaticResource LargeFontSize}" />
                 <controls:DataGridTextColumn Binding="{Binding ArrivalAirport.City}" Header="To" FontSize="{StaticResource LargeFontSize}" />

@@ -10,6 +10,7 @@
     <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
         <Grid
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <TextBlock Text="SHIT!" />
         </Grid>
     </Grid>
 </Page>
