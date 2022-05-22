@@ -19,6 +19,7 @@
         ExpandedModeThresholdWidth="1280"
         Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}"
         Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+        <!-- Airport search box -->
         <NavigationView.AutoSuggestBox>
             <AutoSuggestBox 
                 PlaceholderText="Search for airports" 
@@ -27,6 +28,7 @@
                 ToolTipService.ToolTip="Search by name, ICAO- or IATA-code." />
         </NavigationView.AutoSuggestBox>
 
+        <!-- Navigation shortcuts -->
         <NavigationView.MenuItems>
             <NavigationViewItem x:Uid="Shell_Add" Content="Flights" ToolTipService.ToolTip="Flights" SelectsOnInvoked="False">
                 <NavigationViewItem.MenuItems>
@@ -58,6 +60,8 @@
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.MenuItems>
+        
+        <!-- Header -->
         <NavigationView.HeaderTemplate>
             <DataTemplate>
                 <Grid>
@@ -83,6 +87,8 @@
                 </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
             </behaviors:NavigationViewHeaderBehavior>
         </i:Interaction.Behaviors>
+        
+        <!-- View content -->
         <Grid>
             <Frame x:Name="shellFrame" />
         </Grid>

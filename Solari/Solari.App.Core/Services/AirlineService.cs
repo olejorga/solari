@@ -16,11 +16,11 @@ namespace Solari.App.Core.Services
     /// </summary>
     public class AirlineService : IAirlineService
     {
-        private readonly HttpClient _HttpClient;
+        private readonly HttpClient _httpClient;
 
         public AirlineService()
         {
-            _HttpClient = new HttpClient() { BaseAddress = new Uri(BaseAddress.DataApi) };
+            _httpClient = new HttpClient() { BaseAddress = new Uri(BaseAddress.DataApi) };
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Solari.App.Core.Services
         public async Task<Airline> GetAirlineAsync(string icao)
         {
             // Request the airline.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .GetAsync($"airlines/{icao}");
 
             // Read the contents of the body of the response.
@@ -64,7 +64,7 @@ namespace Solari.App.Core.Services
         public async Task AddAirlineAsync(Airline airline)
         {
             // Create the airline.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .PostAsJsonAsync("airlines", airline);
 
             // Read the contents of the body of the response.
@@ -90,7 +90,7 @@ namespace Solari.App.Core.Services
         public async Task UpdateAirlineAsync(Airline airline)
         {
             // Update the airline.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .PutAsJsonAsync($"airlines/{airline.Icao}", airline);
 
             // Read the contents of the body of the response.
@@ -116,7 +116,7 @@ namespace Solari.App.Core.Services
         public async Task DeleteAirlineAsync(string icao)
         {
             // Delete the airline.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .DeleteAsync($"airlines/{icao}");
 
             // Read the contents of the body of the response.

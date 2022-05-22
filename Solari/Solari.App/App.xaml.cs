@@ -39,73 +39,72 @@ namespace Solari.App
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
             base.OnLaunched(args);
-            var activationService = Ioc.Default.GetService<IActivationService>();
+            IActivationService activationService = Ioc.Default.GetService<IActivationService>();
             await activationService.ActivateAsync(args);
         }
 
-        private System.IServiceProvider ConfigureServices()
+        private static System.IServiceProvider ConfigureServices()
         {
-            // TODO WTS: Register your services, view models and pages here
-            var services = new ServiceCollection();
+            ServiceCollection services = new();
 
             // Default Activation Handler
-            services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+            _ = services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
             // Other Activation Handlers
 
             // Services
-            services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-            services.AddTransient<INavigationViewService, NavigationViewService>();
+            _ = services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+            _ = services.AddTransient<INavigationViewService, NavigationViewService>();
 
-            services.AddSingleton<IActivationService, ActivationService>();
-            services.AddSingleton<IPageService, PageService>();
-            services.AddSingleton<INavigationService, NavigationService>();
+            _ = services.AddSingleton<IActivationService, ActivationService>();
+            _ = services.AddSingleton<IPageService, PageService>();
+            _ = services.AddSingleton<INavigationService, NavigationService>();
 
             // Core Services
-            services.AddSingleton<IAirlineService, AirlineService>();
-            services.AddSingleton<IAirportService, AirportService>();
-            services.AddSingleton<IFlightService, FlightService>();
+            _ = services.AddSingleton<IAirlineService, AirlineService>();
+            _ = services.AddSingleton<IAirportService, AirportService>();
+            _ = services.AddSingleton<IFlightService, FlightService>();
 
             // Views and ViewModels
             // Navigation
-            services.AddTransient<ShellPage>();
-            services.AddTransient<ShellViewModel>();
+            _ = services.AddTransient<ShellPage>();
+            _ = services.AddTransient<ShellViewModel>();
 
             // Start page
-            services.AddTransient<LandingViewModel>();
-            services.AddTransient<LandingPage>();
+            _ = services.AddTransient<LandingViewModel>();
+            _ = services.AddTransient<LandingPage>();
 
             // Airport departures page
-            services.AddTransient<DeparturesViewModel>();
-            services.AddTransient<DeparturesPage>();
+            _ = services.AddTransient<DeparturesViewModel>();
+            _ = services.AddTransient<DeparturesPage>();
 
             // Airport arrivals page
-            services.AddTransient<ArrivalsViewModel>();
-            services.AddTransient<ArrivalsPage>();
+            _ = services.AddTransient<ArrivalsViewModel>();
+            _ = services.AddTransient<ArrivalsPage>();
 
             // Flight details page
-            services.AddTransient<FlightViewModel>();
-            services.AddTransient<FlightPage>();
+            _ = services.AddTransient<FlightViewModel>();
+            _ = services.AddTransient<FlightPage>();
 
             // Add data pages
-            services.AddTransient<AddAirlineViewModel>();
-            services.AddTransient<AddAirlinePage>();
-            services.AddTransient<AddAirportViewModel>();
-            services.AddTransient<AddAirportPage>();
-            services.AddTransient<AddFlightViewModel>();
-            services.AddTransient<AddFlightPage>();
+            _ = services.AddTransient<AddAirlineViewModel>();
+            _ = services.AddTransient<AddAirlinePage>();
+            _ = services.AddTransient<AddAirportViewModel>();
+            _ = services.AddTransient<AddAirportPage>();
+            _ = services.AddTransient<AddFlightViewModel>();
+            _ = services.AddTransient<AddFlightPage>();
 
             // Edit (and remove) data pages
-            services.AddTransient<EditAirlineViewModel>();
-            services.AddTransient<EditAirlinePage>();
-            services.AddTransient<EditAirportViewModel>();
-            services.AddTransient<EditAirportPage>();
-            services.AddTransient<EditFlightViewModel>();
-            services.AddTransient<EditFlightPage>();
+            _ = services.AddTransient<EditAirlineViewModel>();
+            _ = services.AddTransient<EditAirlinePage>();
+            _ = services.AddTransient<EditAirportViewModel>();
+            _ = services.AddTransient<EditAirportPage>();
+            _ = services.AddTransient<EditFlightViewModel>();
+            _ = services.AddTransient<EditFlightPage>();
 
             // Application settings page
-            services.AddTransient<SettingsViewModel>();
-            services.AddTransient<SettingsPage>();
+            _ = services.AddTransient<SettingsViewModel>();
+            _ = services.AddTransient<SettingsPage>();
 
             return services.BuildServiceProvider();
         }

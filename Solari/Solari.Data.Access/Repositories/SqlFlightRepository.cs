@@ -84,7 +84,7 @@ namespace Solari.Data.Access.Repositories
             {
                 // Check if a flight with the same flight number exists.
                 // Throws "EntityNotFoundException" if flight does not already exist.
-                await GetFlightAsync(flight.FlightNumber);
+                _ = await GetFlightAsync(flight.FlightNumber);
 
                 // If the flight does already exist, throw exception.
                 throw new EntityAlreadyExistsException("Flight already exists!");
@@ -92,10 +92,10 @@ namespace Solari.Data.Access.Repositories
             catch (EntityNotFoundException)
             {
                 // If the flight does not exist, create flight.
-                await _dbContext.Flights.AddAsync(flight);
+                _ = await _dbContext.Flights.AddAsync(flight);
 
                 // Update database.
-                await _dbContext.SaveChangesAsync();
+                _ = await _dbContext.SaveChangesAsync();
 
                 // Get and return the created flight.
                 return await GetFlightAsync(flight.FlightNumber);
@@ -125,7 +125,7 @@ namespace Solari.Data.Access.Repositories
             flightToUpdate.ArrivalAirportIcao = flight.ArrivalAirportIcao;
 
             // Update database.
-            await _dbContext.SaveChangesAsync();
+            _ = await _dbContext.SaveChangesAsync();
 
             // Return the updated flight.
             return flightToUpdate;
@@ -144,10 +144,10 @@ namespace Solari.Data.Access.Repositories
             Flight flightToDelete = await GetFlightAsync(flightNumber);
 
             // If the flight exists, remove flight.
-            _dbContext.Flights.Remove(flightToDelete);
+            _ = _dbContext.Flights.Remove(flightToDelete);
 
             // Update database.
-            await _dbContext.SaveChangesAsync();
+            _ = await _dbContext.SaveChangesAsync();
 
             // Return deleted flight.
             return flightToDelete;

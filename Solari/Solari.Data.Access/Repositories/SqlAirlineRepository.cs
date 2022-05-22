@@ -80,7 +80,7 @@ namespace Solari.Data.Access.Repositories
             {
                 // Check if an airline with the same ICAO code exists.
                 // Throws "EntityNotFoundException" if airline does not already exist.
-                await GetAirlineAsync(airline.Icao);
+                _ = await GetAirlineAsync(airline.Icao);
 
                 // If the airline does already exist, throw exception.
                 throw new EntityAlreadyExistsException("Airline already exists!");
@@ -88,10 +88,10 @@ namespace Solari.Data.Access.Repositories
             catch (EntityNotFoundException)
             {
                 // If the airline does not exist, create airline.
-                await _dbContext.Airlines.AddAsync(airline);
+                _ = await _dbContext.Airlines.AddAsync(airline);
 
                 // Update database.
-                await _dbContext.SaveChangesAsync();
+                _ = await _dbContext.SaveChangesAsync();
 
                 // Get and return the created airline.
                 return await GetAirlineAsync(airline.Icao);
@@ -116,7 +116,7 @@ namespace Solari.Data.Access.Repositories
             airlineToUpdate.Name = airline.Name;
 
             // Update database.
-            await _dbContext.SaveChangesAsync();
+            _ = await _dbContext.SaveChangesAsync();
 
             // Return the updated airline.
             return airlineToUpdate;
@@ -135,10 +135,10 @@ namespace Solari.Data.Access.Repositories
             Airline airlineToDelete = await GetAirlineAsync(icao);
 
             // If the airline exists, remove airline.
-            _dbContext.Airlines.Remove(airlineToDelete);
+            _ = _dbContext.Airlines.Remove(airlineToDelete);
 
             // Update database.
-            await _dbContext.SaveChangesAsync();
+            _ = await _dbContext.SaveChangesAsync();
 
             // Return deleted airline.
             return airlineToDelete;

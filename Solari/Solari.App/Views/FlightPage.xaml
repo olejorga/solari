@@ -22,12 +22,12 @@
                         <TextBlock Text="{Binding Path=SelectedFlight.FlightNumber}" FontSize="{StaticResource LargeFontSize}" />
                         <TextBlock Text="{Binding Path=SelectedFlight.Airline.Name}" FontSize="{StaticResource LargeFontSize}" />
                     </StackPanel>
-                    <TextBlock Text="{Binding Path=SelectedFlight.ArrivalAirport.City}" FontSize="96" FontWeight="Black" HorizontalTextAlignment="Center" />
+                    <TextBlock Text="{Binding Path=SelectedFlight.ArrivalAirport.City}" FontSize="{StaticResource XXXLFontSize}" FontWeight="Black" HorizontalTextAlignment="Center" />
                     <TextBlock Text="{Binding Path=SelectedFlight.DepartureTime.Date, Converter={StaticResource DateTimeToDateConverter}}" FontSize="{StaticResource LargeFontSize}" HorizontalTextAlignment="Center" />
                 </StackPanel>
                 <Grid ColumnDefinitions="auto, *, auto" HorizontalAlignment="Stretch" Background="{ThemeResource SystemControlPageBackgroundChromeMediumLowBrush}" Padding="48 24, 48, 48" CornerRadius="0, 0, 8, 8">
                     <StackPanel Orientation="Vertical" Grid.Column="0" Spacing="4">
-                        <TextBlock Text="{Binding Path=SelectedFlight.DepartureAirport.Iata}" FontSize="48" FontWeight="Black" HorizontalTextAlignment="Center" />
+                        <TextBlock Text="{Binding Path=SelectedFlight.DepartureAirport.Iata}" FontSize="{StaticResource XLFontSize}" FontWeight="Black" HorizontalTextAlignment="Center" />
                         <TextBlock Text="{Binding Path=SelectedFlight.DepartureAirport.Name}" FontSize="{StaticResource LargeFontSize}" HorizontalTextAlignment="Center" Opacity=".50" />
                         <TextBlock Text="{Binding Path=SelectedFlight.DepartureTime.TimeOfDay, Converter={StaticResource TimeSpanToClockConverter}}" FontSize="{StaticResource LargeFontSize}" HorizontalTextAlignment="Center" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
@@ -36,7 +36,7 @@
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="1" Spacing="4">
-                        <TextBlock Text=". . . . . . . . . . . ." FontSize="48" FontWeight="Black" HorizontalTextAlignment="Center" Opacity=".50" />
+                        <TextBlock Text=". . . . . . . . . . . ." FontSize="{StaticResource XLFontSize}" FontWeight="Black" HorizontalTextAlignment="Center" Opacity=".50" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
                             <TextBlock Text="{Binding Path=FlightTime}" FontSize="{StaticResource LargeFontSize}" Opacity=".50" />
                             <TextBlock Text="min" FontSize="{StaticResource LargeFontSize}" Opacity=".50" />
@@ -45,7 +45,7 @@
                         <TextBlock Text="{Binding Path=SelectedFlight.Status}" FontSize="{StaticResource LargeFontSize}" HorizontalTextAlignment="Center" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="2" Spacing="4">
-                        <TextBlock Text="{Binding Path=SelectedFlight.ArrivalAirport.Iata}" FontSize="48" FontWeight="Black" HorizontalTextAlignment="Center" />
+                        <TextBlock Text="{Binding Path=SelectedFlight.ArrivalAirport.Iata}" FontSize="{StaticResource XLFontSize}" FontWeight="Black" HorizontalTextAlignment="Center" />
                         <TextBlock Text="{Binding Path=SelectedFlight.ArrivalAirport.Name}" FontSize="{StaticResource LargeFontSize}" HorizontalTextAlignment="Center" Opacity=".50" />
                         <TextBlock Text="{Binding Path=SelectedFlight.ArrivalTime.TimeOfDay, Converter={StaticResource TimeSpanToClockConverter}}" FontSize="{StaticResource LargeFontSize}" HorizontalTextAlignment="Center" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">

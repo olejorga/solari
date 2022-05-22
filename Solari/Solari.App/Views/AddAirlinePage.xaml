@@ -4,26 +4,56 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:viewmodels="using:Solari.App.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddAirlineViewModel}"
+    xmlns:viewmodels="using:Solari.App.ViewModels" 
+    d:DataContext="{d:DesignInstance Type=viewmodels:AddAirlineViewModel}"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
 
-    <Grid x:Name="ContentArea" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+    <Grid 
+        x:Name="ContentArea" 
+        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <ScrollViewer>
-            <StackPanel Orientation="Vertical" Margin="{StaticResource DetailPageMargin}" Width="250" HorizontalAlignment="Left">
+            <StackPanel 
+                Orientation="Vertical" 
+                Margin="{StaticResource DetailPageMargin}" 
+                Width="250" 
+                HorizontalAlignment="Left">
                 <!-- General section -->
-                <TextBlock Text="General" FontSize="{StaticResource LargeFontSize}" />
-                <TextBox Text="{Binding Path=NewAirline.Name, Mode=TwoWay}" Header="Name of the airline:" PlaceholderText="E.g. Braathens" Margin="{StaticResource SmallTopMargin}" />
+                <TextBlock 
+                    Text="General" 
+                    FontSize="{StaticResource LargeFontSize}" />
+                <TextBox 
+                    Text="{Binding Path=NewAirline.Name, Mode=TwoWay}" 
+                    Header="Name of the airline:" 
+                    PlaceholderText="E.g. Braathens" 
+                    Margin="{StaticResource SmallTopMargin}" />
                 
                 <!-- Identification section -->
-                <TextBlock Text="Identification" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <TextBox Text="{Binding Path=NewAirline.Icao, Mode=TwoWay}" Header="Airline ICAO code:" PlaceholderText="E.g. BRA" />
-                    <TextBox Text="{Binding Path=NewAirline.Iata, Mode=TwoWay}" Header="Airline IATA code:" PlaceholderText="E.g. BU" Margin="{StaticResource MediumLeftRightMargin}" />
+                <TextBlock 
+                    Text="Identification" 
+                    FontSize="{StaticResource LargeFontSize}" 
+                    Margin="{StaticResource LargeTopMargin}" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource SmallTopMargin}">
+                    <TextBox 
+                        Text="{Binding Path=NewAirline.Icao, Mode=TwoWay}" 
+                        Header="Airline ICAO code:" 
+                        PlaceholderText="E.g. BRA" />
+                    <TextBox 
+                        Text="{Binding Path=NewAirline.Iata, Mode=TwoWay}" 
+                        Header="Airline IATA code:" 
+                        PlaceholderText="E.g. BU" 
+                        Margin="{StaticResource MediumLeftRightMargin}" />
                 </StackPanel>
                 
                 <!-- Submit button -->
-                <Button Content="Add airline" Command="{Binding Path=AddAirlineCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" Style="{StaticResource AccentButtonStyle}" />
+                <Button 
+                    Content="Add airline" 
+                    Command="{Binding Path=AddAirlineCommand}" 
+                    Margin="{StaticResource LargeTopMargin}" 
+                    FontSize="{StaticResource MediumFontSize}" 
+                    Style="{StaticResource AccentButtonStyle}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

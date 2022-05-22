@@ -2,8 +2,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!-- 96px -->
+    <x:Double x:Key="XXXLFontSize">96</x:Double>
+
+    <!-- 72px -->
+    <x:Double x:Key="XXLFontSize">72</x:Double>
+
+    <!-- 48px -->
+    <x:Double x:Key="XLFontSize">48</x:Double>
+
+    <!-- 24px -->
     <x:Double x:Key="LargeFontSize">24</x:Double>
 
+    <!-- 16px -->
     <x:Double x:Key="MediumFontSize">16</x:Double>
 
 </ResourceDictionary>

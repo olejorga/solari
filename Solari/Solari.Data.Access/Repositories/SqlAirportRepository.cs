@@ -86,7 +86,7 @@ namespace Solari.Data.Access.Repositories
             {
                 // Check if an airport with the same ICAO code exists.
                 // Throws "EntityNotFoundException" if airport does not already exist.
-                await GetAirportAsync(airport.Icao);
+                _ = await GetAirportAsync(airport.Icao);
 
                 // If the airport does already exist, throw exception.
                 throw new EntityAlreadyExistsException("Airport already exists!");
@@ -94,10 +94,10 @@ namespace Solari.Data.Access.Repositories
             catch (EntityNotFoundException)
             {
                 // If the airport does not exist, create airport.
-                await _dbContext.Airports.AddAsync(airport);
+                _ = await _dbContext.Airports.AddAsync(airport);
 
                 // Update database.
-                await _dbContext.SaveChangesAsync();
+                _ = await _dbContext.SaveChangesAsync();
 
                 // Get and return the created airport.
                 return await GetAirportAsync(airport.Icao);
@@ -123,7 +123,7 @@ namespace Solari.Data.Access.Repositories
             airportToUpdate.City = airport.City;
 
             // Update database.
-            await _dbContext.SaveChangesAsync();
+            _ = await _dbContext.SaveChangesAsync();
 
             // Return the updated airport.
             return airportToUpdate;
@@ -142,10 +142,10 @@ namespace Solari.Data.Access.Repositories
             Airport airportToDelete = await GetAirportAsync(icao);
 
             // If the airport exists, remove airport.
-            _dbContext.Airports.Remove(airportToDelete);
+            _ = _dbContext.Airports.Remove(airportToDelete);
 
             // Update database.
-            await _dbContext.SaveChangesAsync();
+            _ = await _dbContext.SaveChangesAsync();
 
             // Return deleted airport.
             return airportToDelete;

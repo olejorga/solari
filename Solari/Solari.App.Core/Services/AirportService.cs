@@ -17,11 +17,11 @@ namespace Solari.App.Core.Services
     /// </summary>
     public class AirportService : IAirportService
     {
-        private readonly HttpClient _HttpClient;
+        private readonly HttpClient _httpClient;
 
         public AirportService()
         {
-            _HttpClient = new HttpClient() { BaseAddress = new Uri(BaseAddress.DataApi) };
+            _httpClient = new HttpClient() { BaseAddress = new Uri(BaseAddress.DataApi) };
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Solari.App.Core.Services
         public async Task<IEnumerable<Airport>> GetAirportsAsync()
         {
             // Request all airports.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .GetAsync("airports");
 
             // Read the contents of the body of the response.
@@ -61,7 +61,7 @@ namespace Solari.App.Core.Services
         public async Task<Airport> GetAirportAsync(string icao)
         {
             // Request the airport.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .GetAsync($"airports/{icao}");
 
             // Read the contents of the body of the response.
@@ -93,7 +93,7 @@ namespace Solari.App.Core.Services
         public async Task AddAirportAsync(Airport airport)
         {
             // Create the airport.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .PostAsJsonAsync("airports", airport);
 
             // Read the contents of the body of the response.
@@ -122,7 +122,7 @@ namespace Solari.App.Core.Services
             airport.ArrivingFlights = null;
 
             // Update the airport.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .PutAsJsonAsync($"airports/{airport.Icao}", airport);
 
             // Read the contents of the body of the response.
@@ -148,7 +148,7 @@ namespace Solari.App.Core.Services
         public async Task DeleteAirportAsync(string icao)
         {
             // Delete the airport.
-            HttpResponseMessage response = await _HttpClient
+            HttpResponseMessage response = await _httpClient
                 .DeleteAsync($"airports/{icao}");
 
             // Read the contents of the body of the response.

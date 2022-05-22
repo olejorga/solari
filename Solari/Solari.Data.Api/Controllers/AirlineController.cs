@@ -17,11 +17,11 @@ namespace Solari.Data.Api.Controllers
     [Route("api")]
     public class AirlineController : ControllerBase
     {
-        private readonly IAirlineRepository _AirlineRepository;
+        private readonly IAirlineRepository _airlineRepository;
 
         public AirlineController(IAirlineRepository airlineRepository)
         {
-            _AirlineRepository = airlineRepository;
+            _airlineRepository = airlineRepository;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Solari.Data.Api.Controllers
         {
             try
             {
-                return Ok((await _AirlineRepository.GetAirlinesAsync()).ToList());
+                return Ok((await _airlineRepository.GetAirlinesAsync()).ToList());
             }
             catch (EntitiesNotFoundException exception)
             {
@@ -61,7 +61,7 @@ namespace Solari.Data.Api.Controllers
         {
             try
             {
-                return Ok(await _AirlineRepository.GetAirlineAsync(icao));
+                return Ok(await _airlineRepository.GetAirlineAsync(icao));
             }
             catch (EntityNotFoundException exception)
             {
@@ -93,7 +93,7 @@ namespace Solari.Data.Api.Controllers
                     return BadRequest("No airline object provided!");
                 }
 
-                Airline createdAirline = await _AirlineRepository.AddAirlineAsync(airline);
+                Airline createdAirline = await _airlineRepository.AddAirlineAsync(airline);
 
                 // Return a 201 response with the airline object.
                 return CreatedAtAction(nameof(CreateAirline),
@@ -132,12 +132,9 @@ namespace Solari.Data.Api.Controllers
                 }
 
                 // If the provided ICAO codes does not match, return 400.
-                if (icao.ToUpper() != airline.Icao)
-                {
-                    return BadRequest("Airline ICAO mismatch!");
-                }
-
-                return Ok(await _AirlineRepository.UpdateAirlineAsync(airline));
+                return icao.ToUpper() != airline.Icao
+                    ? BadRequest("Airline ICAO mismatch!")
+                    : Ok(await _airlineRepository.UpdateAirlineAsync(airline));
             }
             catch (EntityNotFoundException exception)
             {
@@ -162,7 +159,7 @@ namespace Solari.Data.Api.Controllers
         {
             try
             {
-                return Ok(await _AirlineRepository.DeleteAirlineAsync(icao));
+                return Ok(await _airlineRepository.DeleteAirlineAsync(icao));
             }
             catch (EntityNotFoundException exception)
             {

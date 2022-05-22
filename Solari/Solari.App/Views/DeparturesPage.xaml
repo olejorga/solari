@@ -5,7 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
-    xmlns:helpers="using:Solari.App.Helpers"
+    xmlns:helpers="using:Solari.App.Helpers" 
+    xmlns:viewmodels="using:Solari.App.ViewModels" 
+    d:DataContext="{d:DesignInstance Type=viewmodels:DeparturesViewModel}"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
 
@@ -14,13 +16,32 @@
         <helpers:TimeSpanToClockConverter x:Key="TimeSpanToClockConverter" />
     </Page.Resources>
 
-    <Grid x:Name="ContentArea" Margin="{StaticResource DetailPageMargin}">
-        <StackPanel Orientation="Vertical" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" Padding="24">
-            <Grid ColumnDefinitions="auto, *, auto" HorizontalAlignment="Stretch">
-                <TextBlock Text="{x:Bind ViewModel.SelectedAirport.Iata, Mode=OneWay}" FontSize="72" Grid.Column="0" FontWeight="Black" />
-                <TextBlock x:Name="Clock" Text="10:00" FontSize="48" Grid.Column="2" VerticalAlignment="Center" />
+    <Grid 
+        x:Name="ContentArea" 
+        Margin="{StaticResource DetailPageMargin}">
+        <!-- Table head -->
+        <StackPanel 
+            Orientation="Vertical" 
+            Background="{ThemeResource SystemControlBackgroundAltHighBrush}" 
+            Padding="24">
+            <Grid 
+                ColumnDefinitions="auto, *, auto" 
+                HorizontalAlignment="Stretch">
+                <TextBlock 
+                    Text="{x:Bind ViewModel.SelectedAirport.Iata, Mode=OneWay}" 
+                    FontSize="{StaticResource XXLFontSize}" 
+                    Grid.Column="0" 
+                    FontWeight="Black" />
+                <TextBlock 
+                    x:Name="Clock" 
+                    Text="10:00" 
+                    FontSize="{StaticResource XLFontSize}" 
+                    Grid.Column="2" 
+                    VerticalAlignment="Center" />
             </Grid>
         </StackPanel>
+
+        <!-- Table body -->
         <controls:DataGrid
                 AutoGenerateColumns="False"
                 GridLinesVisibility="Horizontal"
@@ -31,12 +52,30 @@
                 x:Name="DataGrid"
                 SelectionChanged="DataGrid_SelectionChanged">
             <controls:DataGrid.Columns>
-                <controls:DataGridTextColumn Binding="{Binding DepartureTime.TimeOfDay, Converter={StaticResource TimeSpanToClockConverter}}" Header="Time" FontSize="{StaticResource LargeFontSize}" />
-                <controls:DataGridTextColumn Binding="{Binding ArrivalAirport.City}" Header="To" FontSize="{StaticResource LargeFontSize}" />
-                <controls:DataGridTextColumn Binding="{Binding FlightNumber}" Header="Flight" FontSize="{StaticResource LargeFontSize}" />
-                <controls:DataGridTextColumn Binding="{Binding Airline.Name}" Header="Airline" FontSize="{StaticResource LargeFontSize}" />
-                <controls:DataGridTextColumn Binding="{Binding DepartureGate}" Header="Gate" FontSize="{StaticResource LargeFontSize}" />
-                <controls:DataGridTextColumn Binding="{Binding Status}" Header="Status" FontSize="{StaticResource LargeFontSize}" />
+                <controls:DataGridTextColumn 
+                    Binding="{Binding DepartureTime.TimeOfDay, Converter={StaticResource TimeSpanToClockConverter}}" 
+                    Header="Time" 
+                    FontSize="{StaticResource LargeFontSize}" />
+                <controls:DataGridTextColumn 
+                    Binding="{Binding ArrivalAirport.City}" 
+                    Header="To" 
+                    FontSize="{StaticResource LargeFontSize}" />
+                <controls:DataGridTextColumn 
+                    Binding="{Binding FlightNumber}" 
+                    Header="Flight" 
+                    FontSize="{StaticResource LargeFontSize}" />
+                <controls:DataGridTextColumn 
+                    Binding="{Binding Airline.Name}" 
+                    Header="Airline" 
+                    FontSize="{StaticResource LargeFontSize}" />
+                <controls:DataGridTextColumn 
+                    Binding="{Binding DepartureGate}" 
+                    Header="Gate" 
+                    FontSize="{StaticResource LargeFontSize}" />
+                <controls:DataGridTextColumn 
+                    Binding="{Binding Status}" 
+                    Header="Status" 
+                    FontSize="{StaticResource LargeFontSize}" />
             </controls:DataGrid.Columns>
         </controls:DataGrid>
     </Grid>
