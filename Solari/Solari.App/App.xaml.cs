@@ -12,7 +12,6 @@ using Solari.App.Services;
 using Solari.App.ViewModels;
 using Solari.App.Views;
 
-// To learn more about WinUI3, see: https://docs.microsoft.com/windows/apps/winui/winui3/.
 namespace Solari.App
 {
     public partial class App : Application

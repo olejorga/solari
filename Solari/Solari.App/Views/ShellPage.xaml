@@ -12,7 +12,7 @@
 
     <NavigationView
         x:Name="navigationView"
-        IsBackButtonVisible="Visible"
+        IsBackButtonVisible="Collapsed"
         IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
         SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
         IsSettingsVisible="True"
@@ -21,10 +21,10 @@
         Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
         <NavigationView.AutoSuggestBox>
             <AutoSuggestBox 
-                QueryIcon="Find" 
-                PlaceholderText="Search for airports and flights" 
+                PlaceholderText="Search for airports" 
                 TextChanged="Search_TextChanged"
-                SuggestionChosen="Search_SuggestionChosen" />
+                SuggestionChosen="Search_SuggestionChosen" 
+                ToolTipService.ToolTip="Search by name, ICAO- or IATA-code." />
         </NavigationView.AutoSuggestBox>
 
         <NavigationView.MenuItems>

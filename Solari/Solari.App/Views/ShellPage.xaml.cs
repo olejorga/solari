@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Input;
 
 using Solari.App.Contracts.Services;
 using Solari.App.Core.Contracts.Services;
+using Solari.App.Helpers;
 using Solari.App.ViewModels;
 using Solari.Data.Access.Models;
 using System.Collections.Generic;
@@ -74,7 +75,7 @@ namespace Solari.App.Views
 
                     foreach (Airport airport in dbAirports)
                     {
-                        allAirports.Add($"{airport.Name} - {airport.Icao}");
+                        allAirports.Add($"{airport.Name} ({airport.Iata}) - {airport.Icao}");
                     }
                 }
                 catch
@@ -84,7 +85,7 @@ namespace Solari.App.Views
 
                     return;
                 }
-                
+
                 string[] splitText = sender.Text.ToLower().Split(" ");
 
                 foreach (string airport in allAirports)
@@ -108,10 +109,12 @@ namespace Solari.App.Views
             }
         }
 
-        private void Search_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        private async void Search_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            //SuggestionOutput.Text = args.SelectedItem.ToString();
-            Session
+            await ApplicationData.Current.LocalSettings.SaveAsync("SelectedAirportIcao", args.SelectedItem.ToString()[^4..]);
+
+            ViewModel.NavigationService.NavigateTo("Solari.App.ViewModels.LandingViewModel");
+            ViewModel.NavigationService.NavigateTo("Solari.App.ViewModels.DeparturesViewModel");
         }
     }
 }
