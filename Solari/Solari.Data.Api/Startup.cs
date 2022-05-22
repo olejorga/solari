@@ -35,8 +35,8 @@ namespace Solari.Data.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Solari.Data.Api", Version = "v1" });
 
-                var dataApiDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Api.xml");
-                var dataAccessDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Access.xml");
+                string dataApiDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Api.xml");
+                string dataAccessDocFilePath = Path.Combine(AppContext.BaseDirectory, "Solari.Data.Access.xml");
 
                 // Adding XML documentation to the Swagger UI
                 c.IncludeXmlComments(dataApiDocFilePath);

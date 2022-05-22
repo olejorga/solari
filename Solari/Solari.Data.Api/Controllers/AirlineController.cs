@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Solari.Data.Access.Contracts.Repositories;
 using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
-using Solari.Data.Access.Contracts.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,9 +89,11 @@ namespace Solari.Data.Api.Controllers
             {
                 // If the user have not provided an airline to be created, return 400.
                 if (airline == null)
+                {
                     return BadRequest("No airline object provided!");
+                }
 
-                var createdAirline = await _AirlineRepository.AddAirlineAsync(airline);
+                Airline createdAirline = await _AirlineRepository.AddAirlineAsync(airline);
 
                 // Return a 201 response with the airline object.
                 return CreatedAtAction(nameof(CreateAirline),
@@ -125,11 +127,15 @@ namespace Solari.Data.Api.Controllers
             {
                 // If the user have not provided an airline to update, return 400.
                 if (airline == null)
+                {
                     return BadRequest("No airline object provided!");
+                }
 
                 // If the provided ICAO codes does not match, return 400.
                 if (icao.ToUpper() != airline.Icao)
+                {
                     return BadRequest("Airline ICAO mismatch!");
+                }
 
                 return Ok(await _AirlineRepository.UpdateAirlineAsync(airline));
             }

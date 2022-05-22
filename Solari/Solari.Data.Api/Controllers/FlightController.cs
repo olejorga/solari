@@ -89,9 +89,11 @@ namespace Solari.Data.Api.Controllers
             {
                 // If the user have not provided a flight to be created, return 400.
                 if (flight == null)
+                {
                     return BadRequest("No flight object provided!");
+                }
 
-                var createdFlight = await _FlightRepository.AddFlightAsync(flight);
+                Flight createdFlight = await _FlightRepository.AddFlightAsync(flight);
 
                 // Return a 201 response with the flight object.
                 return CreatedAtAction(nameof(CreateFlight),
@@ -125,11 +127,15 @@ namespace Solari.Data.Api.Controllers
             {
                 // If the user have not provided a flight to update, return 400.
                 if (flight == null)
+                {
                     return BadRequest("No flight object provided!");
+                }
 
                 // If the provided flight numbers does not match, return 400.
                 if (flightNumber.ToUpper() != flight.FlightNumber)
+                {
                     return BadRequest("Flight number mismatch!");
+                }
 
                 return Ok(await _FlightRepository.UpdateFlightAsync(flight));
             }
