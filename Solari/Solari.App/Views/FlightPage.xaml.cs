@@ -3,6 +3,7 @@
 using Microsoft.UI.Xaml.Controls;
 
 using Solari.App.ViewModels;
+using System;
 
 namespace Solari.App.Views
 {
@@ -13,6 +14,7 @@ namespace Solari.App.Views
         public FlightPage()
         {
             ViewModel = Ioc.Default.GetService<FlightViewModel>();
+            DataContext = ViewModel;
             InitializeComponent();
         }
     }

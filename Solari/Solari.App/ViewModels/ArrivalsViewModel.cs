@@ -14,11 +14,11 @@ namespace Solari.App.ViewModels
 
         public ObservableCollection<Flight> Source { get; } = new ObservableCollection<Flight>();
 
-        private Airport _selectedairport;
+        private Airport _selectedAirport;
         public Airport SelectedAirport
         {
-            get => _selectedairport;
-            set => SetProperty(ref _selectedairport, value);
+            get => _selectedAirport;
+            set => SetProperty(ref _selectedAirport, value);
         }
 
         public ArrivalsViewModel(IAirportService airportService)
