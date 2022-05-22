@@ -40,12 +40,16 @@ namespace Solari.App.Core.Services
 
             // If the request was successful (200), return the airline.
             if (response.IsSuccessStatusCode)
+            {
                 return await Json.ToObjectAsync<Airline>(content);
+            }
 
             // For any other status code, throw a exception with
             // the error message from the REST-API.
             else
+            {
                 throw new Exception(content);
+            }
         }
 
         /// <summary>
@@ -69,7 +73,9 @@ namespace Solari.App.Core.Services
             // If the request was unsuccessful (Not 201), throw a
             // exception with the error message from the REST-API.
             if (response.StatusCode != HttpStatusCode.Created)
+            {
                 throw new Exception(content);
+            }
         }
 
         /// <summary>
@@ -93,7 +99,9 @@ namespace Solari.App.Core.Services
             // If the request was unsuccessful (Not 200), throw a
             // exception with the error message from the REST-API.
             if (response.StatusCode != HttpStatusCode.OK)
+            {
                 throw new Exception(content);
+            }
         }
 
         /// <summary>
@@ -117,7 +125,9 @@ namespace Solari.App.Core.Services
             // If the request was unsuccessful (Not 200), throw a
             // exception with the error message from the REST-API.
             if (response.StatusCode != HttpStatusCode.OK)
+            {
                 throw new Exception(content);
+            }
         }
     }
 }

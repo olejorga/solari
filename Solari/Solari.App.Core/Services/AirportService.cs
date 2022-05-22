@@ -40,12 +40,16 @@ namespace Solari.App.Core.Services
 
             // If the request was successful (200), return the airports.
             if (response.IsSuccessStatusCode)
+            {
                 return await Json.ToObjectAsync<List<Airport>>(content);
+            }
 
             // For any other status code, throw a exception with
             // the error message from the REST-API.
             else
+            {
                 throw new Exception(content);
+            }
         }
 
         /// <summary>
@@ -65,12 +69,16 @@ namespace Solari.App.Core.Services
 
             // If the request was successful (200), return the airport.
             if (response.IsSuccessStatusCode)
+            {
                 return await Json.ToObjectAsync<Airport>(content);
+            }
 
             // For any other status code, throw a exception with
             // the error message from the REST-API.
             else
+            {
                 throw new Exception(content);
+            }
         }
 
         /// <summary>
@@ -94,7 +102,9 @@ namespace Solari.App.Core.Services
             // If the request was unsuccessful (Not 201), throw a
             // exception with the error message from the REST-API.
             if (response.StatusCode != HttpStatusCode.Created)
+            {
                 throw new Exception(content);
+            }
         }
 
         /// <summary>
@@ -121,7 +131,9 @@ namespace Solari.App.Core.Services
             // If the request was unsuccessful (Not 200), throw a
             // exception with the error message from the REST-API.
             if (response.StatusCode != HttpStatusCode.OK)
+            {
                 throw new Exception(content);
+            }
         }
 
         /// <summary>
@@ -145,7 +157,9 @@ namespace Solari.App.Core.Services
             // If the request was unsuccessful (Not 200), throw a
             // exception with the error message from the REST-API.
             if (response.StatusCode != HttpStatusCode.OK)
+            {
                 throw new Exception(content);
+            }
         }
     }
 }
