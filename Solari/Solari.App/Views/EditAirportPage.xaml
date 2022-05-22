@@ -34,9 +34,12 @@
                     <TextBox Text="{Binding Path=UpdatedAirport.Icao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENGM" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
                     <TextBox Text="{Binding Path=UpdatedAirport.Iata, Mode=TwoWay}" Header="Airport IATA code:" PlaceholderText="E.g. OSL" Margin="{StaticResource MediumLeftRightMargin}" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
-                
-                <!-- Submit button -->
-                <Button Content="Edit airport" Command="{Binding Path=EditAirportCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+
+                <!-- Submit and delete buttons -->
+                <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeTopMargin}">
+                    <Button Content="Edit airport" Command="{Binding Path=EditAirportCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" Style="{StaticResource AccentButtonStyle}" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                    <Button Content="Delete airport" Command="{Binding Path=DeleteAirportCommand}" Margin="{StaticResource MediumLeftRightMargin}" FontSize="{StaticResource MediumFontSize}" VerticalAlignment="Bottom" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

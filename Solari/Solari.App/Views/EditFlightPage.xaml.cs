@@ -25,6 +25,7 @@ namespace Solari.App.Views
             {
                 ViewModel.ErrorDialogService = new ErrorDialogService(XamlRoot);
                 ViewModel.InfoDialogService = new InfoDialogService(XamlRoot);
+                ViewModel.ConfirmationDialogService = new ConfirmationDialogService(XamlRoot);
             };
         }
     }

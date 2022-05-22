@@ -39,7 +39,7 @@
                 <TextBox Text="{Binding Path=NewFlight.Status, Mode=TwoWay}" Header="Status of the flight:" PlaceholderText="E.g. Boarding" Margin="{StaticResource SmallTopMargin}" />
                 
                 <!-- Submit button -->
-                <Button Content="Add flight" Command="{Binding Path=AddFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" />
+                <Button Content="Add flight" Command="{Binding Path=AddFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" Style="{StaticResource AccentButtonStyle}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

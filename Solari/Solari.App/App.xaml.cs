@@ -19,6 +19,11 @@ namespace Solari.App
     {
         public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName".GetLocalized() };
 
+        public struct Config
+        {
+            public static int SelectedAirportIcao { get; set; }
+        }
+
         public App()
         {
             InitializeComponent();

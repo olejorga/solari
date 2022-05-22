@@ -23,7 +23,7 @@
                 </StackPanel>
                 
                 <!-- Submit button -->
-                <Button Content="Add airline" Command="{Binding Path=AddAirlineCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" />
+                <Button Content="Add airline" Command="{Binding Path=AddAirlineCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" Style="{StaticResource AccentButtonStyle}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

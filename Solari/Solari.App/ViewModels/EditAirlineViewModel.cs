@@ -16,6 +16,8 @@ namespace Solari.App.ViewModels
 
         public IDialogService InfoDialogService { get; set; }
 
+        public IDialogService ConfirmationDialogService { get; set; }
+
         private Airline _updatedAirline;
         public Airline UpdatedAirline
         {
@@ -90,6 +92,45 @@ namespace Solari.App.ViewModels
                 }
 
                 return _SearchAirlineCommand;
+            }
+        }
+
+        private ICommand _DeleteAirlineCommand;
+        public ICommand DeleteAirlineCommand
+        {
+            get
+            {
+                if (_DeleteAirlineCommand == null)
+                {
+                    _DeleteAirlineCommand = new RelayCommand(async () =>
+                    {
+                        try
+                        {
+                            // Ask for confirmation.
+                            DialogResult answer = await ConfirmationDialogService.ShowAsync("Are you sure you want to delete this airline?");
+
+                            // Check confirmation answer. If not yes, stop command execution.
+                            if (answer != DialogResult.Primary) return;
+
+                            // Try to delete airline.
+                            await _AirlineSerivce.DeleteAirlineAsync(UpdatedAirline.Icao);
+
+                            // Clear local airline object, as it is deleted.
+                            UpdatedAirline = null;
+                            UserInputtedIcao = null;
+
+                            // If successful, create success dialog.
+                            _ = await InfoDialogService.ShowAsync("Airline deleted.");
+                        }
+                        catch (Exception exception)
+                        {
+                            // If unsuccessful, create error dialog, with error message from service.
+                            _ = await ErrorDialogService.ShowAsync(exception.Message);
+                        }
+                    });
+                }
+
+                return _DeleteAirlineCommand;
             }
         }
     }

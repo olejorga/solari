@@ -48,11 +48,6 @@ namespace Solari.App.Core.Services
                 throw new Exception(content);
         }
 
-        public async Task<IEnumerable<Airport>> SearchAirportsAsync(string query)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Gets airport by ICAO code from the REST-API.
         /// </summary>

@@ -50,8 +50,11 @@
                 <TextBlock Text="Other" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
                 <TextBox Text="{Binding Path=UpdatedFlight.Status, Mode=TwoWay}" Header="Status of the flight:" PlaceholderText="E.g. Boarding" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
 
-                <!-- Submit button -->
-                <Button Content="Edit flight" Command="{Binding Path=EditFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <!-- Submit and delete buttons -->
+                <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeTopMargin}">
+                    <Button Content="Edit flight" Command="{Binding Path=EditFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" Style="{StaticResource AccentButtonStyle}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                    <Button Content="Delete flight" Command="{Binding Path=DeleteFlightCommand}" Margin="{StaticResource MediumLeftRightMargin}" FontSize="{StaticResource MediumFontSize}" VerticalAlignment="Bottom" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

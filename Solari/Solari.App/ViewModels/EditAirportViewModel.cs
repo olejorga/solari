@@ -16,6 +16,8 @@ namespace Solari.App.ViewModels
 
         public IDialogService InfoDialogService { get; set; }
 
+        public IDialogService ConfirmationDialogService { get; set; }
+
         private Airport _updatedAirport;
         public Airport UpdatedAirport
         {
@@ -90,6 +92,45 @@ namespace Solari.App.ViewModels
                 }
 
                 return _SearchAirportCommand;
+            }
+        }
+
+        private ICommand _DeleteAirportCommand;
+        public ICommand DeleteAirportCommand
+        {
+            get
+            {
+                if (_DeleteAirportCommand == null)
+                {
+                    _DeleteAirportCommand = new RelayCommand(async () =>
+                    {
+                        try
+                        {
+                            // Ask for confirmation.
+                            DialogResult answer = await ConfirmationDialogService.ShowAsync("Are you sure you want to delete this airport?");
+
+                            // Check confirmation answer. If not yes, stop command execution.
+                            if (answer != DialogResult.Primary) return;
+
+                            // Try to delete airport.
+                            await _AirportSerivce.DeleteAirportAsync(UpdatedAirport.Icao);
+
+                            // Clear local airport object, as it is deleted.
+                            UpdatedAirport = null;
+                            UserInputtedIcao = null;
+
+                            // If successful, create success dialog.
+                            _ = await InfoDialogService.ShowAsync("Airport deleted.");
+                        }
+                        catch (Exception exception)
+                        {
+                            // If unsuccessful, create error dialog, with error message from service.
+                            _ = await ErrorDialogService.ShowAsync(exception.Message);
+                        }
+                    });
+                }
+
+                return _DeleteAirportCommand;
             }
         }
     }

@@ -4,24 +4,32 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 
 using Solari.App.Contracts.Services;
+using Solari.App.Core.Contracts.Services;
 using Solari.App.ViewModels;
-
+using Solari.Data.Access.Models;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.Storage;
 using Windows.System;
 
 namespace Solari.App.Views
 {
-    // TODO WTS: Change the icons and titles for all NavigationViewItems in ShellPage.xaml.
     public sealed partial class ShellPage : Page
     {
         private readonly KeyboardAccelerator _altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);
         private readonly KeyboardAccelerator _backKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.GoBack);
 
+        private readonly IAirportService _airportSerivce;
+
         public ShellViewModel ViewModel { get; }
 
-        public ShellPage(ShellViewModel viewModel)
+        public ShellPage(ShellViewModel viewModel, IAirportService airportSerivce, IFlightService flightService)
         {
+            _airportSerivce = airportSerivce;
             ViewModel = viewModel;
+
             InitializeComponent();
+
             ViewModel.NavigationService.Frame = shellFrame;
             ViewModel.NavigationViewService.Initialize(navigationView);
         }
@@ -51,6 +59,59 @@ namespace Solari.App.Views
             var navigationService = Ioc.Default.GetService<INavigationService>();
             var result = navigationService.GoBack();
             args.Handled = result;
+        }
+
+        private async void Search_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                List<string> allAirports = new();
+                List<string> suitableAirports = new();
+
+                try
+                {
+                    IEnumerable<Airport> dbAirports = await _airportSerivce.GetAirportsAsync();
+
+                    foreach (Airport airport in dbAirports)
+                    {
+                        allAirports.Add($"{airport.Name} - {airport.Icao}");
+                    }
+                }
+                catch
+                {
+                    suitableAirports.Add("Error - can't fetch airports.");
+                    sender.ItemsSource = suitableAirports;
+
+                    return;
+                }
+                
+                string[] splitText = sender.Text.ToLower().Split(" ");
+
+                foreach (string airport in allAirports)
+                {
+                    var found = splitText.All((key) =>
+                    {
+                        return airport.ToLower().Contains(key);
+                    });
+                    if (found)
+                    {
+                        suitableAirports.Add(airport);
+                    }
+                }
+
+                if (suitableAirports.Count == 0)
+                {
+                    suitableAirports.Add("No airports found.");
+                }
+
+                sender.ItemsSource = suitableAirports;
+            }
+        }
+
+        private void Search_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            //SuggestionOutput.Text = args.SelectedItem.ToString();
+            Session
         }
     }
 }

@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 namespace Solari.App.ViewModels
 {
     /// <summary>
-    /// A tailored dialog service for info messages. 
+    /// A tailored dialog service for messages needing confirmation. 
     /// </summary>
-    public class InfoDialogService : DialogService
+    public class ConfirmationDialogService : DialogService
     {
-        public InfoDialogService(XamlRoot xamlRoot) : base(xamlRoot)
+        public ConfirmationDialogService(XamlRoot xamlRoot) : base(xamlRoot)
         { }
 
         public override async Task<DialogResult> ShowAsync(string message)
         {
-            return await CreateDialogAsync("Info", message, null, null, "Close");
+            return await CreateDialogAsync("Info", message, "Yes", "No", null);
         }
     }
 }

@@ -48,11 +48,6 @@ namespace Solari.App.Core.Services
                 throw new Exception(content);
         }
 
-        public async Task<IEnumerable<Flight>> SearchFlightsAsync(string query)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Gets flight by flight number from the REST-API.
         /// </summary>

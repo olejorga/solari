@@ -19,13 +19,15 @@
         ExpandedModeThresholdWidth="1280"
         Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}"
         Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+        <NavigationView.AutoSuggestBox>
+            <AutoSuggestBox 
+                QueryIcon="Find" 
+                PlaceholderText="Search for airports and flights" 
+                TextChanged="Search_TextChanged"
+                SuggestionChosen="Search_SuggestionChosen" />
+        </NavigationView.AutoSuggestBox>
+
         <NavigationView.MenuItems>
-            <!--
-            TODO WTS: Change the symbols for each item as appropriate for your app
-            More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
-            Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/release/docs/UWP/projectTypes/navigationpane.md
-            Edit String/en-US/Resources.resw: Add a menu item title for each page
-            -->
             <NavigationViewItem x:Uid="Shell_Add" Content="Flights" ToolTipService.ToolTip="Flights" SelectsOnInvoked="False">
                 <NavigationViewItem.MenuItems>
                     <NavigationViewItem x:Uid="Shell_Departures" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.DeparturesViewModel" />

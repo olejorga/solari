@@ -16,6 +16,8 @@ namespace Solari.App.ViewModels
 
         public IDialogService InfoDialogService { get; set; }
 
+        public IDialogService ConfirmationDialogService { get; set; }
+
         public bool IsInitializing { get; set; }
 
         private Flight _updatedFlight;
@@ -104,6 +106,45 @@ namespace Solari.App.ViewModels
                 }
 
                 return _SearchFlightCommand;
+            }
+        }
+
+        private ICommand _DeleteFlightCommand;
+        public ICommand DeleteFlightCommand
+        {
+            get
+            {
+                if (_DeleteFlightCommand == null)
+                {
+                    _DeleteFlightCommand = new RelayCommand(async () =>
+                    {
+                        try
+                        {
+                            // Ask for confirmation.
+                            DialogResult answer = await ConfirmationDialogService.ShowAsync("Are you sure you want to delete this flight?");
+
+                            // Check confirmation answer. If not yes, stop command execution.
+                            if (answer != DialogResult.Primary) return;
+
+                            // Try to delete flight.
+                            await _FlightSerivce.DeleteFlightAsync(UpdatedFlight.FlightNumber);
+
+                            // Clear local flight object, as it is deleted.
+                            UpdatedFlight = null;
+                            UserInputtedFlightNumber = null;
+
+                            // If successful, create success dialog.
+                            _ = await InfoDialogService.ShowAsync("Flight deleted.");
+                        }
+                        catch (Exception exception)
+                        {
+                            // If unsuccessful, create error dialog, with error message from service.
+                            _ = await ErrorDialogService.ShowAsync(exception.Message);
+                        }
+                    });
+                }
+
+                return _DeleteFlightCommand;
             }
         }
 
