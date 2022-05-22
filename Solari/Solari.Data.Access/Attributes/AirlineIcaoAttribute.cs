@@ -6,6 +6,7 @@
     public class AirlineIcaoAttribute : IdentifierAttribute
     {
         public AirlineIcaoAttribute() : base(3, 3)
-        { }
+        {
+        }
     }
 }

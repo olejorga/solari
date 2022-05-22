@@ -28,13 +28,15 @@ namespace Solari.Data.Access.Repositories
         public async Task<IEnumerable<Airline>> GetAirlinesAsync()
         {
             // Get all airlines.
-            var airlines = await _dbContext.Airlines
+            List<Airline> airlines = await _dbContext.Airlines
                 .Include(e => e.Flights)
                 .ToListAsync();
 
             // If no airlines were found, throw exception.
             if (airlines.Count == 0)
+            {
                 throw new EntitiesNotFoundException("No airlines were found!");
+            }
 
             // If airlines were found.
             return airlines;
@@ -52,13 +54,15 @@ namespace Solari.Data.Access.Repositories
             icao = icao.ToUpper();
 
             // Get airline by ICAO code.
-            var airline = await _dbContext.Airlines
+            Airline airline = await _dbContext.Airlines
                 .Include(e => e.Flights)
                 .FirstOrDefaultAsync(e => e.Icao == icao.ToUpper());
 
             // If airline is not found, throw exception.
             if (airline == null)
+            {
                 throw new EntityNotFoundException($"Airline with ICAO = {icao} not found!");
+            }
 
             // If airline is found, return airline.
             return airline;
@@ -104,7 +108,7 @@ namespace Solari.Data.Access.Repositories
         {
             // Get the airline the user is trying to update exists.
             // Throws "EntityNotFoundException" if airline does not already exist.
-            var airlineToUpdate = await GetAirlineAsync(airline.Icao);
+            Airline airlineToUpdate = await GetAirlineAsync(airline.Icao);
 
             // If the airline exists, update airline.
             airlineToUpdate.Icao = airline.Icao;
@@ -128,7 +132,7 @@ namespace Solari.Data.Access.Repositories
         {
             // Get the airline the user is trying to delete.
             // Throws "EntityNotFoundException" if airline does not already exist.
-            var airlineToDelete = await GetAirlineAsync(icao);
+            Airline airlineToDelete = await GetAirlineAsync(icao);
 
             // If the airline exists, remove airline.
             _dbContext.Airlines.Remove(airlineToDelete);

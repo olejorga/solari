@@ -6,6 +6,7 @@
     public class AirlineIataAttribute : IdentifierAttribute
     {
         public AirlineIataAttribute() : base(2, 2)
-        { }
+        {
+        }
     }
 }

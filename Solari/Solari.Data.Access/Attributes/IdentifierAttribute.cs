@@ -30,7 +30,9 @@ namespace Solari.Data.Access.Attributes
             Regex pattern = new($"^[A-Z0-9]{{{MinLength},{MaxLength}}}$");
 
             if (!string.IsNullOrEmpty(icao))
+            {
                 return pattern.IsMatch(icao);
+            }
 
             return true;
         }

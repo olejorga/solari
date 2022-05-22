@@ -28,7 +28,7 @@ namespace Solari.Data.Access.Repositories
         public async Task<IEnumerable<Flight>> GetFlightsAsync()
         {
             // Get all flights.
-            var flights = await _dbContext.Flights
+            List<Flight> flights = await _dbContext.Flights
                 .Include(e => e.Airline)
                 .Include(e => e.DepartureAirport)
                 .Include(e => e.ArrivalAirport)
@@ -36,7 +36,9 @@ namespace Solari.Data.Access.Repositories
 
             // If no flights were found, throw exception.
             if (flights.Count == 0)
+            {
                 throw new EntitiesNotFoundException("No flights were found!");
+            }
 
             // If flights were found.
             return flights;
@@ -54,7 +56,7 @@ namespace Solari.Data.Access.Repositories
             flightNumber = flightNumber.ToUpper();
 
             // Get flight by flight number.
-            var flight = await _dbContext.Flights
+            Flight flight = await _dbContext.Flights
                 .Include(e => e.Airline)
                 .Include(e => e.DepartureAirport)
                 .Include(e => e.ArrivalAirport)
@@ -62,7 +64,9 @@ namespace Solari.Data.Access.Repositories
 
             // If flight is not found, throw exception.
             if (flight == null)
+            {
                 throw new EntityNotFoundException($"Flight with ICAO = {flightNumber} not found!");
+            }
 
             // If flight is found, return flight.
             return flight;
@@ -108,7 +112,7 @@ namespace Solari.Data.Access.Repositories
         {
             // Get the flight the user is trying to update exists.
             // Throws "EntityNotFoundException" if flight does not already exist.
-            var flightToUpdate = await GetFlightAsync(flight.FlightNumber);
+            Flight flightToUpdate = await GetFlightAsync(flight.FlightNumber);
 
             // If the flight exists, update flight.
             flightToUpdate.FlightNumber = flight.FlightNumber;
@@ -137,7 +141,7 @@ namespace Solari.Data.Access.Repositories
         {
             // Get the flight the user is trying to delete.
             // Throws "EntityNotFoundException" if flight does not already exist.
-            var flightToDelete = await GetFlightAsync(flightNumber);
+            Flight flightToDelete = await GetFlightAsync(flightNumber);
 
             // If the flight exists, remove flight.
             _dbContext.Flights.Remove(flightToDelete);

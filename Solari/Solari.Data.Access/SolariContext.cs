@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Solari.App.Core.Constants;
 using Solari.Data.Access.Models;
 using System;
 
@@ -16,10 +17,10 @@ namespace Solari.Data.Access
         {
             SqlConnectionStringBuilder builder = new()
             {
-                DataSource = "donau.hiof.no",
-                InitialCatalog = "olejorga",
-                UserID = "olejorga",
-                Password = "v1FHdrd6lI"
+                DataSource = SqlServerCredentials.DataSource,
+                InitialCatalog = SqlServerCredentials.InitialCatalog,
+                UserID = SqlServerCredentials.UserID,
+                Password = SqlServerCredentials.Password
             };
 
             optionsBuilder.UseSqlServer(builder.ConnectionString.ToString());

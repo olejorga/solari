@@ -6,6 +6,7 @@
     public class AirportIataAttribute : IdentifierAttribute
     {
         public AirportIataAttribute() : base(3, 3)
-        { }
+        {
+        }
     }
 }

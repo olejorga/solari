@@ -3,7 +3,6 @@ using Solari.Data.Access.Contracts.Repositories;
 using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Solari.Data.Access.Repositories
@@ -29,14 +28,16 @@ namespace Solari.Data.Access.Repositories
         public async Task<IEnumerable<Airport>> GetAirportsAsync()
         {
             // Get all airports.
-            var airports = await _dbContext.Airports
+            List<Airport> airports = await _dbContext.Airports
                 .Include(e => e.DepartingFlights)
                 .Include(e => e.ArrivingFlights)
                 .ToListAsync();
 
             // If no airports were found, throw exception.
             if (airports.Count == 0)
+            {
                 throw new EntitiesNotFoundException("No airports were found!");
+            }
 
             // If airports were found.
             return airports;
@@ -54,7 +55,7 @@ namespace Solari.Data.Access.Repositories
             icao = icao.ToUpper();
 
             // Get airport by ICAO code.
-            var airport = await _dbContext.Airports
+            Airport airport = await _dbContext.Airports
                 .Include(e => e.DepartingFlights).ThenInclude(s => s.Airline)
                 .Include(e => e.DepartingFlights).ThenInclude(s => s.DepartureAirport)
                 .Include(e => e.DepartingFlights).ThenInclude(s => s.ArrivalAirport)
@@ -65,7 +66,9 @@ namespace Solari.Data.Access.Repositories
 
             // If airport is not found, throw exception.
             if (airport == null)
+            {
                 throw new EntityNotFoundException($"Airport with ICAO = {icao} not found!");
+            }
 
             // If airport is found, return airport.
             return airport;
@@ -111,7 +114,7 @@ namespace Solari.Data.Access.Repositories
         {
             // Get the airport the user is trying to update exists.
             // Throws "EntityNotFoundException" if airport does not already exist.
-            var airportToUpdate = await GetAirportAsync(airport.Icao);
+            Airport airportToUpdate = await GetAirportAsync(airport.Icao);
 
             // If the airport exists, update airport.
             airportToUpdate.Icao = airport.Icao;
@@ -136,7 +139,7 @@ namespace Solari.Data.Access.Repositories
         {
             // Get the airport the user is trying to delete.
             // Throws "EntityNotFoundException" if airport does not already exist.
-            var airportToDelete = await GetAirportAsync(icao);
+            Airport airportToDelete = await GetAirportAsync(icao);
 
             // If the airport exists, remove airport.
             _dbContext.Airports.Remove(airportToDelete);

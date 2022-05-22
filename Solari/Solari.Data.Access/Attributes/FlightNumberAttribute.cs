@@ -6,6 +6,7 @@
     public class FlightNumberAttribute : IdentifierAttribute
     {
         public FlightNumberAttribute() : base(3, 6)
-        { }
+        {
+        }
     }
 }
