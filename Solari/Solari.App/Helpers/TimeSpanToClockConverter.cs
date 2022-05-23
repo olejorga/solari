@@ -6,7 +6,7 @@ namespace Solari.App.Helpers
 {
     public class TimeSpanToClockConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string[] hands = value.ToString().Split(":");
             return $"{hands[0]}:{hands[1]}";

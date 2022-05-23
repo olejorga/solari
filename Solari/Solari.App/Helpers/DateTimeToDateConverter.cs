@@ -6,7 +6,7 @@ namespace Solari.App.Helpers
 {
     public class DateTimeToDateConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return value.ToString().Split(" ")[0];
         }

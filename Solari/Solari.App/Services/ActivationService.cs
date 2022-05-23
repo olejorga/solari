@@ -37,7 +37,7 @@ namespace Solari.App.Services
             }
 
             // Depending on activationArgs one of ActivationHandlers or DefaultActivationHandler
-            // will navigate to the first page
+            // will navigate to the first page.
             await HandleActivationAsync(activationArgs);
 
             // Ensure the current window is active

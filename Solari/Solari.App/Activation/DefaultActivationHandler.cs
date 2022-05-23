@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Microsoft.UI.Xaml;
-
+﻿using Microsoft.UI.Xaml;
 using Solari.App.Contracts.Services;
 using Solari.App.ViewModels;
+using System;
+using System.Threading.Tasks;
 
 namespace Solari.App.Activation
 {
@@ -25,7 +23,7 @@ namespace Solari.App.Activation
 
         protected override bool CanHandleInternal(LaunchActivatedEventArgs args)
         {
-            // None of the ActivationHandlers has handled the app activation
+            // None of the ActivationHandlers has handled the app activation.
             return _navigationService.Frame.Content == null;
         }
     }

@@ -18,8 +18,8 @@ namespace Solari.App.Behaviors
 
         public object DefaultHeader
         {
-            get { return GetValue(DefaultHeaderProperty); }
-            set { SetValue(DefaultHeaderProperty, value); }
+            get => GetValue(DefaultHeaderProperty);
+            set => SetValue(DefaultHeaderProperty, value);
         }
 
         public static readonly DependencyProperty DefaultHeaderProperty = DependencyProperty.Register("DefaultHeader", typeof(object), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (d, e) => _current.UpdateHeader()));
@@ -67,20 +67,20 @@ namespace Solari.App.Behaviors
         {
             base.OnAttached();
             _current = this;
-            var navigationService = Ioc.Default.GetService<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetService<INavigationService>();
             navigationService.Navigated += OnNavigated;
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            var navigationService = Ioc.Default.GetService<INavigationService>();
+            INavigationService navigationService = Ioc.Default.GetService<INavigationService>();
             navigationService.Navigated -= OnNavigated;
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
-            var frame = sender as Frame;
+            Frame frame = sender as Frame;
             if (frame.Content is Page page)
             {
                 _currentPage = page;
@@ -94,7 +94,7 @@ namespace Solari.App.Behaviors
         {
             if (_currentPage != null)
             {
-                var headerMode = GetHeaderMode(_currentPage);
+                NavigationViewHeaderMode headerMode = GetHeaderMode(_currentPage);
                 if (headerMode == NavigationViewHeaderMode.Never)
                 {
                     AssociatedObject.Header = null;
@@ -102,7 +102,7 @@ namespace Solari.App.Behaviors
                 }
                 else
                 {
-                    var headerFromPage = GetHeaderContext(_currentPage);
+                    object headerFromPage = GetHeaderContext(_currentPage);
                     if (headerFromPage != null)
                     {
                         AssociatedObject.Header = headerFromPage;
@@ -128,7 +128,7 @@ namespace Solari.App.Behaviors
         {
             if (_currentPage != null)
             {
-                var headerTemplate = GetHeaderTemplate(_currentPage);
+                DataTemplate headerTemplate = GetHeaderTemplate(_currentPage);
                 AssociatedObject.HeaderTemplate = headerTemplate ?? DefaultHeaderTemplate;
             }
         }
