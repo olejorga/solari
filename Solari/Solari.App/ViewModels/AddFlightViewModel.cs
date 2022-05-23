@@ -82,9 +82,13 @@ namespace Solari.App.ViewModels
                 DepartureTime.Hours, DepartureTime.Minutes, DepartureTime.Seconds);
 
             if (newDepartureTime < NewFlight.ArrivalTime)
+            {
                 NewFlight.DepartureTime = newDepartureTime;
+            }
             else
-                ErrorDialogService.ShowAsync("The departure time must be earlier than the arrival time.");
+            {
+                _ = ErrorDialogService.ShowAsync("The departure time must be earlier than the arrival time.");
+            }
         }
 
         private DateTimeOffset _ArrivalDate = DateTimeOffset.Now;
@@ -116,9 +120,13 @@ namespace Solari.App.ViewModels
                 ArrivalTime.Hours, ArrivalTime.Minutes, ArrivalTime.Seconds);
 
             if (newArrivalTime > NewFlight.DepartureTime)
+            {
                 NewFlight.ArrivalTime = newArrivalTime;
+            }
             else
-                ErrorDialogService.ShowAsync("The arrival time must be later than the departure time.");
+            {
+                _ = ErrorDialogService.ShowAsync("The arrival time must be later than the departure time.");
+            }
         }
     }
 }

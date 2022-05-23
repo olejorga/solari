@@ -3,8 +3,6 @@ using Solari.App.Contracts.ViewModels;
 using Solari.App.Core.Contracts.Services;
 using Solari.App.Helpers;
 using Solari.Data.Access.Models;
-using System;
-using System.Diagnostics;
 using Windows.Storage;
 
 namespace Solari.App.ViewModels
@@ -19,7 +17,7 @@ namespace Solari.App.ViewModels
             get => _selectedFlight;
             set
             {
-                SetProperty(ref _selectedFlight, value);
+                _ = SetProperty(ref _selectedFlight, value);
                 SetFlightTime();
             }
         }
@@ -39,6 +37,12 @@ namespace Solari.App.ViewModels
         public async void OnNavigatedTo(object parameter)
         {
             string flightNumber = await ApplicationData.Current.LocalSettings.ReadAsync<string>("SelectedFlightNumber");
+
+            if (string.IsNullOrEmpty(flightNumber))
+            {
+                //
+            }
+
             SelectedFlight = await _flightService.GetFlightAsync(flightNumber);
         }
 

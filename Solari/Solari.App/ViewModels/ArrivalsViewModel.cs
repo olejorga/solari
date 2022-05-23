@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Solari.App.Contracts.Services;
 using Solari.App.Contracts.ViewModels;
 using Solari.App.Core.Contracts.Services;
 using Solari.App.Helpers;
 using Solari.Data.Access.Models;
+using System;
 using System.Collections.ObjectModel;
 using Windows.Storage;
 
@@ -11,6 +13,10 @@ namespace Solari.App.ViewModels
     public class ArrivalsViewModel : ObservableRecipient, INavigationAware
     {
         private readonly IAirportService _airportService;
+
+        public INavigationService NavigationService { get; }
+
+        public IDialogService ErrorDialogService { get; set; }
 
         public ObservableCollection<Flight> Source { get; } = new ObservableCollection<Flight>();
 
@@ -21,9 +27,10 @@ namespace Solari.App.ViewModels
             set => SetProperty(ref _selectedAirport, value);
         }
 
-        public ArrivalsViewModel(IAirportService airportService)
+        public ArrivalsViewModel(IAirportService airportService, INavigationService navigationService)
         {
             _airportService = airportService;
+            NavigationService = navigationService;
         }
 
         public async void OnNavigatedTo(object parameter)
@@ -32,14 +39,29 @@ namespace Solari.App.ViewModels
 
             string icao = await ApplicationData.Current.LocalSettings.ReadAsync<string>("SelectedAirportIcao");
 
-            if (string.IsNullOrEmpty(icao)) icao = "ENGM";
-
-            // Replace this with your actual data
-            SelectedAirport = await _airportService.GetAirportAsync(icao);
-
-            foreach (Flight flight in SelectedAirport.ArrivingFlights)
+            // Default selected airport to ..., if non is already set.
+            if (string.IsNullOrEmpty(icao))
             {
-                Source.Add(flight);
+                icao = "ENGM";
+            }
+
+            // Try to fetch the airport
+            try
+            {
+                SelectedAirport = await _airportService.GetAirportAsync(icao);
+
+                // Add all arriving flights at the airport to the view model.
+                foreach (Flight flight in SelectedAirport.ArrivingFlights)
+                {
+                    Source.Add(flight);
+                }
+            }
+            catch (Exception exception)
+            {
+                _ = ErrorDialogService.ShowAsync(exception.Message);
+
+                // Send user back to start page.
+                _ = NavigationService.NavigateTo("Solari.App.ViewModels.LandingPage");
             }
         }
 

@@ -124,7 +124,10 @@ namespace Solari.App.ViewModels
                             DialogResult answer = await ConfirmationDialogService.ShowAsync("Are you sure you want to delete this flight?");
 
                             // Check confirmation answer. If not yes, stop command execution.
-                            if (answer != DialogResult.Primary) return;
+                            if (answer != DialogResult.Primary)
+                            {
+                                return;
+                            }
 
                             // Try to delete flight.
                             await _FlightSerivce.DeleteFlightAsync(UpdatedFlight.FlightNumber);
@@ -155,7 +158,11 @@ namespace Solari.App.ViewModels
             set
             {
                 _ = SetProperty(ref _DepartureDate, value);
-                if (!IsInitializing) SetFlightDepartureTime();
+
+                if (!IsInitializing)
+                {
+                    SetFlightDepartureTime();
+                }
             }
         }
 
@@ -166,7 +173,11 @@ namespace Solari.App.ViewModels
             set
             {
                 _ = SetProperty(ref _DepartureTime, value);
-                if (!IsInitializing) SetFlightDepartureTime();
+
+                if (!IsInitializing)
+                {
+                    SetFlightDepartureTime();
+                }
             }
         }
 
@@ -179,9 +190,13 @@ namespace Solari.App.ViewModels
                 DepartureTime.Hours, DepartureTime.Minutes, DepartureTime.Seconds);
 
                 if (newDepartureTime < UpdatedFlight.ArrivalTime)
+                {
                     UpdatedFlight.DepartureTime = newDepartureTime;
+                }
                 else
-                    ErrorDialogService.ShowAsync("The departure time must be earlier than the arrival time.");
+                {
+                    _ = ErrorDialogService.ShowAsync("The departure time must be earlier than the arrival time.");
+                }
             }
         }
 
@@ -192,7 +207,11 @@ namespace Solari.App.ViewModels
             set
             {
                 _ = SetProperty(ref _ArrivalDate, value);
-                if (!IsInitializing) SetFlightArrivalTime();
+
+                if (!IsInitializing)
+                {
+                    SetFlightArrivalTime();
+                }
             }
         }
 
@@ -203,7 +222,11 @@ namespace Solari.App.ViewModels
             set
             {
                 _ = SetProperty(ref _ArrivalTime, value);
-                if (!IsInitializing) SetFlightArrivalTime();
+
+                if (!IsInitializing)
+                {
+                    SetFlightArrivalTime();
+                }
             }
         }
 
@@ -216,9 +239,13 @@ namespace Solari.App.ViewModels
                 ArrivalTime.Hours, ArrivalTime.Minutes, ArrivalTime.Seconds);
 
                 if (newArrivalTime > UpdatedFlight.DepartureTime)
+                {
                     UpdatedFlight.ArrivalTime = newArrivalTime;
+                }
                 else
-                    ErrorDialogService.ShowAsync("The arrival time must be later than the departure time.");
+                {
+                    _ = ErrorDialogService.ShowAsync("The arrival time must be later than the departure time.");
+                }
             }
         }
     }

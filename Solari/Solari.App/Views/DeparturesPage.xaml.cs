@@ -13,14 +13,16 @@ namespace Solari.App.Views
     {
         public DeparturesViewModel ViewModel { get; }
 
-        private readonly INavigationService _navigationService;
-
         public DeparturesPage()
         {
             ViewModel = Ioc.Default.GetService<DeparturesViewModel>();
-            _navigationService = Ioc.Default.GetService<INavigationService>();
 
             InitializeComponent();
+
+            // Assign the XamlRoot element to the dialog services after window
+            // has loaded, aka. when XamlRoot is available and not null.
+            Loaded += (sender, e) =>
+                ViewModel.ErrorDialogService = new ErrorDialogService(XamlRoot);
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace Solari.App.Views
 
             await ApplicationData.Current.LocalSettings.SaveAsync("SelectedFlightNumber", flight.FlightNumber);
 
-            _ = _navigationService.NavigateTo("Solari.App.ViewModels.FlightViewModel");
+            _ = ViewModel.NavigationService.NavigateTo("Solari.App.ViewModels.FlightViewModel");
         }
     }
 }

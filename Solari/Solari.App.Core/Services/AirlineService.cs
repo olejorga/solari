@@ -39,17 +39,11 @@ namespace Solari.App.Core.Services
             string content = await response.Content.ReadAsStringAsync();
 
             // If the request was successful (200), return the airline.
-            if (response.IsSuccessStatusCode)
-            {
-                return await Json.ToObjectAsync<Airline>(content);
-            }
-
             // For any other status code, throw a exception with
             // the error message from the REST-API.
-            else
-            {
-                throw new Exception(content);
-            }
+            return response.IsSuccessStatusCode
+                ? await Json.ToObjectAsync<Airline>(content)
+                : throw new Exception(content);
         }
 
         /// <summary>

@@ -17,14 +17,14 @@ namespace Solari.App.ViewModels
 
         public bool IsBackEnabled
         {
-            get { return _isBackEnabled; }
-            set { SetProperty(ref _isBackEnabled, value); }
+            get => _isBackEnabled;
+            set => SetProperty(ref _isBackEnabled, value);
         }
 
         public object Selected
         {
-            get { return _selected; }
-            set { SetProperty(ref _selected, value); }
+            get => _selected;
+            set => SetProperty(ref _selected, value);
         }
 
         public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService)
@@ -43,7 +43,7 @@ namespace Solari.App.ViewModels
                 return;
             }
 
-            var selectedItem = NavigationViewService.GetSelectedItem(e.SourcePageType);
+            Microsoft.UI.Xaml.Controls.NavigationViewItem selectedItem = NavigationViewService.GetSelectedItem(e.SourcePageType);
             if (selectedItem != null)
             {
                 Selected = selectedItem;

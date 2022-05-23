@@ -110,7 +110,10 @@ namespace Solari.App.ViewModels
                             DialogResult answer = await ConfirmationDialogService.ShowAsync("Are you sure you want to delete this airline?");
 
                             // Check confirmation answer. If not yes, stop command execution.
-                            if (answer != DialogResult.Primary) return;
+                            if (answer != DialogResult.Primary)
+                            {
+                                return;
+                            }
 
                             // Try to delete airline.
                             await _AirlineSerivce.DeleteAirlineAsync(UpdatedAirline.Icao);
