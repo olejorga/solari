@@ -5,7 +5,9 @@ using Solari.App.Core.Contracts.Services;
 using Solari.App.Helpers;
 using Solari.Data.Access.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Windows.Storage;
 
 namespace Solari.App.ViewModels
@@ -45,13 +47,19 @@ namespace Solari.App.ViewModels
                 icao = "ENGM";
             }
 
-            // Try to fetch the airport
+            // Try to fetch the airport.
             try
             {
                 SelectedAirport = await _airportService.GetAirportAsync(icao);
 
+                // Copy flights.
+                List<Flight> flights = SelectedAirport.ArrivingFlights;
+
+                // Sort flights by arrival time.
+                flights = flights.OrderBy(x => x.ArrivalTime).ToList();
+
                 // Add all arriving flights at the airport to the view model.
-                foreach (Flight flight in SelectedAirport.ArrivingFlights)
+                foreach (Flight flight in flights)
                 {
                     Source.Add(flight);
                 }

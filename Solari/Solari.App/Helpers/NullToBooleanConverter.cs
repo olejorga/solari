@@ -4,6 +4,9 @@ using System.Globalization;
 
 namespace Solari.App.Helpers
 {
+    /// <summary>
+    /// A helper for converting null to WINUI boolean ("True") and ("False").
+    /// </summary>
     public class NullToBooleanConverter : IValueConverter
     {
         public static object Convert(object value, Type targetType, object parameter, CultureInfo culture)

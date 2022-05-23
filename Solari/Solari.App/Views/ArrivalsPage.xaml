@@ -33,8 +33,7 @@
                     Grid.Column="0" 
                     FontWeight="Black" />
                 <TextBlock 
-                    x:Name="Clock" 
-                    Text="10:00" 
+                    x:Name="ClockDisplay" 
                     FontSize="{StaticResource XLFontSize}" 
                     Grid.Column="2" 
                     VerticalAlignment="Center" />

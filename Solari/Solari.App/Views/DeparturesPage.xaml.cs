@@ -23,6 +23,10 @@ namespace Solari.App.Views
             // has loaded, aka. when XamlRoot is available and not null.
             Loaded += (sender, e) =>
                 ViewModel.ErrorDialogService = new ErrorDialogService(XamlRoot);
+
+            // Start the table clock.
+            Clock watch = new();
+            watch.Run(time => ClockDisplay.Text = time);
         }
 
         /// <summary>

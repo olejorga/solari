@@ -4,6 +4,9 @@ using System.Globalization;
 
 namespace Solari.App.Helpers
 {
+    /// <summary>
+    /// A helper for converting DateTime to a date string (without time).
+    /// </summary>
     public class DateTimeToDateConverter : IValueConverter
     {
         public static object Convert(object value, Type targetType, object parameter, CultureInfo culture)

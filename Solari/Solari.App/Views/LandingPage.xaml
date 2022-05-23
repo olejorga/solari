@@ -13,7 +13,7 @@
         <!-- Welcome message -->
         <StackPanel 
             Orientation="Vertical"
-            Spacing="4">
+            Spacing="8">
             <TextBlock 
                 Text="Welcome"
                 Style="{ThemeResource TitleTextBlockStyle}" 

@@ -4,6 +4,9 @@ using System.Globalization;
 
 namespace Solari.App.Helpers
 {
+    /// <summary>
+    /// A helper for converting TimeSpan to a clock string (without seconds).
+    /// </summary>
     public class TimeSpanToClockConverter : IValueConverter
     {
         public static object Convert(object value, Type targetType, object parameter, CultureInfo culture)

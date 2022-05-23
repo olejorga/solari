@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 
 using Microsoft.UI.Xaml.Controls;
-using Solari.App.Contracts.Services;
 using Solari.App.Helpers;
 using Solari.App.ViewModels;
 using Solari.Data.Access.Models;
@@ -23,6 +22,10 @@ namespace Solari.App.Views
             // has loaded, aka. when XamlRoot is available and not null.
             Loaded += (sender, e) =>
                 ViewModel.ErrorDialogService = new ErrorDialogService(XamlRoot);
+
+            // Start the table clock.
+            Clock watch = new();
+            watch.Run(time => ClockDisplay.Text = time);
         }
 
         /// <summary>
