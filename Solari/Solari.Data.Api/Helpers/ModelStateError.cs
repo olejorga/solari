@@ -1,5 +1,9 @@
 ﻿namespace Solari.Data.Api.Helpers
 {
+    /// <summary>
+    /// A helper that creates a custom model validation 
+    /// error message in the form of a string.
+    /// </summary>
     public static class ModelStateError
     {
         public static string Create(dynamic modelState)
@@ -15,7 +19,7 @@
                     dynamic key = modelStateKey;
                     dynamic errorMessage = error.ErrorMessage;
 
-                    message = $"{key}: {errorMessage}\n";
+                    message = $"{key}: {errorMessage} \n";
                 }
             }
 

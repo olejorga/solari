@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solari.App", "Solari.App\Solari.App.csproj", "{F6DA545F-BEB9-4742-B86F-0B82FA81BDD9}"
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Solari.App (Package)", "Solari.App (Package)\Solari.App (Package).wapproj", "{7A3951E2-9022-490E-B4D3-9B3A187F8CD9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45C45EE5-A46F-482D-A3C5-64032465C6C6} = {45C45EE5-A46F-482D-A3C5-64032465C6C6}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solari.App.Core", "Solari.App.Core\Solari.App.Core.csproj", "{CB22D273-B3EB-4F54-B0B8-9C22C09C6E69}"
 EndProject

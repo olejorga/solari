@@ -160,5 +160,11 @@
             <response code="404">Flight were not found.</response>
             <response code="500">Error updating database.</response>
         </member>
+        <member name="T:Solari.Data.Api.Helpers.ModelStateError">
+            <summary>
+            A helper that creates a custom model validation 
+            error message in the form of a string.
+            </summary>
+        </member>
     </members>
 </doc>
