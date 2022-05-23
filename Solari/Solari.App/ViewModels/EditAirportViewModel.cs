@@ -10,7 +10,7 @@ namespace Solari.App.ViewModels
 {
     public class EditAirportViewModel : ObservableRecipient
     {
-        private readonly IAirportService _AirportSerivce;
+        private readonly IAirportService _airportSerivce;
 
         public IDialogService ErrorDialogService { get; set; }
 
@@ -34,22 +34,22 @@ namespace Solari.App.ViewModels
 
         public EditAirportViewModel(IAirportService airportService)
         {
-            _AirportSerivce = airportService;
+            _airportSerivce = airportService;
         }
 
-        private ICommand _EditAirportCommand;
+        private ICommand _editAirportCommand;
         public ICommand EditAirportCommand
         {
             get
             {
-                if (_EditAirportCommand == null)
+                if (_editAirportCommand == null)
                 {
-                    _EditAirportCommand = new RelayCommand(async () =>
+                    _editAirportCommand = new RelayCommand(async () =>
                     {
                         try
                         {
                             // Try to edit airport.
-                            await _AirportSerivce.UpdateAirportAsync(UpdatedAirport);
+                            await _airportSerivce.UpdateAirportAsync(UpdatedAirport);
 
                             // If successful, create success dialog.
                             _ = await InfoDialogService.ShowAsync("Airport successfully edited.");
@@ -62,23 +62,23 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _EditAirportCommand;
+                return _editAirportCommand;
             }
         }
 
-        private ICommand _SearchAirportCommand;
+        private ICommand _searchAirportCommand;
         public ICommand SearchAirportCommand
         {
             get
             {
-                if (_SearchAirportCommand == null)
+                if (_searchAirportCommand == null)
                 {
-                    _SearchAirportCommand = new RelayCommand(async () =>
+                    _searchAirportCommand = new RelayCommand(async () =>
                     {
                         try
                         {
                             // Try to get airport.
-                            UpdatedAirport = await _AirportSerivce.GetAirportAsync(UserInputtedIcao);
+                            UpdatedAirport = await _airportSerivce.GetAirportAsync(UserInputtedIcao);
 
                             // If successful, create success dialog.
                             _ = await InfoDialogService.ShowAsync("Airport found.");
@@ -91,18 +91,18 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _SearchAirportCommand;
+                return _searchAirportCommand;
             }
         }
 
-        private ICommand _DeleteAirportCommand;
+        private ICommand _deleteAirportCommand;
         public ICommand DeleteAirportCommand
         {
             get
             {
-                if (_DeleteAirportCommand == null)
+                if (_deleteAirportCommand == null)
                 {
-                    _DeleteAirportCommand = new RelayCommand(async () =>
+                    _deleteAirportCommand = new RelayCommand(async () =>
                     {
                         try
                         {
@@ -116,7 +116,7 @@ namespace Solari.App.ViewModels
                             }
 
                             // Try to delete airport.
-                            await _AirportSerivce.DeleteAirportAsync(UpdatedAirport.Icao);
+                            await _airportSerivce.DeleteAirportAsync(UpdatedAirport.Icao);
 
                             // Clear local airport object, as it is deleted.
                             UpdatedAirport = null;
@@ -133,7 +133,7 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _DeleteAirportCommand;
+                return _deleteAirportCommand;
             }
         }
     }

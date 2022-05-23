@@ -10,7 +10,7 @@ namespace Solari.App.ViewModels
 {
     public class AddAirportViewModel : ObservableRecipient
     {
-        private readonly IAirportService _AirportSerivce;
+        private readonly IAirportService _airportSerivce;
 
         public IDialogService ErrorDialogService { get; set; }
 
@@ -20,22 +20,22 @@ namespace Solari.App.ViewModels
 
         public AddAirportViewModel(IAirportService airportService)
         {
-            _AirportSerivce = airportService;
+            _airportSerivce = airportService;
         }
 
-        private ICommand _AddAirportCommand;
+        private ICommand _addAirportCommand;
         public ICommand AddAirportCommand
         {
             get
             {
-                if (_AddAirportCommand == null)
+                if (_addAirportCommand == null)
                 {
-                    _AddAirportCommand = new RelayCommand(async () =>
+                    _addAirportCommand = new RelayCommand(async () =>
                     {
                         try
                         {
                             // Try to add airport.
-                            await _AirportSerivce.AddAirportAsync(NewAirport);
+                            await _airportSerivce.AddAirportAsync(NewAirport);
 
                             // If successful, create success dialog.
                             _ = await InfoDialogService.ShowAsync("Airport successfully added.");
@@ -48,7 +48,7 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _AddAirportCommand;
+                return _addAirportCommand;
             }
         }
     }

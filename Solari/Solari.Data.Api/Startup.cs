@@ -26,12 +26,17 @@ namespace Solari.Data.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // Use JSON References to prevent cycles in data.
-            services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            _ = services.AddControllers()
+                // Use JSON References to prevent cycles in data.
+                .AddJsonOptions(x =>
+                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve)
+                // Turn of automatic 400 model validation.
+                .ConfigureApiBehaviorOptions(options =>
+                    options.SuppressModelStateInvalidFilter = true);
+
 
             // API name and version.
-            services.AddSwaggerGen(c =>
+            _ = services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Solari.Data.Api", Version = "v1" });
 
@@ -44,10 +49,10 @@ namespace Solari.Data.Api
             });
 
             // Automatic repository and context dependency injection.
-            services.AddScoped<SolariContext, SolariContext>();
-            services.AddScoped<IAirlineRepository, SqlAirlineRepository>();
-            services.AddScoped<IAirportRepository, SqlAirportRepository>();
-            services.AddScoped<IFlightRepository, SqlFlightRepository>();
+            _ = services.AddScoped<SolariContext, SolariContext>();
+            _ = services.AddScoped<IAirlineRepository, SqlAirlineRepository>();
+            _ = services.AddScoped<IAirportRepository, SqlAirportRepository>();
+            _ = services.AddScoped<IFlightRepository, SqlFlightRepository>();
         }
 
         // This method gets called by the runtime.
@@ -55,20 +60,20 @@ namespace Solari.Data.Api
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Solari.Data.Api v1"));
+                _ = app.UseDeveloperExceptionPage();
+                _ = app.UseSwagger();
+                _ = app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Solari.Data.Api v1"));
             }
 
-            app.UseHttpsRedirection();
+            _ = app.UseHttpsRedirection();
 
-            app.UseRouting();
+            _ = app.UseRouting();
 
-            app.UseAuthorization();
+            _ = app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            _ = app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                _ = endpoints.MapControllers();
             });
         }
     }

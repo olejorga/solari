@@ -14,8 +14,10 @@ namespace Solari.App.Views
 
         public ArrivalsPage()
         {
+            // Injecting departures view model
             ViewModel = Ioc.Default.GetService<ArrivalsViewModel>();
 
+            // Initialize view
             InitializeComponent();
 
             // Assign the XamlRoot element to the dialog services after window

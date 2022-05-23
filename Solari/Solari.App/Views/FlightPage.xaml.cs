@@ -13,8 +13,13 @@ namespace Solari.App.Views
 
         public FlightPage()
         {
+            // Injecting flight view model
             ViewModel = Ioc.Default.GetService<FlightViewModel>();
+
+            // Assigning view model to context, so that we can use data bindings
             DataContext = ViewModel;
+
+            // Initialize view
             InitializeComponent();
 
             // Assign the XamlRoot element to the dialog services after window

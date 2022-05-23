@@ -10,7 +10,7 @@ namespace Solari.App.ViewModels
 {
     public class EditFlightViewModel : ObservableRecipient
     {
-        private readonly IFlightService _FlightSerivce;
+        private readonly IFlightService _flightSerivce;
 
         public IDialogService ErrorDialogService { get; set; }
 
@@ -36,22 +36,22 @@ namespace Solari.App.ViewModels
 
         public EditFlightViewModel(IFlightService flightService)
         {
-            _FlightSerivce = flightService;
+            _flightSerivce = flightService;
         }
 
-        private ICommand _EditFlightCommand;
+        private ICommand _editFlightCommand;
         public ICommand EditFlightCommand
         {
             get
             {
-                if (_EditFlightCommand == null)
+                if (_editFlightCommand == null)
                 {
-                    _EditFlightCommand = new RelayCommand(async () =>
+                    _editFlightCommand = new RelayCommand(async () =>
                     {
                         try
                         {
                             // Try to edit flight.
-                            await _FlightSerivce.UpdateFlightAsync(UpdatedFlight);
+                            await _flightSerivce.UpdateFlightAsync(UpdatedFlight);
 
                             // If successful, create success dialog.
                             _ = await InfoDialogService.ShowAsync("Flight successfully edited.");
@@ -64,18 +64,18 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _EditFlightCommand;
+                return _editFlightCommand;
             }
         }
 
-        private ICommand _SearchFlightCommand;
+        private ICommand _searchFlightCommand;
         public ICommand SearchFlightCommand
         {
             get
             {
-                if (_SearchFlightCommand == null)
+                if (_searchFlightCommand == null)
                 {
-                    _SearchFlightCommand = new RelayCommand(async () =>
+                    _searchFlightCommand = new RelayCommand(async () =>
                     {
                         try
                         {
@@ -83,7 +83,7 @@ namespace Solari.App.ViewModels
                             IsInitializing = true;
 
                             // Try to get flight.
-                            UpdatedFlight = await _FlightSerivce.GetFlightAsync(UserInputtedFlightNumber);
+                            UpdatedFlight = await _flightSerivce.GetFlightAsync(UserInputtedFlightNumber);
 
                             // Sync local date and time fields with flight.
                             DepartureDate = UpdatedFlight.DepartureTime;
@@ -105,18 +105,18 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _SearchFlightCommand;
+                return _searchFlightCommand;
             }
         }
 
-        private ICommand _DeleteFlightCommand;
+        private ICommand _deleteFlightCommand;
         public ICommand DeleteFlightCommand
         {
             get
             {
-                if (_DeleteFlightCommand == null)
+                if (_deleteFlightCommand == null)
                 {
-                    _DeleteFlightCommand = new RelayCommand(async () =>
+                    _deleteFlightCommand = new RelayCommand(async () =>
                     {
                         try
                         {
@@ -130,7 +130,7 @@ namespace Solari.App.ViewModels
                             }
 
                             // Try to delete flight.
-                            await _FlightSerivce.DeleteFlightAsync(UpdatedFlight.FlightNumber);
+                            await _flightSerivce.DeleteFlightAsync(UpdatedFlight.FlightNumber);
 
                             // Clear local flight object, as it is deleted.
                             UpdatedFlight = null;
@@ -147,17 +147,17 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _DeleteFlightCommand;
+                return _deleteFlightCommand;
             }
         }
 
-        private DateTimeOffset _DepartureDate;
+        private DateTimeOffset _departureDate;
         public DateTimeOffset DepartureDate
         {
-            get => _DepartureDate;
+            get => _departureDate;
             set
             {
-                _ = SetProperty(ref _DepartureDate, value);
+                _ = SetProperty(ref _departureDate, value);
 
                 if (!IsInitializing)
                 {
@@ -166,13 +166,13 @@ namespace Solari.App.ViewModels
             }
         }
 
-        private TimeSpan _DepartureTime;
+        private TimeSpan _departureTime;
         public TimeSpan DepartureTime
         {
-            get => _DepartureTime;
+            get => _departureTime;
             set
             {
-                _ = SetProperty(ref _DepartureTime, value);
+                _ = SetProperty(ref _departureTime, value);
 
                 if (!IsInitializing)
                 {
@@ -200,13 +200,13 @@ namespace Solari.App.ViewModels
             }
         }
 
-        private DateTimeOffset _ArrivalDate;
+        private DateTimeOffset _arrivalDate;
         public DateTimeOffset ArrivalDate
         {
-            get => _ArrivalDate;
+            get => _arrivalDate;
             set
             {
-                _ = SetProperty(ref _ArrivalDate, value);
+                _ = SetProperty(ref _arrivalDate, value);
 
                 if (!IsInitializing)
                 {
@@ -215,13 +215,13 @@ namespace Solari.App.ViewModels
             }
         }
 
-        private TimeSpan _ArrivalTime;
+        private TimeSpan _arrivalTime;
         public TimeSpan ArrivalTime
         {
-            get => _ArrivalTime;
+            get => _arrivalTime;
             set
             {
-                _ = SetProperty(ref _ArrivalTime, value);
+                _ = SetProperty(ref _arrivalTime, value);
 
                 if (!IsInitializing)
                 {

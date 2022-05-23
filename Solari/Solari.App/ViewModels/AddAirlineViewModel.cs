@@ -10,7 +10,7 @@ namespace Solari.App.ViewModels
 {
     public class AddAirlineViewModel : ObservableRecipient
     {
-        private readonly IAirlineService _AirlineSerivce;
+        private readonly IAirlineService _airlineSerivce;
 
         public IDialogService ErrorDialogService { get; set; }
 
@@ -20,22 +20,22 @@ namespace Solari.App.ViewModels
 
         public AddAirlineViewModel(IAirlineService airlineService)
         {
-            _AirlineSerivce = airlineService;
+            _airlineSerivce = airlineService;
         }
 
-        private ICommand _AddAirlineCommand;
+        private ICommand _addAirlineCommand;
         public ICommand AddAirlineCommand
         {
             get
             {
-                if (_AddAirlineCommand == null)
+                if (_addAirlineCommand == null)
                 {
-                    _AddAirlineCommand = new RelayCommand(async () =>
+                    _addAirlineCommand = new RelayCommand(async () =>
                     {
                         try
                         {
                             // Try to add airline.
-                            await _AirlineSerivce.AddAirlineAsync(NewAirline);
+                            await _airlineSerivce.AddAirlineAsync(NewAirline);
 
                             // If successful, create success dialog.
                             _ = await InfoDialogService.ShowAsync("Airline successfully added.");
@@ -48,7 +48,7 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _AddAirlineCommand;
+                return _addAirlineCommand;
             }
         }
     }

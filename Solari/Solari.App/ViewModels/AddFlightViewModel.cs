@@ -11,7 +11,7 @@ namespace Solari.App.ViewModels
 {
     public class AddFlightViewModel : ObservableRecipient, INotifyPropertyChanged
     {
-        private readonly IFlightService _FlightSerivce;
+        private readonly IFlightService _flightSerivce;
 
         public IDialogService ErrorDialogService { get; set; }
 
@@ -21,22 +21,22 @@ namespace Solari.App.ViewModels
 
         public AddFlightViewModel(IFlightService flightService)
         {
-            _FlightSerivce = flightService;
+            _flightSerivce = flightService;
         }
 
-        private ICommand _AddFlightCommand;
+        private ICommand _addFlightCommand;
         public ICommand AddFlightCommand
         {
             get
             {
-                if (_AddFlightCommand == null)
+                if (_addFlightCommand == null)
                 {
-                    _AddFlightCommand = new RelayCommand(async () =>
+                    _addFlightCommand = new RelayCommand(async () =>
                     {
                         try
                         {
                             // Try to add flight.
-                            await _FlightSerivce.AddFlightAsync(NewFlight);
+                            await _flightSerivce.AddFlightAsync(NewFlight);
 
                             // If successful, create success dialog.
                             _ = await InfoDialogService.ShowAsync("Flight successfully added.");
@@ -49,28 +49,28 @@ namespace Solari.App.ViewModels
                     });
                 }
 
-                return _AddFlightCommand;
+                return _addFlightCommand;
             }
         }
 
-        private DateTimeOffset _DepartureDate = DateTimeOffset.Now;
+        private DateTimeOffset _departureDate = DateTimeOffset.Now;
         public DateTimeOffset DepartureDate
         {
-            get => _DepartureDate;
+            get => _departureDate;
             set
             {
-                _ = SetProperty(ref _DepartureDate, value);
+                _ = SetProperty(ref _departureDate, value);
                 SetFlightDepartureTime();
             }
         }
 
-        private TimeSpan _DepartureTime = DateTime.Now.TimeOfDay;
+        private TimeSpan _departureTime = DateTime.Now.TimeOfDay;
         public TimeSpan DepartureTime
         {
-            get => _DepartureTime;
+            get => _departureTime;
             set
             {
-                _ = SetProperty(ref _DepartureTime, value);
+                _ = SetProperty(ref _departureTime, value);
                 SetFlightDepartureTime();
             }
         }
@@ -91,24 +91,24 @@ namespace Solari.App.ViewModels
             }
         }
 
-        private DateTimeOffset _ArrivalDate = DateTimeOffset.Now;
+        private DateTimeOffset _arrivalDate = DateTimeOffset.Now;
         public DateTimeOffset ArrivalDate
         {
-            get => _ArrivalDate;
+            get => _arrivalDate;
             set
             {
-                _ = SetProperty(ref _ArrivalDate, value);
+                _ = SetProperty(ref _arrivalDate, value);
                 SetFlightArrivalTime();
             }
         }
 
-        private TimeSpan _ArrivalTime = DateTime.Now.TimeOfDay;
+        private TimeSpan _arrivalTime = DateTime.Now.TimeOfDay;
         public TimeSpan ArrivalTime
         {
-            get => _ArrivalTime;
+            get => _arrivalTime;
             set
             {
-                _ = SetProperty(ref _ArrivalTime, value);
+                _ = SetProperty(ref _arrivalTime, value);
                 SetFlightArrivalTime();
             }
         }

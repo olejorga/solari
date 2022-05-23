@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Solari.Data.Access.Contracts.Repositories;
 using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
+using Solari.Data.Api.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +86,12 @@ namespace Solari.Data.Api.Controllers
         [HttpPost("airports")]
         public async Task<ActionResult<Airport>> CreateAirport(Airport airport)
         {
+            // If mode is invalid, return a custom error.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelStateError.Create(ModelState));
+            }
+
             try
             {
                 // If the user have not provided an airport to be created, return 400.
@@ -123,6 +130,12 @@ namespace Solari.Data.Api.Controllers
         [HttpPut("airports/{icao}")]
         public async Task<ActionResult<Airport>> UpdateAirport(string icao, Airport airport)
         {
+            // If mode is invalid, return a custom error.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelStateError.Create(ModelState));
+            }
+
             try
             {
                 // If the user have not provided an airport to update, return 400.

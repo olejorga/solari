@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Solari.Data.Access.Contracts.Repositories;
 using Solari.Data.Access.Exceptions;
 using Solari.Data.Access.Models;
+using Solari.Data.Api.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +86,12 @@ namespace Solari.Data.Api.Controllers
         [HttpPost("flights")]
         public async Task<ActionResult<Flight>> CreateFlight(Flight flight)
         {
+            // If mode is invalid, return a custom error.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelStateError.Create(ModelState));
+            }
+
             try
             {
                 // If the user have not provided a flight to be created, return 400.
@@ -123,6 +130,12 @@ namespace Solari.Data.Api.Controllers
         [HttpPut("flights/{flightNumber}")]
         public async Task<ActionResult<Flight>> UpdateFlight(string flightNumber, Flight flight)
         {
+            // If mode is invalid, return a custom error.
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelStateError.Create(ModelState));
+            }
+
             try
             {
                 // If the user have not provided a flight to update, return 400.

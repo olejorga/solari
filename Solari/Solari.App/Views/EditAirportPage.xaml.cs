@@ -10,7 +10,7 @@ namespace Solari.App.Views
 
         public EditAirportPage()
         {
-            // Injecting airport service
+            // Injecting airport view model
             ViewModel = Ioc.Default.GetService<EditAirportViewModel>();
 
             // Assigning view model to context, so that we can use data bindings

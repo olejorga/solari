@@ -10,7 +10,7 @@ namespace Solari.App.Views
 
         public AddFlightPage()
         {
-            // Injecting flight service
+            // Injecting flight view model
             ViewModel = Ioc.Default.GetService<AddFlightViewModel>();
 
             // Assigning view model to context, so that we can use data bindings
