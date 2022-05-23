@@ -40,39 +40,42 @@ namespace Solari.App.Services
         }
 
         public NavigationViewItem GetSelectedItem(Type pageType)
-            => GetSelectedItem(_navigationView.MenuItems, pageType);
+        {
+            return GetSelectedItem(_navigationView.MenuItems, pageType);
+        }
 
         private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
-            => _navigationService.GoBack();
+        {
+            _ = _navigationService.GoBack();
+        }
 
         private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked)
             {
-                _navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
+                _ = _navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
             }
             else
             {
-                var selectedItem = args.InvokedItemContainer as NavigationViewItem;
-                var pageKey = selectedItem.GetValue(NavHelper.NavigateToProperty) as string;
+                NavigationViewItem selectedItem = args.InvokedItemContainer as NavigationViewItem;
 
-                if (pageKey != null)
+                if (selectedItem.GetValue(NavHelper.NavigateToProperty) is string pageKey)
                 {
-                    _navigationService.NavigateTo(pageKey);
+                    _ = _navigationService.NavigateTo(pageKey);
                 }
             }
         }
 
         private NavigationViewItem GetSelectedItem(IEnumerable<object> menuItems, Type pageType)
         {
-            foreach (var item in menuItems.OfType<NavigationViewItem>())
+            foreach (NavigationViewItem item in menuItems.OfType<NavigationViewItem>())
             {
                 if (IsMenuItemForPageType(item, pageType))
                 {
                     return item;
                 }
 
-                var selectedChild = GetSelectedItem(item.MenuItems, pageType);
+                NavigationViewItem selectedChild = GetSelectedItem(item.MenuItems, pageType);
                 if (selectedChild != null)
                 {
                     return selectedChild;
@@ -84,13 +87,8 @@ namespace Solari.App.Services
 
         private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType)
         {
-            var pageKey = menuItem.GetValue(NavHelper.NavigateToProperty) as string;
-            if (pageKey != null)
-            {
-                return _pageService.GetPageType(pageKey) == sourcePageType;
-            }
-
-            return false;
+            return menuItem.GetValue(NavHelper.NavigateToProperty) is string pageKey
+                && _pageService.GetPageType(pageKey) == sourcePageType;
         }
     }
 }

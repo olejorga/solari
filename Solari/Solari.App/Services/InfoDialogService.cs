@@ -11,7 +11,8 @@ namespace Solari.App.ViewModels
     public class InfoDialogService : DialogService
     {
         public InfoDialogService(XamlRoot xamlRoot) : base(xamlRoot)
-        { }
+        {
+        }
 
         public override async Task<DialogResult> ShowAsync(string message)
         {

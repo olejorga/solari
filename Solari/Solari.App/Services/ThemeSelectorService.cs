@@ -37,20 +37,20 @@ namespace Solari.App.Services
             await Task.CompletedTask;
         }
 
-        private async Task<ElementTheme> LoadThemeFromSettingsAsync()
+        private static async Task<ElementTheme> LoadThemeFromSettingsAsync()
         {
             ElementTheme cacheTheme = ElementTheme.Default;
             string themeName = await ApplicationData.Current.LocalSettings.ReadAsync<string>(SettingsKey);
 
             if (!string.IsNullOrEmpty(themeName))
             {
-                Enum.TryParse(themeName, out cacheTheme);
+                _ = Enum.TryParse(themeName, out cacheTheme);
             }
 
             return cacheTheme;
         }
 
-        private async Task SaveThemeInSettingsAsync(ElementTheme theme)
+        private static async Task SaveThemeInSettingsAsync(ElementTheme theme)
         {
             await ApplicationData.Current.LocalSettings.SaveAsync(SettingsKey, theme.ToString());
         }

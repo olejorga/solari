@@ -11,7 +11,8 @@ namespace Solari.App.ViewModels
     public class ConfirmationDialogService : DialogService
     {
         public ConfirmationDialogService(XamlRoot xamlRoot) : base(xamlRoot)
-        { }
+        {
+        }
 
         public override async Task<DialogResult> ShowAsync(string message)
         {

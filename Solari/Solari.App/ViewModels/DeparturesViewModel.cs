@@ -58,10 +58,10 @@ namespace Solari.App.ViewModels
             }
             catch (Exception exception)
             {
-                _ = ErrorDialogService.ShowAsync(exception.Message);
+                _ = await ErrorDialogService.ShowAsync(exception.Message);
 
                 // Send user back to start page.
-                _ = NavigationService.NavigateTo("Solari.App.ViewModels.LandingPage");
+                _ = NavigationService.NavigateTo("Solari.App.ViewModels.LandingViewModel");
             }
         }
 

@@ -14,15 +14,13 @@ namespace Solari.App.Services
     {
         private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
         private readonly IEnumerable<IActivationHandler> _activationHandlers;
-        private readonly INavigationService _navigationService;
         private readonly IThemeSelectorService _themeSelectorService;
         private UIElement _shell = null;
 
-        public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, INavigationService navigationService, IThemeSelectorService themeSelectorService)
+        public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService)
         {
             _defaultHandler = defaultHandler;
             _activationHandlers = activationHandlers;
-            _navigationService = navigationService;
             _themeSelectorService = themeSelectorService;
         }
 
@@ -51,7 +49,7 @@ namespace Solari.App.Services
 
         private async Task HandleActivationAsync(object activationArgs)
         {
-            var activationHandler = _activationHandlers
+            IActivationHandler activationHandler = _activationHandlers
                                                 .FirstOrDefault(h => h.CanHandle(activationArgs));
 
             if (activationHandler != null)

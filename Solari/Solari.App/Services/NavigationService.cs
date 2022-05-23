@@ -8,8 +8,6 @@ using Solari.App.Helpers;
 
 namespace Solari.App.Services
 {
-    // For more information on navigation between pages see
-    // https://github.com/Microsoft/WindowsTemplateStudio/blob/release/docs/WinUI/navigation.md
     public class NavigationService : INavigationService
     {
         private readonly IPageService _pageService;
@@ -66,7 +64,7 @@ namespace Solari.App.Services
         {
             if (CanGoBack)
             {
-                var vmBeforeNavigation = _frame.GetPageViewModel();
+                object vmBeforeNavigation = _frame.GetPageViewModel();
                 _frame.GoBack();
                 if (vmBeforeNavigation is INavigationAware navigationAware)
                 {
@@ -81,13 +79,13 @@ namespace Solari.App.Services
 
         public bool NavigateTo(string pageKey, object parameter = null, bool clearNavigation = false)
         {
-            var pageType = _pageService.GetPageType(pageKey);
+            System.Type pageType = _pageService.GetPageType(pageKey);
 
             if (_frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
             {
                 _frame.Tag = clearNavigation;
-                var vmBeforeNavigation = _frame.GetPageViewModel();
-                var navigated = _frame.Navigate(pageType, parameter);
+                object vmBeforeNavigation = _frame.GetPageViewModel();
+                bool navigated = _frame.Navigate(pageType, parameter);
                 if (navigated)
                 {
                     _lastParameterUsed = parameter;
@@ -104,7 +102,9 @@ namespace Solari.App.Services
         }
 
         public void CleanNavigation()
-            => _frame.BackStack.Clear();
+        {
+            _frame.BackStack.Clear();
+        }
 
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
@@ -126,6 +126,8 @@ namespace Solari.App.Services
         }
 
         public void SetListDataItemForNextConnectedAnimation(object item)
-            => Frame.SetListDataItemForNextConnectedAnimation(item);
+        {
+            Frame.SetListDataItemForNextConnectedAnimation(item);
+        }
     }
 }

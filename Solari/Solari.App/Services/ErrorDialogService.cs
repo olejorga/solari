@@ -11,7 +11,8 @@ namespace Solari.App.ViewModels
     public class ErrorDialogService : DialogService
     {
         public ErrorDialogService(XamlRoot xamlRoot) : base(xamlRoot)
-        { }
+        {
+        }
 
         public override async Task<DialogResult> ShowAsync(string message)
         {
