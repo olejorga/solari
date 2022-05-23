@@ -24,7 +24,7 @@ namespace Solari.App.Views
 
         public ShellViewModel ViewModel { get; }
 
-        public ShellPage(ShellViewModel viewModel, IAirportService airportSerivce, IFlightService flightService)
+        public ShellPage(ShellViewModel viewModel, IAirportService airportSerivce)
         {
             _airportSerivce = airportSerivce;
             ViewModel = viewModel;
@@ -38,14 +38,13 @@ namespace Solari.App.Views
         private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
-            // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
             KeyboardAccelerators.Add(_altLeftKeyboardAccelerator);
             KeyboardAccelerators.Add(_backKeyboardAccelerator);
         }
 
         private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
         {
-            var keyboardAccelerator = new KeyboardAccelerator() { Key = key };
+            KeyboardAccelerator keyboardAccelerator = new() { Key = key };
             if (modifiers.HasValue)
             {
                 keyboardAccelerator.Modifiers = modifiers.Value;
@@ -57,11 +56,14 @@ namespace Solari.App.Views
 
         private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
-            var navigationService = Ioc.Default.GetService<INavigationService>();
-            var result = navigationService.GoBack();
+            INavigationService navigationService = Ioc.Default.GetService<INavigationService>();
+            bool result = navigationService.GoBack();
             args.Handled = result;
         }
 
+        /// <summary>
+        /// Handles the auto suggest airport search in the navigation menu.
+        /// </summary>
         private async void Search_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
@@ -75,9 +77,11 @@ namespace Solari.App.Views
 
                     foreach (Airport airport in dbAirports)
                     {
-                        allAirports.Add($"{airport.Name} ({airport.Iata}) - {airport.Icao}");
+                        allAirports.Add($"{airport.City} {airport.Name} ({airport.Iata}) - {airport.Icao}");
                     }
                 }
+
+                // If fetching airports fails.
                 catch
                 {
                     suitableAirports.Add("Error - can't fetch airports.");
@@ -86,35 +90,45 @@ namespace Solari.App.Views
                     return;
                 }
 
+                // Split search query into search phrases.
                 string[] splitText = sender.Text.ToLower().Split(" ");
 
+                // Match each airport with all phrases.
                 foreach (string airport in allAirports)
                 {
-                    var found = splitText.All((key) =>
+                    bool found = splitText.All((key) =>
                     {
                         return airport.ToLower().Contains(key);
                     });
+
+                    // If a match is found, add airport to search suggestions.
                     if (found)
                     {
                         suitableAirports.Add(airport);
                     }
                 }
 
+                // If there are no matching airports.
                 if (suitableAirports.Count == 0)
                 {
                     suitableAirports.Add("No airports found.");
                 }
 
+
                 sender.ItemsSource = suitableAirports;
             }
         }
 
+        /// <summary>
+        /// Handles when the user selects a suggested airport from the auto suggest box.
+        /// </summary>
         private async void Search_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             await ApplicationData.Current.LocalSettings.SaveAsync("SelectedAirportIcao", args.SelectedItem.ToString()[^4..]);
 
-            ViewModel.NavigationService.NavigateTo("Solari.App.ViewModels.LandingViewModel");
-            ViewModel.NavigationService.NavigateTo("Solari.App.ViewModels.DeparturesViewModel");
+            // Navigate user to departures view after search.
+            _ = ViewModel.NavigationService.NavigateTo("Solari.App.ViewModels.LandingViewModel");
+            _ = ViewModel.NavigationService.NavigateTo("Solari.App.ViewModels.DeparturesViewModel");
         }
     }
 }

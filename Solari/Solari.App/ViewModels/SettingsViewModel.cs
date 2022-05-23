@@ -59,7 +59,7 @@ namespace Solari.App.ViewModels
             VersionDescription = GetVersionDescription();
         }
 
-        private string GetVersionDescription()
+        private static string GetVersionDescription()
         {
             var appName = "AppDisplayName".GetLocalized();
             var package = Package.Current;

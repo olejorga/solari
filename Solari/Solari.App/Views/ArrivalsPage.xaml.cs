@@ -23,6 +23,9 @@ namespace Solari.App.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles when the user clicks on a flight row in the traffic table.
+        /// </summary>
         private async void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Flight flight = (Flight)DataGrid.SelectedItem;

@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:viewmodels="using:Solari.App.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EditAirportViewModel}"
+    xmlns:viewmodels="using:Solari.App.ViewModels" 
+    d:DataContext="{d:DesignInstance Type=viewmodels:EditAirportViewModel}"
     xmlns:helpers="using:Solari.App.Helpers"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
@@ -14,31 +15,87 @@
         <helpers:NullToBooleanConverter x:Key="NullToBooleanConverter" />
     </Page.Resources>
 
-    <Grid x:Name="ContentArea" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+    <Grid 
+        x:Name="ContentArea" 
+        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <ScrollViewer>
-            <StackPanel Orientation="Vertical" Margin="{StaticResource DetailPageMargin}" Width="250" HorizontalAlignment="Left">
+            <StackPanel 
+                Orientation="Vertical" 
+                Margin="{StaticResource DetailPageMargin}" 
+                Width="250" 
+                HorizontalAlignment="Left">
                 <!-- Search section -->
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <TextBox Text="{Binding Path=UserInputtedIcao, Mode=TwoWay}" Header="Find airport by ICAO:" PlaceholderText="E.g. ENGM" Width="175" />
-                    <Button Content="Find" Command="{Binding Path=SearchAirportCommand}" Margin="{StaticResource MediumLeftRightMargin}" VerticalAlignment="Bottom" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource SmallTopMargin}">
+                    <TextBox 
+                        Text="{Binding Path=UserInputtedIcao, Mode=TwoWay}" 
+                        Header="Find airport by ICAO:" 
+                        PlaceholderText="E.g. ENGM" 
+                        Width="175" />
+                    <Button 
+                        Content="Find" 
+                        Command="{Binding Path=SearchAirportCommand}" 
+                        Margin="{StaticResource MediumLeftRightMargin}" 
+                        VerticalAlignment="Bottom" />
                 </StackPanel>
                 
                 <!-- General section -->
-                <TextBlock Text="General" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
-                <TextBox Text="{Binding Path=UpdatedAirport.Name, Mode=TwoWay}" Header="Name of the airport:" PlaceholderText="E.g. Oslo Airport Gardermoen" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
-                <TextBox Text="{Binding Path=UpdatedAirport.City, Mode=TwoWay}" Header="City:" PlaceholderText="E.g. Oslo" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBlock 
+                    Text="General" 
+                    FontSize="{StaticResource LargeFontSize}" 
+                    Margin="{StaticResource LargeTopMargin}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedAirport.Name, Mode=TwoWay}" 
+                    Header="Name of the airport:" 
+                    PlaceholderText="E.g. Oslo Airport Gardermoen" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedAirport.City, Mode=TwoWay}" 
+                    Header="City:" 
+                    PlaceholderText="E.g. Oslo" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
                 
                 <!-- Identification section -->
-                <TextBlock Text="Identification" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <TextBox Text="{Binding Path=UpdatedAirport.Icao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENGM" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
-                    <TextBox Text="{Binding Path=UpdatedAirport.Iata, Mode=TwoWay}" Header="Airport IATA code:" PlaceholderText="E.g. OSL" Margin="{StaticResource MediumLeftRightMargin}" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBlock 
+                    Text="Identification" 
+                    FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource SmallTopMargin}">
+                    <TextBox 
+                        Text="{Binding Path=UpdatedAirport.Icao, Mode=TwoWay}" 
+                        Header="Airport ICAO code:" 
+                        PlaceholderText="E.g. ENGM" 
+                        IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                    <TextBox 
+                        Text="{Binding Path=UpdatedAirport.Iata, Mode=TwoWay}" 
+                        Header="Airport IATA code:" 
+                        PlaceholderText="E.g. OSL" 
+                        Margin="{StaticResource MediumLeftRightMargin}" 
+                        IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
 
                 <!-- Submit and delete buttons -->
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeTopMargin}">
-                    <Button Content="Edit airport" Command="{Binding Path=EditAirportCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" Style="{StaticResource AccentButtonStyle}" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
-                    <Button Content="Delete airport" Command="{Binding Path=DeleteAirportCommand}" Margin="{StaticResource MediumLeftRightMargin}" FontSize="{StaticResource MediumFontSize}" VerticalAlignment="Bottom" IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource LargeTopMargin}">
+                    <Button 
+                        Content="Edit airport" 
+                        Command="{Binding Path=EditAirportCommand}" 
+                        Margin="{StaticResource LargeTopMargin}" 
+                        FontSize="{StaticResource MediumFontSize}" 
+                        Style="{StaticResource AccentButtonStyle}" 
+                        IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
+                    <Button 
+                        Content="Delete airport"
+                        Command="{Binding Path=DeleteAirportCommand}" 
+                        Margin="{StaticResource MediumLeftRightMargin}" 
+                        FontSize="{StaticResource MediumFontSize}" 
+                        VerticalAlignment="Bottom" 
+                        IsEnabled="{Binding UpdatedAirport, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

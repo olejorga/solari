@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:viewmodels="using:Solari.App.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EditFlightViewModel}"
+    xmlns:viewmodels="using:Solari.App.ViewModels" 
+    d:DataContext="{d:DesignInstance Type=viewmodels:EditFlightViewModel}"
     xmlns:helpers="using:Solari.App.Helpers"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
@@ -14,46 +15,145 @@
         <helpers:NullToBooleanConverter x:Key="NullToBooleanConverter" />
     </Page.Resources>
 
-    <Grid x:Name="ContentArea" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+    <Grid 
+        x:Name="ContentArea" 
+        Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
         <ScrollViewer>
-            <StackPanel Orientation="Vertical" Margin="{StaticResource DetailPageMargin}" Width="560" HorizontalAlignment="Left">
+            <StackPanel 
+                Orientation="Vertical" 
+                Margin="{StaticResource DetailPageMargin}" 
+                Width="560" 
+                HorizontalAlignment="Left">
                 <!-- Search section -->
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <TextBox Text="{Binding Path=UserInputtedFlightNumber, Mode=TwoWay}" Header="Find by flight number:" PlaceholderText="E.g. DY320" Width="175" />
-                    <Button Content="Find" Command="{Binding Path=SearchFlightCommand}" Margin="{StaticResource MediumLeftRightMargin}" VerticalAlignment="Bottom" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource SmallTopMargin}">
+                    <TextBox 
+                        Text="{Binding Path=UserInputtedFlightNumber, Mode=TwoWay}" 
+                        Header="Find by flight number:" 
+                        PlaceholderText="E.g. DY320" 
+                        Width="175" />
+                    <Button 
+                        Content="Find" 
+                        Command="{Binding Path=SearchFlightCommand}" 
+                        Margin="{StaticResource MediumLeftRightMargin}" 
+                        VerticalAlignment="Bottom" />
                 </StackPanel>
                 
                 <!-- General section -->
-                <TextBlock Text="General" FontSize="{StaticResource LargeFontSize}"  Margin="{StaticResource LargeTopMargin}" />
-                <TextBox Text="{Binding Path=UpdatedFlight.AirlineIcao, Mode=TwoWay}" Header="Airline ICAO code:" PlaceholderText="E.g. NAX" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
-                <TextBox Text="{Binding Path=UpdatedFlight.FlightNumber, Mode=TwoWay}" Header="Flight number:" PlaceholderText="E.g. DY320" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBlock 
+                    Text="General" 
+                    FontSize="{StaticResource LargeFontSize}"  
+                    Margin="{StaticResource LargeTopMargin}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedFlight.AirlineIcao, Mode=TwoWay}" 
+                    Header="Airline ICAO code:" 
+                    PlaceholderText="E.g. NAX" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedFlight.FlightNumber, Mode=TwoWay}" 
+                    Header="Flight number:" 
+                    PlaceholderText="E.g. DY320" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
 
                 <!-- Flight plan section -->
-                <TextBlock Text="Flight plan" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
-                <TextBlock Text="Departure" FontSize="{StaticResource MediumFontSize}" Margin="{StaticResource SmallTopMargin}" />
-                <TextBox Text="{Binding Path=UpdatedFlight.DepartureAirportIcao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENGM" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <DatePicker SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" Header="Date of departure:" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
-                    <TimePicker SelectedTime="{Binding Path=DepartureTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of departure:" Margin="{StaticResource MediumLeftRightMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBlock 
+                    Text="Flight plan" 
+                    FontSize="{StaticResource LargeFontSize}" 
+                    Margin="{StaticResource LargeTopMargin}" />
+                <TextBlock 
+                    Text="Departure" 
+                    FontSize="{StaticResource MediumFontSize}" 
+                    Margin="{StaticResource SmallTopMargin}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedFlight.DepartureAirportIcao, Mode=TwoWay}" 
+                    Header="Airport ICAO code:" 
+                    PlaceholderText="E.g. ENGM" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource SmallTopMargin}">
+                    <DatePicker 
+                        SelectedDate="{Binding Path=DepartureDate, Mode=TwoWay}" 
+                        Header="Date of departure:" 
+                        IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                    <TimePicker 
+                        SelectedTime="{Binding Path=DepartureTime, Mode=TwoWay}" 
+                        ClockIdentifier="24HourClock" 
+                        Header="Time of departure:" 
+                        Margin="{StaticResource MediumLeftRightMargin}" 
+                        IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
-                <TextBox Text="{Binding Path=UpdatedFlight.DepartureGate, Mode=TwoWay}" Header="Departure gate:" PlaceholderText="E.g. A14" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedFlight.DepartureGate, Mode=TwoWay}" 
+                    Header="Departure gate:" 
+                    PlaceholderText="E.g. A14" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
 
-                <TextBlock Text="Arrival" FontSize="{StaticResource MediumFontSize}" Margin="{StaticResource MediumTopMargin}" />
-                <TextBox Text="{Binding Path=UpdatedFlight.ArrivalAirportIcao, Mode=TwoWay}" Header="Airport ICAO code:" PlaceholderText="E.g. ENBR" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource SmallTopMargin}">
-                    <DatePicker SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}" Header="Date of arrival:" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
-                    <TimePicker SelectedTime="{Binding Path=ArrivalTime, Mode=TwoWay}" ClockIdentifier="24HourClock" Header="Time of arrival:" Margin="{StaticResource MediumLeftRightMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBlock 
+                    Text="Arrival" 
+                    FontSize="{StaticResource MediumFontSize}" 
+                    Margin="{StaticResource MediumTopMargin}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedFlight.ArrivalAirportIcao, Mode=TwoWay}" 
+                    Header="Airport ICAO code:" 
+                    PlaceholderText="E.g. ENBR" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource SmallTopMargin}">
+                    <DatePicker 
+                        SelectedDate="{Binding Path=ArrivalDate, Mode=TwoWay}" 
+                        Header="Date of arrival:" 
+                        IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                    <TimePicker 
+                        SelectedTime="{Binding Path=ArrivalTime, Mode=TwoWay}" 
+                        ClockIdentifier="24HourClock" Header="Time of arrival:"
+                        Margin="{StaticResource MediumLeftRightMargin}" 
+                        IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
-                <TextBox Text="{Binding Path=UpdatedFlight.BaggageBelt, Mode=TwoWay}" Header="Baggage belt:" PlaceholderText="E.g. 5" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedFlight.BaggageBelt, Mode=TwoWay}" 
+                    Header="Baggage belt:" 
+                    PlaceholderText="E.g. 5" 
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
 
                 <!-- Other section -->
-                <TextBlock Text="Other" FontSize="{StaticResource LargeFontSize}" Margin="{StaticResource LargeTopMargin}" />
-                <TextBox Text="{Binding Path=UpdatedFlight.Status, Mode=TwoWay}" Header="Status of the flight:" PlaceholderText="E.g. Boarding" Margin="{StaticResource SmallTopMargin}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <TextBlock 
+                    Text="Other" 
+                    FontSize="{StaticResource LargeFontSize}" 
+                    Margin="{StaticResource LargeTopMargin}" />
+                <TextBox 
+                    Text="{Binding Path=UpdatedFlight.Status, Mode=TwoWay}" 
+                    Header="Status of the flight:" 
+                    PlaceholderText="E.g. Boarding"
+                    Margin="{StaticResource SmallTopMargin}" 
+                    IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
 
                 <!-- Submit and delete buttons -->
-                <StackPanel Orientation="Horizontal" Margin="{StaticResource LargeTopMargin}">
-                    <Button Content="Edit flight" Command="{Binding Path=EditFlightCommand}" Margin="{StaticResource LargeTopMargin}" FontSize="{StaticResource MediumFontSize}" Style="{StaticResource AccentButtonStyle}" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
-                    <Button Content="Delete flight" Command="{Binding Path=DeleteFlightCommand}" Margin="{StaticResource MediumLeftRightMargin}" FontSize="{StaticResource MediumFontSize}" VerticalAlignment="Bottom" IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="{StaticResource LargeTopMargin}">
+                    <Button 
+                        Content="Edit flight" 
+                        Command="{Binding Path=EditFlightCommand}" 
+                        Margin="{StaticResource LargeTopMargin}" 
+                        FontSize="{StaticResource MediumFontSize}" 
+                        Style="{StaticResource AccentButtonStyle}" 
+                        IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
+                    <Button 
+                        Content="Delete flight"
+                        Command="{Binding Path=DeleteFlightCommand}" 
+                        Margin="{StaticResource MediumLeftRightMargin}"
+                        FontSize="{StaticResource MediumFontSize}" 
+                        VerticalAlignment="Bottom" 
+                        IsEnabled="{Binding UpdatedFlight, Converter={StaticResource NullToBooleanConverter}}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

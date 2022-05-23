@@ -7,9 +7,28 @@
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
 
-    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-        </Grid>
+    <Grid 
+        x:Name="ContentArea" 
+        Margin="{StaticResource DetailPageMargin}">
+        <!-- Welcome message -->
+        <StackPanel 
+            Orientation="Vertical"
+            Spacing="4">
+            <TextBlock 
+                Text="Welcome"
+                Style="{ThemeResource TitleTextBlockStyle}" 
+                FontWeight="Bold" />
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xEC52;" 
+                        VerticalAlignment="Bottom" />
+                <TextBlock 
+                    Text="To get started, search for an airport via the navigation menu on the left." 
+                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

@@ -2,8 +2,6 @@
     x:Class="Solari.App.Views.ShellPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:Solari.App.Helpers"
     xmlns:behaviors="using:Solari.App.Behaviors"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
@@ -25,38 +23,83 @@
                 PlaceholderText="Search for airports" 
                 TextChanged="Search_TextChanged"
                 SuggestionChosen="Search_SuggestionChosen" 
-                ToolTipService.ToolTip="Search by name, ICAO- or IATA-code." />
+                ToolTipService.ToolTip="Search by city, name, ICAO- or IATA-code." />
         </NavigationView.AutoSuggestBox>
 
         <!-- Navigation shortcuts -->
         <NavigationView.MenuItems>
-            <NavigationViewItem x:Uid="Shell_Add" Content="Flights" ToolTipService.ToolTip="Flights" SelectsOnInvoked="False">
+            <!-- Airport traffic menu -->
+            <NavigationViewItem 
+                x:Uid="Shell_Flights" 
+                Content="Flights" 
+                ToolTipService.ToolTip="Airport traffic tables." 
+                SelectsOnInvoked="False">
                 <NavigationViewItem.MenuItems>
-                    <NavigationViewItem x:Uid="Shell_Departures" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.DeparturesViewModel" />
-                    <NavigationViewItem x:Uid="Shell_Arrivals" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.ArrivalsViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Departures" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.DeparturesViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Arrivals" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.ArrivalsViewModel" />
                 </NavigationViewItem.MenuItems>
                 <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE709;" />
+                    <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xE709;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem x:Uid="Shell_Add" Content="Add" ToolTipService.ToolTip="Add" SelectsOnInvoked="False">
+
+            <!-- Add data menu -->
+            <NavigationViewItem 
+                x:Uid="Shell_Add" 
+                Content="Add" 
+                ToolTipService.ToolTip="Add data." 
+                SelectsOnInvoked="False">
                 <NavigationViewItem.MenuItems>
-                    <NavigationViewItem x:Uid="Shell_Add_Airline" Content="Add an Airline" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddAirlineViewModel" />
-                    <NavigationViewItem x:Uid="Shell_Add_Airport" Content="Add an Airport" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddAirportViewModel" />
-                    <NavigationViewItem x:Uid="Shell_Add_Flight" Content="Add a Flight" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddFlightViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Add_Airline" 
+                        Content="Add an Airline" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddAirlineViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Add_Airport" 
+                        Content="Add an Airport" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddAirportViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Add_Flight" 
+                        Content="Add a Flight" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.AddFlightViewModel" />
                 </NavigationViewItem.MenuItems>
                 <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xECC8;" />
+                    <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xECC8;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem x:Uid="Shell_Edit" Content="Edit" ToolTipService.ToolTip="Edit" SelectsOnInvoked="False">
+
+            <!-- Edit data menu -->
+            <NavigationViewItem 
+                x:Uid="Shell_Edit" 
+                Content="Edit" 
+                ToolTipService.ToolTip="Edit data." 
+                SelectsOnInvoked="False">
                 <NavigationViewItem.MenuItems>
-                    <NavigationViewItem x:Uid="Shell_Edit_Airline" Content="Edit an Airline" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditAirlineViewModel" />
-                    <NavigationViewItem x:Uid="Shell_Edit_Airport" Content="Edit an Airport" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditAirportViewModel" />
-                    <NavigationViewItem x:Uid="Shell_Edit_Flight" Content="Edit a Flight" helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditFlightViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Edit_Airline" 
+                        Content="Edit an Airline" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditAirlineViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Edit_Airport" 
+                        Content="Edit an Airport" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditAirportViewModel" />
+                    <NavigationViewItem 
+                        x:Uid="Shell_Edit_Flight" 
+                        Content="Edit a Flight" 
+                        helpers:NavHelper.NavigateTo="Solari.App.ViewModels.EditFlightViewModel" />
                 </NavigationViewItem.MenuItems>
                 <NavigationViewItem.Icon>
-                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE70F;" />
+                    <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xE70F;" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.MenuItems>
